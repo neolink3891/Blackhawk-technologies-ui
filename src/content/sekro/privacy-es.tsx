@@ -8,8 +8,9 @@ import { SEKRO_LEGAL, SEKRO_RETENTION } from "@/lib/sekro-legal";
 export const privacyIntro = (
   <>
     <p>
-      Sekro oculta fotos, vídeos, audios y mensajes cifrados de extremo a extremo dentro de imágenes de aspecto normal.
-      Esta política explica qué datos recogemos cuando usas Sekro, qué no podemos ver y qué opciones tienes.
+      Sekro te permite enviar fotos, vídeos, audios, textos y mensajes cifrados de extremo a extremo, ocultos tras
+      imágenes de aspecto normal. Esta política explica qué datos recogemos cuando usas Sekro, qué no podemos ver y qué
+      opciones tienes.
     </p>
     <p>
       En resumen: no podemos leer tus Sekros ni tus mensajes. Guardamos los datos de tu cuenta y la información de
@@ -41,10 +42,27 @@ export const privacySections: LegalSection[] = [
     title: "Lo que no podemos ver",
     body: (
       <>
+        <p>Un Sekro puede ocultar una de estas cosas, la que tú elijas:</p>
+        <UL>
+          <li>
+            una <B>foto</B> o un <B>texto</B> (de hasta 5000 caracteres): viaja dentro de la propia imagen, así que no se
+            sube nada más;
+          </li>
+          <li>
+            un <B>vídeo</B> (de hasta 7 minutos) o un <B>audio</B> (de hasta 10 minutos): se cifra en tu dispositivo y se
+            guarda en nuestros servidores como un archivo cifrado; la imagen solo contiene un enlace cifrado a ese
+            archivo y la clave para abrirlo.
+          </li>
+        </UL>
         <p>
-          El contenido oculto de un Sekro (la foto, el vídeo o el audio que lleva dentro) y el texto de tus mensajes se{" "}
-          <B>cifran de extremo a extremo</B> en tu dispositivo antes de llegar a nosotros. Solo pueden abrirlos las
-          personas a quienes los envías y tú. No tenemos las claves, así que no podemos descifrarlos ni dárselos a nadie.
+          Una foto, un vídeo o un audio también pueden llevar una <B>nota oculta</B> opcional (de hasta 5000 caracteres),
+          cifrada junto con ellos.
+        </p>
+        <p>
+          Todo esto, y el texto de tus mensajes del chat, se <B>cifra de extremo a extremo</B> en tu dispositivo antes de
+          llegar a nosotros. Solo pueden abrir un Sekro las personas para quienes se creó y tú. No tenemos las claves, así
+          que no podemos descifrarlo ni dárselo a nadie. El contenido revelado solo se muestra dentro de Sekro, y la app
+          no permite guardarlo, copiarlo ni compartirlo; solo se puede guardar o compartir la imagen.
         </p>
         <p>
           Tus claves privadas nunca salen de tu dispositivo sin protección. Si haces una copia de seguridad en tu cuenta,
@@ -74,7 +92,10 @@ export const privacySections: LegalSection[] = [
         <UL>
           <li>Tu nombre de usuario, tu correo electrónico y si lo has verificado.</li>
           <li>Un hash de tu contraseña (con Argon2id). Nunca guardamos la contraseña en sí.</li>
-          <li>El idioma de la app, y cuándo creaste tu cuenta y aceptaste los Términos.</li>
+          <li>
+            El idioma de la app (para que nuestros correos lleguen en tu idioma y un teléfono nuevo pueda usarlo), y
+            cuándo creaste tu cuenta y aceptaste los Términos.
+          </li>
           <li>
             Un nombre visible y una foto de perfil, si los añades (Perfil › Cuenta). Tu nombre visible se muestra junto a
             tu nombre de usuario a quienes pueden encontrarte; tu foto de perfil, solo a tus contactos.
@@ -119,13 +140,20 @@ export const privacySections: LegalSection[] = [
             leyó, y qué versiones de clave se usaron. El texto de los mensajes solo se guarda cifrado.
           </li>
           <li>
-            Los archivos de imagen de los Sekros que envías o guardas en tu Galería, los archivos de vídeo y audio
-            cifrados, y su tamaño y suma de comprobación. Los detalles de tu Galería (por ejemplo, para quién era un
-            Sekro) van cifrados para tu cuenta.
+            Los archivos de imagen de los Sekros que envías o guardas en tu Galería (un Sekro de foto o de texto va
+            entero dentro de su imagen), y su tamaño y suma de comprobación. Los detalles de tu Galería (por ejemplo, para
+            quién era un Sekro y de qué tipo es) van cifrados para tu cuenta.
           </li>
           <li>
-            Avisos de captura y grabación de pantalla: si alguien captura un Sekro que le enviaste mientras está revelado,
-            registramos que ocurrió y cuándo, y se lo mostramos a ambos. La captura en sí nunca nos llega.
+            Los archivos de vídeo y audio cifrados, su tamaño y si cada uno es un vídeo o un audio (para aplicar el límite
+            de tamaño). No podemos reproducirlos.
+          </li>
+          <li>
+            Avisos de captura y grabación de pantalla: si alguien hace una captura o graba su pantalla mientras tiene
+            revelado un Sekro que le enviaste (en un chat o abierto desde un archivo), su app nos lo comunica. Solo
+            guardamos el tipo de aviso (captura o grabación), el identificador del mensaje al que se refiere (ninguno si el
+            Sekro se abrió desde un archivo) y la hora, como una entrada en el chat que ven ambas personas. La
+            captura o la grabación en sí nunca nos llega.
           </li>
           <li>
             Presencia: si estás en línea y cuándo te conectaste por última vez, visible solo para tus contactos. El
@@ -160,7 +188,42 @@ export const privacySections: LegalSection[] = [
         <H3>En tu dispositivo</H3>
         <p>
           Tus claves desbloqueadas, una copia local cifrada de tus chats y tu Galería, y tus ajustes se quedan en tu
-          teléfono. No tenemos acceso a ellos.
+          teléfono. No tenemos acceso a ellos. El icono de la app que elijas (Perfil › Apariencia) lo guarda iOS en tu
+          teléfono y nunca nos llega. Tu elección de idioma se guarda en tu teléfono y también en tu cuenta, como se
+          indica arriba; las notificaciones push se muestran en el idioma de tu teléfono.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "permissions",
+    title: "Micrófono, fotos y otros permisos del teléfono",
+    body: (
+      <>
+        <UL>
+          <li>
+            <B>Micrófono</B>: solo se usa mientras grabas audio para un Sekro (Crear › Audio › Grabar audio, o el botón
+            del micrófono en un chat). La grabación se comprime y se cifra en tu teléfono antes de subirse, así que solo
+            recibimos el archivo cifrado y nunca podemos escucharla. Sekro no usa el micrófono en ningún otro momento.
+          </li>
+          <li>
+            <B>Fototeca</B>: para elegir una foto, un vídeo, una imagen de portada o una foto de perfil, Sekro usa el
+            selector de fotos del iPhone, que solo le da a la app lo que eliges, no el resto de tu fototeca. Los vídeos
+            que eliges se comprimen y se cifran en tu teléfono. Cuando guardas un Sekro en Fotos, iOS te pide permiso solo
+            para añadir fotos: Sekro puede añadir la imagen, pero no puede ver tu fototeca.
+          </li>
+          <li>
+            <B>Archivos</B>: un archivo de vídeo o audio que eliges en Archivos solo se lee cuando lo eliges, y se procesa
+            en tu teléfono de la misma forma.
+          </li>
+          <li>
+            <B>Notificaciones</B>: Sekro te lo pide la primera vez que envías o recibes una invitación de contacto. Puedes
+            desactivarlas en cualquier momento en los Ajustes del iPhone.
+          </li>
+        </UL>
+        <p>
+          Sekro no usa tu cámara, tu ubicación ni la agenda de tu teléfono. Puedes cambiar cualquier permiso en los
+          Ajustes del iPhone.
         </p>
       </>
     ),
@@ -204,9 +267,11 @@ export const privacySections: LegalSection[] = [
     body: (
       <>
         <p>
-          Cuando denuncias algo que has recibido, tu dispositivo nos envía: el contenido descifrado (foto, vídeo, audio o
-          texto), el archivo de imagen del Sekro, el motivo que elegiste, la nota que añadas, quién lo envió y cuándo, y
-          tu cuenta. También puedes bloquear al remitente al mismo tiempo.
+          Cuando denuncias algo que has recibido, tu dispositivo nos envía lo que reveló: la foto, el vídeo o el audio,
+          o el texto (de un Sekro de texto o de un mensaje del chat), junto con la nota oculta que llevara. También envía
+          el archivo de imagen del Sekro, el motivo que elegiste, el comentario que añadas, quién lo envió y cuándo, desde
+          dónde lo denunciaste (un chat o un Sekro abierto desde un archivo) y tu cuenta. Puedes denunciar a un remitente
+          aunque ya lo hayas bloqueado, y también puedes bloquearlo al mismo tiempo.
         </p>
         <p>
           Solo un número reducido de personal autorizado puede revisar las denuncias. Las usamos para decidir si tomamos
@@ -266,8 +331,8 @@ export const privacySections: LegalSection[] = [
             <B>Datos de la cuenta, claves y contactos</B>: mientras exista tu cuenta.
           </li>
           <li>
-            <B>Mensajes y Sekros enviados en un chat</B>: hasta que ambas personas los eliminen. «Eliminar para mí» quita
-            un mensaje de tu vista en todos tus dispositivos; la otra persona conserva su copia. Cuando los dos lo habéis
+            <B>Mensajes, y Sekros de foto y de texto enviados en un chat</B>: hasta que ambas personas los eliminen. «Eliminar para mí» quita
+            un mensaje de tu vista en todos tus dispositivos; la otra persona conserva su copia. Cuando ambas personas lo han
             eliminado, el mensaje y su archivo de Sekro se borran de nuestros servidores. Guardamos un registro breve de
             que se eliminó (su identificador y la hora, sin contenido) durante un máximo de 120 días para que todos tus
             dispositivos también lo quiten.
@@ -280,8 +345,14 @@ export const privacySections: LegalSection[] = [
           </li>
           <li>
             <B>Archivos de vídeo y audio cifrados</B>: se borran cuando ya nada hace referencia a ellos (ningún elemento
-            de la Galería ni ningún mensaje que ambas personas conserven), o de inmediato si eliges «Eliminar en todas
-            partes».
+            de la Galería ni ningún mensaje que alguna de las dos personas conserve), o de inmediato si eliges «Eliminar
+            en todas partes» en un Sekro de vídeo o audio que creaste (en la Galería, o en uno que enviaste en un chat).
+            Una vez borrado el archivo, ese Sekro deja de funcionar en todas partes, también en las copias guardadas o
+            compartidas fuera de la app: muestra «Este vídeo (o audio) ya no está disponible».
+          </li>
+          <li>
+            <B>Sekros de foto y de texto ya enviados</B>: su contenido va dentro de la imagen, así que una copia que
+            alguien haya recibido o guardado sigue funcionando dondequiera que esté, y no podemos recuperarla.
           </li>
           <li>
             <B>Denuncias</B>: {SEKRO_RETENTION.reports.es}.

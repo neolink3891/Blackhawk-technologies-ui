@@ -7,8 +7,9 @@ import { SEKRO_LEGAL, SEKRO_RETENTION } from "@/lib/sekro-legal";
 export const privacyIntro = (
   <>
     <p>
-      Sekro hides end-to-end encrypted photos, videos, audio and messages inside ordinary-looking images. This policy
-      explains what we collect when you use Sekro, what we can't see, and the choices you have.
+      Sekro lets you send end-to-end encrypted photos, videos, audio, text and messages, hidden behind
+      ordinary-looking images. This policy explains what we collect when you use Sekro, what we can't see, and the
+      choices you have.
     </p>
     <p>
       The short version: we can't read your Sekros or your messages. We hold the account details and delivery
@@ -43,10 +44,27 @@ export const privacySections: LegalSection[] = [
     title: "What we can't see",
     body: (
       <>
+        <p>A Sekro can hide one of these, chosen by you:</p>
+        <UL>
+          <li>
+            a <B>photo</B> or <B>text</B> (up to 5,000 characters): it travels inside the image itself, so nothing else
+            is uploaded;
+          </li>
+          <li>
+            a <B>video</B> (up to 7 minutes) or <B>audio</B> (up to 10 minutes): it's encrypted on your device and
+            stored on our servers as an encrypted file; the image holds only an encrypted link to that file and the key
+            to open it.
+          </li>
+        </UL>
         <p>
-          The hidden content of a Sekro (the photo, video or audio inside it) and the text of your chat messages are{" "}
-          <B>end-to-end encrypted</B> on your device before they reach us. Only the people you sent them to, and you,
-          can open them. We don't have the keys, so we can't decrypt them, and we can't give them to anyone else.
+          A photo, video or audio can also carry an optional <B>hidden note</B> (up to 5,000 characters), encrypted with
+          it.
+        </p>
+        <p>
+          All of this, and the text of your chat messages, is <B>end-to-end encrypted</B> on your device before it
+          reaches us. Only the people a Sekro was made for, and you, can open it. We don't have the keys, so we can't
+          decrypt it, and we can't give it to anyone else. Revealed content is shown only inside Sekro, and the app
+          doesn't let anyone save, copy or share it; only the image can be saved or shared.
         </p>
         <p>
           Your private encryption keys never leave your device unprotected. If you back them up to your account, the
@@ -75,7 +93,10 @@ export const privacySections: LegalSection[] = [
         <UL>
           <li>Your username, email address and whether you've verified it.</li>
           <li>A hash of your password (made with Argon2id). We never store the password itself.</li>
-          <li>Your app language, and when you created your account and accepted the Terms.</li>
+          <li>
+            Your app language (so our emails are in your language and a new phone can pick it up), and when you created
+            your account and accepted the Terms.
+          </li>
           <li>
             A display name and profile photo, if you add them (Profile › Account). Your display name is shown with your
             username to people who can find you; your profile photo only to your contacts.
@@ -117,12 +138,20 @@ export const privacySections: LegalSection[] = [
             which encryption key versions were used. Message text is stored only in encrypted form.
           </li>
           <li>
-            Sekro image files you send or save to your Gallery, encrypted video and audio files, and their size and
-            checksum. Your Gallery's details (such as who a Sekro was for) are encrypted for your account.
+            Sekro image files you send or save to your Gallery (a photo or text Sekro is entirely inside its image), and
+            their size and checksum. Your Gallery's details (such as who a Sekro was for, and what kind it is) are
+            encrypted for your account.
           </li>
           <li>
-            Screenshot and screen-recording alerts: if someone captures a Sekro you sent them while it's revealed, we
-            record that it happened and when, and show it to both of you. The capture itself never reaches us.
+            Encrypted video and audio files, their size, and whether each is a video or audio (to apply the size
+            limit). We can't play them.
+          </li>
+          <li>
+            Screenshot and screen-recording alerts: if someone takes a screenshot or records their screen while a Sekro
+            you sent them is revealed (in a chat, or opened from a file), their app tells us. We store only the type of
+            event (screenshot or recording), the ID of the message it was about (none for a Sekro opened from a file)
+            and the time, as an entry between the two of you that both of you see in your chat. The screenshot or
+            recording itself never reaches us.
           </li>
           <li>
             Presence: whether you're online and when you were last seen, shown only to your contacts. Typing indicators
@@ -157,7 +186,43 @@ export const privacySections: LegalSection[] = [
         <H3>On your device</H3>
         <p>
           Your unlocked keys, a local encrypted copy of your chats and Gallery, and your settings stay on your phone. We
-          don't have access to them.
+          don't have access to them. Your choice of app icon (Profile › Appearance) is kept by iOS on your phone and is
+          never sent to us. Your language choice is stored on your phone, and also on your account as described above;
+          push notifications are shown in your phone's language.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "permissions",
+    title: "Microphone, photos and other phone permissions",
+    body: (
+      <>
+        <UL>
+          <li>
+            <B>Microphone</B>: used only while you record audio for a Sekro (Create › Audio › Record audio, or the
+            microphone button in a chat). The recording is compressed and encrypted on your phone before it's uploaded,
+            so we only ever receive the encrypted file and can never hear it. Sekro doesn't use the microphone at any
+            other time.
+          </li>
+          <li>
+            <B>Photo library</B>: to choose a photo, video, cover image or profile photo, Sekro uses the iPhone's photo
+            picker, which gives the app only the items you pick, not the rest of your library. Videos you pick are
+            compressed and encrypted on your phone. When you save a Sekro to Photos, iOS asks for permission to add
+            photos only: Sekro can add the image but can't see your library.
+          </li>
+          <li>
+            <B>Files</B>: a video or audio file you choose from Files is read only when you pick it, and processed on
+            your phone the same way.
+          </li>
+          <li>
+            <B>Notifications</B>: Sekro asks the first time you send or receive a contact invite. You can turn them off
+            in the iPhone's Settings at any time.
+          </li>
+        </UL>
+        <p>
+          Sekro doesn't use your camera, your location or your phone's address book. You can change any permission in
+          the iPhone's Settings.
         </p>
       </>
     ),
@@ -200,9 +265,11 @@ export const privacySections: LegalSection[] = [
     body: (
       <>
         <p>
-          When you report something you received, your device sends us: the decrypted content (photo, video, audio or
-          text), the Sekro image file, the reason you chose, any note you add, who sent it and when, and your account. You
-          can also block the sender at the same time.
+          When you report something you received, your device sends us what it revealed: the photo, video or audio,
+          or the text (of a text Sekro or a chat message), together with any hidden note it carried. It also sends the
+          Sekro image file, the reason you chose, any comment you add, who sent it and when, where you reported it from
+          (a chat or a Sekro you opened from a file), and your account. You can report a sender even after blocking
+          them, and you can also block the sender at the same time.
         </p>
         <p>
           Only a small number of authorised staff can review reports. We use them to decide whether to take action, such
@@ -260,7 +327,7 @@ export const privacySections: LegalSection[] = [
             <B>Account data, keys and contacts</B>: while your account exists.
           </li>
           <li>
-            <B>Messages and the Sekros sent in a chat</B>: until both people have deleted them. “Delete for me” removes a
+            <B>Messages, and the photo and text Sekros sent in a chat</B>: until both people have deleted them. “Delete for me” removes a
             message from your view on all your devices; the other person keeps their copy. Once both of you have deleted
             it, the message and its Sekro file are deleted from our servers. A short record that it was deleted (its ID
             and time, no content) is kept for up to 120 days so that all your devices remove it too.
@@ -273,7 +340,14 @@ export const privacySections: LegalSection[] = [
           </li>
           <li>
             <B>Encrypted video and audio files</B>: deleted when nothing refers to them any more (no Gallery item and no
-            chat message that both people still keep), or straight away when you choose “Delete everywhere”.
+            chat message that either person still keeps), or straight away when you choose “Delete everywhere” for a
+            video or audio Sekro you made (in the Gallery, or on one you sent in a chat). Once the file is deleted, that
+            Sekro stops working everywhere, including copies saved or shared outside the app: it shows “This video
+            (or audio) is no longer available.”
+          </li>
+          <li>
+            <B>Photo and text Sekros already sent</B>: their content is inside the image, so a copy someone has received
+            or saved keeps working wherever it is, and we can't recall it.
           </li>
           <li>
             <B>Reports</B>: {SEKRO_RETENTION.reports.en}.

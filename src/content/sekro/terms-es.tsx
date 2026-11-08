@@ -24,8 +24,11 @@ export const termsSections: LegalSection[] = [
           {SEKRO_LEGAL.companyNumber}), con domicilio social en {SEKRO_LEGAL.registeredOffice} («nosotros»).
         </p>
         <p>
-          Sekro te permite ocultar fotos, vídeos, audios y mensajes cifrados de extremo a extremo dentro de imágenes de
-          aspecto normal y compartirlos con tus contactos. Escríbenos a <Mail />.
+          Sekro te permite ocultar contenido cifrado de extremo a extremo tras imágenes de aspecto normal y compartirlo
+          con tus contactos: una foto, un vídeo (de hasta 7 minutos), un audio (de hasta 10 minutos) o un texto (de hasta
+          5000 caracteres) y, con una foto, un vídeo o un audio, una nota oculta opcional. También puedes chatear con tus
+          contactos. Las fotos y los textos viajan dentro de la propia imagen; los vídeos y los audios se guardan, cifrados,
+          en nuestros servidores. Escríbenos a <Mail />.
         </p>
       </>
     ),
@@ -86,6 +89,15 @@ export const termsSections: LegalSection[] = [
           están de acuerdo. Recuerda que las imágenes de portada no están cifradas y que quienes lo reciben pueden verlo,
           y quizá guardarlo.
         </p>
+        <p>
+          Sekro intenta impedir las capturas y grabaciones de pantalla del contenido revelado y avisa a quien lo envió cuando
+          detecta una, pero no siempre puede evitarlas (siempre se puede fotografiar la pantalla con otro dispositivo).
+        </p>
+        <p>
+          Puedes borrar un Sekro de vídeo o audio que hayas creado con «Eliminar en todas partes»: a partir de entonces no
+          se puede reproducir en ningún sitio, tampoco en las copias compartidas fuera de la app. Un Sekro de foto o de
+          texto lleva su contenido dentro de la imagen, así que, una vez enviado o compartido, no puedes recuperarlo.
+        </p>
       </>
     ),
   },
@@ -133,8 +145,8 @@ export const termsSections: LegalSection[] = [
             contenido ilegal, spam u otro), añadir una nota y bloquear al remitente al mismo tiempo.
           </li>
           <li>
-            Al denunciar, tu dispositivo descifra el contenido y nos lo envía, junto con el archivo del Sekro y quién lo
-            envió y cuándo. Es la única forma en que podemos ver contenido cifrado. Solo revisamos lo que se nos denuncia.
+            Al denunciar, tu dispositivo nos envía lo que reveló (la foto, el vídeo, el audio o el texto, y la nota oculta
+            que llevara), junto con el archivo del Sekro y quién lo envió y cuándo. Es la única forma en que podemos ver contenido cifrado. Solo revisamos lo que se nos denuncia.
           </li>
           <li>
             Si comprobamos que se han incumplido estos términos, podemos suspender tu cuenta durante un tiempo o cerrarla

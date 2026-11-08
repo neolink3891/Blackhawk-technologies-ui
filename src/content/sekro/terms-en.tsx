@@ -25,8 +25,11 @@ export const termsSections: LegalSection[] = [
           {SEKRO_LEGAL.companyNumber}), registered office {SEKRO_LEGAL.registeredOffice} (“we”, “us”).
         </p>
         <p>
-          Sekro lets you hide end-to-end encrypted photos, videos, audio and messages inside ordinary-looking images and
-          share them with your contacts. Contact us at <Mail />.
+          Sekro lets you hide end-to-end encrypted content behind ordinary-looking images and share it with your
+          contacts: a photo, a video (up to 7 minutes), audio (up to 10 minutes) or text (up to 5,000 characters), and
+          with a photo, video or audio an optional hidden note. You can also chat with your contacts. Photos and text
+          travel inside the image itself; videos and audio are stored, encrypted, on our servers. Contact us at{" "}
+          <Mail />.
         </p>
       </>
     ),
@@ -85,6 +88,15 @@ export const termsSections: LegalSection[] = [
           agreed. Remember that cover images are not encrypted, and that recipients can see, and may keep, what you send
           them.
         </p>
+        <p>
+          Sekro tries to stop screenshots and screen recordings of revealed content and tells the sender when it detects one,
+          but it can't always prevent them (someone can always photograph a screen with another device).
+        </p>
+        <p>
+          You can delete a video or audio Sekro you made with “Delete everywhere”: after that it can't be played anywhere,
+          including copies shared outside the app. A photo or text Sekro carries its content inside the image, so once
+          you've sent or shared it you can't recall it.
+        </p>
       </>
     ),
   },
@@ -132,8 +144,8 @@ export const termsSections: LegalSection[] = [
             illegal content, spam, or other), add a note, and block the sender at the same time.
           </li>
           <li>
-            When you report, your device decrypts the content and sends it to us, with the Sekro file and details of who
-            sent it and when. This is the only way we can see encrypted content. We review only what's reported to us.
+            When you report, your device sends us what it revealed (the photo, video, audio or text, and any hidden note),
+            with the Sekro file and details of who sent it and when. This is the only way we can see encrypted content. We review only what's reported to us.
           </li>
           <li>
             If we find a breach of these terms, we may suspend your account for a period or ban it permanently, depending
