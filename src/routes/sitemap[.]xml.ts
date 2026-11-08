@@ -14,6 +14,10 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/about", changefreq: "monthly", priority: "0.8" },
           { path: "/solutions", changefreq: "monthly", priority: "0.9" },
           { path: "/contact", changefreq: "yearly", priority: "0.7" },
+          { path: "/sekro/privacy", changefreq: "yearly", priority: "0.5" },
+          { path: "/sekro/terms", changefreq: "yearly", priority: "0.5" },
+          { path: "/es/sekro/privacy", changefreq: "yearly", priority: "0.5" },
+          { path: "/es/sekro/terms", changefreq: "yearly", priority: "0.5" },
         ];
         const urls = entries.map((e) =>
           `  <url>\n    <loc>${BASE_URL}${e.path}</loc>\n    <changefreq>${e.changefreq}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`

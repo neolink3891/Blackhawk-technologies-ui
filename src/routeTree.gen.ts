@@ -14,6 +14,10 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SekroTermsRouteImport } from './routes/sekro/terms'
+import { Route as SekroPrivacyRouteImport } from './routes/sekro/privacy'
+import { Route as EsSekroTermsRouteImport } from './routes/es/sekro/terms'
+import { Route as EsSekroPrivacyRouteImport } from './routes/es/sekro/privacy'
 
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
@@ -40,6 +44,26 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SekroTermsRoute = SekroTermsRouteImport.update({
+  id: '/sekro/terms',
+  path: '/sekro/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SekroPrivacyRoute = SekroPrivacyRouteImport.update({
+  id: '/sekro/privacy',
+  path: '/sekro/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsSekroTermsRoute = EsSekroTermsRouteImport.update({
+  id: '/es/sekro/terms',
+  path: '/es/sekro/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsSekroPrivacyRoute = EsSekroPrivacyRouteImport.update({
+  id: '/es/sekro/privacy',
+  path: '/es/sekro/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +71,10 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/sekro/privacy': typeof SekroPrivacyRoute
+  '/sekro/terms': typeof SekroTermsRoute
+  '/es/sekro/privacy': typeof EsSekroPrivacyRoute
+  '/es/sekro/terms': typeof EsSekroTermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +82,10 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/sekro/privacy': typeof SekroPrivacyRoute
+  '/sekro/terms': typeof SekroTermsRoute
+  '/es/sekro/privacy': typeof EsSekroPrivacyRoute
+  '/es/sekro/terms': typeof EsSekroTermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +94,45 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/sekro/privacy': typeof SekroPrivacyRoute
+  '/sekro/terms': typeof SekroTermsRoute
+  '/es/sekro/privacy': typeof EsSekroPrivacyRoute
+  '/es/sekro/terms': typeof EsSekroTermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/sitemap.xml' | '/solutions'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/sitemap.xml'
+    | '/solutions'
+    | '/sekro/privacy'
+    | '/sekro/terms'
+    | '/es/sekro/privacy'
+    | '/es/sekro/terms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/sitemap.xml' | '/solutions'
-  id: '__root__' | '/' | '/about' | '/contact' | '/sitemap.xml' | '/solutions'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/sitemap.xml'
+    | '/solutions'
+    | '/sekro/privacy'
+    | '/sekro/terms'
+    | '/es/sekro/privacy'
+    | '/es/sekro/terms'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/sitemap.xml'
+    | '/solutions'
+    | '/sekro/privacy'
+    | '/sekro/terms'
+    | '/es/sekro/privacy'
+    | '/es/sekro/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +141,10 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SolutionsRoute: typeof SolutionsRoute
+  SekroPrivacyRoute: typeof SekroPrivacyRoute
+  SekroTermsRoute: typeof SekroTermsRoute
+  EsSekroPrivacyRoute: typeof EsSekroPrivacyRoute
+  EsSekroTermsRoute: typeof EsSekroTermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +184,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sekro/terms': {
+      id: '/sekro/terms'
+      path: '/sekro/terms'
+      fullPath: '/sekro/terms'
+      preLoaderRoute: typeof SekroTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sekro/privacy': {
+      id: '/sekro/privacy'
+      path: '/sekro/privacy'
+      fullPath: '/sekro/privacy'
+      preLoaderRoute: typeof SekroPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/sekro/terms': {
+      id: '/es/sekro/terms'
+      path: '/es/sekro/terms'
+      fullPath: '/es/sekro/terms'
+      preLoaderRoute: typeof EsSekroTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/sekro/privacy': {
+      id: '/es/sekro/privacy'
+      path: '/es/sekro/privacy'
+      fullPath: '/es/sekro/privacy'
+      preLoaderRoute: typeof EsSekroPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +221,10 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SolutionsRoute: SolutionsRoute,
+  SekroPrivacyRoute: SekroPrivacyRoute,
+  SekroTermsRoute: SekroTermsRoute,
+  EsSekroPrivacyRoute: EsSekroPrivacyRoute,
+  EsSekroTermsRoute: EsSekroTermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

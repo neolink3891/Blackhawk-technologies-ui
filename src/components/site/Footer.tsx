@@ -4,7 +4,7 @@ import { Hexagon, Linkedin, Github, Twitter } from "lucide-react";
 export function Footer() {
   return (
     <footer className="border-t border-border/60 bg-background">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-5">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 font-semibold">
             <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary">
@@ -41,6 +41,18 @@ export function Footer() {
             <li><Link to="/about" className="hover:text-foreground">About</Link></li>
             <li><Link to="/solutions" className="hover:text-foreground">Solutions</Link></li>
             <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-sm font-semibold text-foreground">Sekro</h4>
+          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+            <li><Link to="/sekro/privacy" className="hover:text-foreground">Privacy Policy</Link></li>
+            <li><Link to="/sekro/terms" className="hover:text-foreground">Terms of Service</Link></li>
+            <li>
+              <Link to="/es/sekro/privacy" hrefLang="es" className="hover:text-foreground">Privacidad</Link>
+              {" · "}
+              <Link to="/es/sekro/terms" hrefLang="es" className="hover:text-foreground">Términos</Link>
+            </li>
           </ul>
         </div>
         <div>
