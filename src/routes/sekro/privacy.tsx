@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
 import { privacyIntro, privacySections } from "@/content/sekro/privacy-en";
 import { SEKRO_PATHS } from "@/lib/sekro-legal";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/sekro/privacy")({
   head: () => ({
@@ -12,8 +13,9 @@ export const Route = createFileRoute("/sekro/privacy")({
       { property: "og:description", content: "What Sekro collects, what it can't see (your end-to-end encrypted content), and your rights." },
     ],
     links: [
-      { rel: "alternate", hrefLang: "en", href: SEKRO_PATHS.privacy.en },
-      { rel: "alternate", hrefLang: "es", href: SEKRO_PATHS.privacy.es },
+      { rel: "canonical", href: `${SITE_URL}/sekro/privacy` },
+      { rel: "alternate", hrefLang: "en", href: `${SITE_URL}${SEKRO_PATHS.privacy.en}` },
+      { rel: "alternate", hrefLang: "es", href: `${SITE_URL}${SEKRO_PATHS.privacy.es}` },
     ],
   }),
   component: () => (
