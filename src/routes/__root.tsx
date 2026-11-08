@@ -79,14 +79,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      // Defaults; each page sets its own title and description.
+      { title: "BlackHawk Technologies" },
+      {
+        name: "description",
+        content:
+          "BlackHawk Technologies designs and develops scalable software, mobile apps, AI tools, and business automation platforms for modern companies.",
+      },
+      { name: "author", content: "BlackHawk Technologies Ltd" },
+      { property: "og:site_name", content: "BlackHawk Technologies" },
+      { property: "og:title", content: "BlackHawk Technologies" },
+      { property: "og:description", content: "Building intelligent software for modern businesses." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

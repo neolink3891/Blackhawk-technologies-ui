@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bhtapp.com/sitemap.xml
+Sitemap: https://www.blackhawk-technologies.com/sitemap.xml
