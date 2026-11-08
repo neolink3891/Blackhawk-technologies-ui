@@ -76,9 +76,10 @@ export const privacySections: LegalSection[] = [
           <li>Your username, email address and whether you've verified it.</li>
           <li>A hash of your password (made with Argon2id). We never store the password itself.</li>
           <li>Your app language, and when you created your account and accepted the Terms.</li>
-          {/* TODO(legal): the API has display_name and avatar_url fields but the app can't set them yet (always
-              empty). Keep this line only while the wording "if you add one" stays true. */}
-          <li>A display name and profile picture, if you add them.</li>
+          <li>
+            A display name and profile photo, if you add them (Profile › Account). Your display name is shown with your
+            username to people who can find you; your profile photo only to your contacts.
+          </li>
           <li>
             Short-lived, hashed codes for verifying your email and resetting your password (they expire within
             minutes).
@@ -256,12 +257,14 @@ export const privacySections: LegalSection[] = [
       <>
         <UL>
           <li>
-            <B>Account data, keys, contacts and messages</B>: while your account exists. “Delete for me” removes a
-            message from your view on all your devices; the other person keeps their copy.
+            <B>Account data, keys and contacts</B>: while your account exists.
           </li>
-          {/* TODO(legal): photo Sekros sent in a chat (the `media` collection) are never deleted from storage once
-              sent, and message records stay after both people "Delete for me". Either add deletion in sekro-api or
-              keep this wording. */}
+          <li>
+            <B>Messages and the Sekros sent in a chat</B>: until both people have deleted them. “Delete for me” removes a
+            message from your view on all your devices; the other person keeps their copy. Once both of you have deleted
+            it, the message and its Sekro file are deleted from our servers. A short record that it was deleted (its ID
+            and time, no content) is kept for up to 120 days so that all your devices remove it too.
+          </li>
           <li>
             <B>Uploads that are never sent or saved</B>: deleted automatically after 24 hours.
           </li>
@@ -291,23 +294,31 @@ export const privacySections: LegalSection[] = [
     title: "Deleting your account",
     body: (
       <>
-        {/* TODO(legal): there is no account deletion in the app or the API yet. Apple requires apps that let
-            people create an account to let them delete it in the app (App Store Review Guideline 5.1.1(v)). Build
-            it, then replace this section with the in-app steps (e.g. Profile › Delete account) and exactly what it
-            deletes. Until then, deletion is handled by email, as below. */}
         <p>
-          To delete your account, email <Mail /> from the email address on your account and tell us your username. We'll
-          confirm the request and delete your account within one month.
+          You can delete your account in the app: <B>Profile › Account › Delete account</B>. You'll be asked for your
+          password and to confirm. It's immediate and can't be undone. If you can't use the app, email <Mail /> from the
+          address on your account and we'll do it for you within one month.
         </p>
         <p>
-          When your account is deleted, we delete your account details, keys and key backup, contacts, invites, blocks,
-          devices and push tokens, and your Gallery and media files. Some things are outside our control or may be
-          kept:
+          We delete straight away: your account details (username, email, password hash, display name, profile photo),
+          your public keys, key backup and saved sender keys, your contacts, invites and blocks, your devices and push
+          tokens, your notifications, your Gallery and its files, and the video and audio files only you were still
+          using. Every device signed in to your account is signed out, and the app removes your keys and messages from
+          it.
         </p>
+        <p>Some things stay:</p>
         <UL>
-          <li>Sekros and messages you sent stay on the recipients' devices, and Sekro files shared outside the app can't be recalled.</li>
-          <li>Reports and security logs are kept for the periods above.</li>
-          <li>We keep information we're required to keep by law, or need for a legal claim.</li>
+          <li>
+            Messages and Sekros in a conversation the other person hasn't deleted stay available to them, including on
+            our servers, until they delete them. Copies on their devices, and Sekro files shared outside the app, are out
+            of our reach.
+          </li>
+          <li>Reports about you, or made by you, are kept for moderation for the period above, with your username.</li>
+          <li>
+            Records of your signed-out sessions (an account ID, no personal details) expire within 90 days. They let us
+            tell your other devices to erase your data.
+          </li>
+          <li>Security logs are kept for the period above, and we keep anything the law requires us to keep.</li>
         </UL>
         <p>
           You can also sign out of Sekro on your device at any time. Signing out removes your keys and local chat history

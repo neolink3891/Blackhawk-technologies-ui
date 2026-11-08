@@ -75,8 +75,10 @@ export const privacySections: LegalSection[] = [
           <li>Tu nombre de usuario, tu correo electrónico y si lo has verificado.</li>
           <li>Un hash de tu contraseña (con Argon2id). Nunca guardamos la contraseña en sí.</li>
           <li>El idioma de la app, y cuándo creaste tu cuenta y aceptaste los Términos.</li>
-          {/* TODO(legal): display_name / avatar_url can't be set yet; see privacy-en.tsx. */}
-          <li>Un nombre visible y una foto de perfil, si los añades.</li>
+          <li>
+            Un nombre visible y una foto de perfil, si los añades (Perfil › Cuenta). Tu nombre visible se muestra junto a
+            tu nombre de usuario a quienes pueden encontrarte; tu foto de perfil, solo a tus contactos.
+          </li>
           <li>
             Códigos de un solo uso, guardados como hash, para verificar tu correo y restablecer tu contraseña (caducan en
             minutos).
@@ -261,10 +263,15 @@ export const privacySections: LegalSection[] = [
       <>
         <UL>
           <li>
-            <B>Datos de la cuenta, claves, contactos y mensajes</B>: mientras exista tu cuenta. «Eliminar para mí» quita
-            un mensaje de tu vista en todos tus dispositivos; la otra persona conserva su copia.
+            <B>Datos de la cuenta, claves y contactos</B>: mientras exista tu cuenta.
           </li>
-          {/* TODO(legal): chat photo Sekros are never deleted once sent; see privacy-en.tsx. */}
+          <li>
+            <B>Mensajes y Sekros enviados en un chat</B>: hasta que ambas personas los eliminen. «Eliminar para mí» quita
+            un mensaje de tu vista en todos tus dispositivos; la otra persona conserva su copia. Cuando los dos lo habéis
+            eliminado, el mensaje y su archivo de Sekro se borran de nuestros servidores. Guardamos un registro breve de
+            que se eliminó (su identificador y la hora, sin contenido) durante un máximo de 120 días para que todos tus
+            dispositivos también lo quiten.
+          </li>
           <li>
             <B>Archivos subidos que nunca se envían ni se guardan</B>: se borran automáticamente a las 24 horas.
           </li>
@@ -295,23 +302,37 @@ export const privacySections: LegalSection[] = [
     title: "Eliminar tu cuenta",
     body: (
       <>
-        {/* TODO(legal): no in-app account deletion yet (App Store Guideline 5.1.1(v)); see privacy-en.tsx. */}
         <p>
-          Para eliminar tu cuenta, escribe a <Mail /> desde el correo de tu cuenta e indica tu nombre de usuario.
-          Confirmaremos la solicitud y eliminaremos tu cuenta en el plazo de un mes.
+          Puedes eliminar tu cuenta desde la app: <B>Perfil › Cuenta › Eliminar cuenta</B>. Te pediremos tu contraseña y
+          una confirmación. Es inmediato y no se puede deshacer. Si no puedes usar la app, escribe a <Mail /> desde el
+          correo de tu cuenta y lo haremos por ti en el plazo de un mes.
         </p>
         <p>
-          Al eliminar tu cuenta, borramos los datos de la cuenta, tus claves y su copia de seguridad, tus contactos,
-          invitaciones, bloqueos, dispositivos y tokens push, y tu Galería y tus archivos. Algunas cosas no dependen de
-          nosotros o pueden conservarse:
+          Borramos de inmediato: los datos de tu cuenta (nombre de usuario, correo, hash de la contraseña, nombre visible,
+          foto de perfil), tus claves públicas, la copia de seguridad de tus claves y las claves de remitentes guardadas,
+          tus contactos, invitaciones y bloqueos, tus dispositivos y tokens push, tus notificaciones, tu Galería y sus
+          archivos, y los archivos de vídeo y audio que solo usabas tú. Se cierra la sesión en todos tus dispositivos, y
+          la app borra de ellos tus claves y mensajes.
         </p>
+        <p>Algunas cosas se conservan:</p>
         <UL>
           <li>
-            Los Sekros y mensajes que enviaste siguen en los dispositivos de quienes los recibieron, y los archivos de
-            Sekro compartidos fuera de la app no se pueden recuperar.
+            Los mensajes y Sekros de una conversación que la otra persona no ha eliminado siguen disponibles para ella,
+            también en nuestros servidores, hasta que los elimine. Las copias en sus dispositivos y los archivos de Sekro
+            compartidos fuera de la app quedan fuera de nuestro alcance.
           </li>
-          <li>Las denuncias y los registros de seguridad se guardan durante los plazos indicados arriba.</li>
-          <li>Conservamos la información que la ley nos obliga a guardar o que necesitemos ante una reclamación legal.</li>
+          <li>
+            Las denuncias sobre ti o hechas por ti se conservan para la moderación durante el plazo indicado arriba, con
+            tu nombre de usuario.
+          </li>
+          <li>
+            Los registros de tus sesiones cerradas (un identificador de cuenta, sin datos personales) caducan en un plazo
+            de 90 días. Nos permiten indicar a tus otros dispositivos que borren tus datos.
+          </li>
+          <li>
+            Los registros de seguridad se guardan durante el plazo indicado arriba, y conservamos lo que la ley nos obligue
+            a guardar.
+          </li>
         </UL>
         <p>
           También puedes cerrar sesión en Sekro en tu dispositivo cuando quieras. Al cerrar sesión se eliminan tus
