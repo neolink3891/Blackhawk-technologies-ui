@@ -1,5 +1,5 @@
 import {
-  Users, Home, UtensilsCrossed, PhoneCall, Terminal, Code2, Sparkles, Lock,
+  Users, Home, UtensilsCrossed, PhoneCall, Terminal, Code2, Sparkles, Lock, ShoppingCart,
   type LucideIcon,
 } from "lucide-react";
 import { SEKRO_IMAGES } from "@/lib/sekro";
@@ -17,6 +17,10 @@ export interface Solution {
   image?: string;
   /** Product page; makes "Learn more" a link. */
   href?: "/sekro";
+  /** External product site, opened in a new tab (instead of `href`). */
+  externalUrl?: string;
+  /** Link text for `externalUrl` (default "Learn more"). */
+  linkLabel?: string;
   features?: string[];
 }
 
@@ -37,6 +41,24 @@ export const solutions: Solution[] = [
       "Screenshot & Recording Protection",
       "Delete Everywhere",
       "iPhone & Android",
+    ],
+  },
+  {
+    name: "HawkSells",
+    tagline: "You Post. HawkSells.",
+    description:
+      "An AI sales assistant for businesses that sell on Facebook and Instagram. It replies to every comment and message 24/7, answers from your own products, prices and delivery options, and delivers qualified leads with the order total. Live, launching in Central America.",
+    status: "Available",
+    icon: ShoppingCart,
+    image: "/hawksells/logo.png",
+    externalUrl: "https://hawksells.bhtapp.com",
+    linkLabel: "Visit HawkSells",
+    features: [
+      "Replies to Comments & Messages 24/7",
+      "Answers From Your Catalogue, Prices & Delivery Zones",
+      "Qualified, Verified Leads With Order Total",
+      "Publish & Schedule Facebook and Instagram Posts",
+      "Pay per Lead With Credits, No Monthly Fee",
     ],
   },
   {

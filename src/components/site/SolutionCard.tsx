@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { Solution } from "@/lib/solutions";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 
 const statusStyles: Record<Solution["status"], string> = {
   Available: "bg-primary/15 text-primary border-primary/30",
@@ -37,7 +37,18 @@ export function SolutionCard({ solution }: { solution: Solution }) {
           ))}
         </ul>
       )}
-      {solution.href ? (
+      {solution.externalUrl ? (
+        <a
+          href={solution.externalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary transition-colors after:absolute after:inset-0 after:content-[''] hover:text-primary-glow"
+        >
+          {solution.linkLabel ?? "Learn more"}{" "}
+          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      ) : solution.href ? (
         <Link
           to={solution.href}
           className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary transition-colors after:absolute after:inset-0 after:content-[''] hover:text-primary-glow"
