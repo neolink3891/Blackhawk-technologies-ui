@@ -8,7 +8,7 @@ export const Route = createFileRoute("/solutions")({
   head: () => ({
     meta: [
       { title: "Solutions — BlackHawk Technologies" },
-      { name: "description", content: "Explore software products and services by BlackHawk Technologies: HawkTrack, Atlas, GetMunching, Adhki Cogno, NeoLogger, custom software, and AI automation." },
+      { name: "description", content: "Explore software products and services by BlackHawk Technologies: Sekro, HawkTrack, Atlas, GetMunching, Adhki Cogno, NeoLogger, custom software, and AI automation." },
       { property: "og:title", content: "Solutions — BlackHawk Technologies" },
       { property: "og:description", content: "Products and services we build — from workforce platforms to AI-powered automation." },
     ],

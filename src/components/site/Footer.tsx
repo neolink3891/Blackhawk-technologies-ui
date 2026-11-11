@@ -46,9 +46,13 @@ export function Footer() {
         <div>
           <h4 className="text-sm font-semibold text-foreground">Sekro</h4>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+            <li><Link to="/sekro" className="hover:text-foreground">About Sekro</Link></li>
             <li><Link to="/sekro/privacy" className="hover:text-foreground">Privacy Policy</Link></li>
             <li><Link to="/sekro/terms" className="hover:text-foreground">Terms of Service</Link></li>
+            <li><Link to="/sekro/delete-account" className="hover:text-foreground">Delete your account</Link></li>
             <li>
+              <Link to="/es/sekro" hrefLang="es" className="hover:text-foreground">Español</Link>
+              {" · "}
               <Link to="/es/sekro/privacy" hrefLang="es" className="hover:text-foreground">Privacidad</Link>
               {" · "}
               <Link to="/es/sekro/terms" hrefLang="es" className="hover:text-foreground">Términos</Link>

@@ -7,11 +7,11 @@ export const SEKRO_LEGAL = {
   registeredOffice: "3rd Floor, 86-90 Paul Street, London EC2A 4NE, United Kingdom",
   supportEmail: "support.sekro@bhtapp.com",
   // Update both when either document changes.
-  lastUpdated: { en: "8 November 2026", es: "8 de noviembre de 2026" },
+  lastUpdated: { en: "11 November 2026", es: "11 de noviembre de 2026" },
   // The account deletion page (Google Play's "delete account" URL) has its own date.
   deleteAccountUpdated: { en: "11 November 2026", es: "11 de noviembre de 2026" },
-  // How long an emailed deletion request (no app) can take, once we've confirmed it.
-  emailDeletionDays: 30,
+  // How long an emailed deletion request (no app) can take: UK GDPR's "without undue delay, within one month".
+  emailDeletionDeadline: { en: "within one month", es: "en el plazo de un mes" },
 };
 
 // Verified against sekro-api (Nov 2026). Change these if the API or deploy config changes.
@@ -27,17 +27,6 @@ export const SEKRO_FIGURES = {
   sessionRecordDays: 90,
   // MESSAGE_TOMBSTONE_DAYS: "it was deleted" records (no content).
   tombstoneDays: 120,
-};
-
-// TODO(legal): fill in these retention periods (both languages), then remove the brackets.
-// DEPLOY.md suggests a lifecycle rule on the S3 `moderation/` prefix (e.g. 180 days); reports in MongoDB
-// have no automatic expiry yet. Security logs are the API's CloudWatch logs.
-export const SEKRO_RETENTION = {
-  reports: { en: "[PLACEHOLDER: retention period for reports]", es: "[PENDIENTE: plazo de conservación de denuncias]" },
-  securityLogs: {
-    en: "[PLACEHOLDER: retention period for security logs]",
-    es: "[PENDIENTE: plazo de conservación de los registros de seguridad]",
-  },
 };
 
 export const SEKRO_PATHS = {

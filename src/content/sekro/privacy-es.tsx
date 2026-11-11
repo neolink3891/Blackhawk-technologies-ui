@@ -1,5 +1,5 @@
 import { A, B, H3, Mail, UL, type LegalSection } from "@/components/site/LegalPage";
-import { SEKRO_LEGAL, SEKRO_PATHS, SEKRO_RETENTION } from "@/lib/sekro-legal";
+import { SEKRO_FIGURES, SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
 
 // Spanish version of privacy-en.tsx. Keep both in step: same sections, same facts, same TODOs.
 // Neutral Spanish with "tú" (as in the app, valid for es-ES and es-419).
@@ -355,10 +355,14 @@ export const privacySections: LegalSection[] = [
             alguien haya recibido o guardado sigue funcionando dondequiera que esté, y no podemos recuperarla.
           </li>
           <li>
-            <B>Denuncias</B>: {SEKRO_RETENTION.reports.es}.
+            <B>Denuncias</B>: se conservan mientras están abiertas y se eliminan {SEKRO_FIGURES.reportRetentionDays} días
+            (12 meses) después de resolverse. El contenido compartido con una denuncia (lo que mostró el dispositivo de
+            quien denuncia y la imagen del Sekro) se elimina con ella y, en cualquier caso, a más tardar{" "}
+            {SEKRO_FIGURES.moderationFileDays} días después de que nos llegara.
           </li>
           <li>
-            <B>Registros de seguridad</B>: {SEKRO_RETENTION.securityLogs.es}.
+            <B>Registros de seguridad</B> (los registros técnicos de nuestros servidores): {SEKRO_FIGURES.serverLogDays}{" "}
+            días.
           </li>
           <li>
             <B>Registros de límites de uso (incluidas las direcciones IP)</B>: unas dos horas. Códigos de correo y de
@@ -376,7 +380,7 @@ export const privacySections: LegalSection[] = [
         <p>
           Puedes eliminar tu cuenta desde la app: <B>Perfil › Cuenta › Eliminar cuenta</B>. Te pediremos tu contraseña y
           una confirmación. Es inmediato y no se puede deshacer. Si no puedes usar la app, escribe a <Mail /> desde el
-          correo de tu cuenta y lo haremos por ti en el plazo de un mes.
+          correo de tu cuenta y lo haremos por ti {SEKRO_LEGAL.emailDeletionDeadline.es}.
         </p>
         <p>
           Borramos de inmediato: los datos de tu cuenta (nombre de usuario, correo, hash de la contraseña, nombre visible,
@@ -398,7 +402,7 @@ export const privacySections: LegalSection[] = [
           </li>
           <li>
             Los registros de tus sesiones cerradas (un identificador de cuenta, sin datos personales) caducan en un plazo
-            de 90 días. Nos permiten indicar a tus otros dispositivos que borren tus datos.
+            de {SEKRO_FIGURES.sessionRecordDays} días. Nos permiten indicar a tus otros dispositivos que borren tus datos.
           </li>
           <li>
             Los registros de seguridad se guardan durante el plazo indicado arriba, y conservamos lo que la ley nos obligue
@@ -428,7 +432,9 @@ export const privacySections: LegalSection[] = [
         <UL>
           <li>obtener una copia de los datos personales que tenemos sobre ti (acceso);</li>
           <li>corregir los datos inexactos;</li>
-          <li>que se borren tus datos;</li>
+          <li>
+            que se borren tus datos (consulta <A href={SEKRO_PATHS.deleteAccount.es}>Eliminar tu cuenta de Sekro</A>);
+          </li>
           <li>recibir tus datos en un formato portable;</li>
           <li>oponerte al uso de tus datos o pedirnos que lo limitemos.</li>
         </UL>

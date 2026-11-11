@@ -14,9 +14,11 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SekroIndexRouteImport } from './routes/sekro/index'
 import { Route as SekroTermsRouteImport } from './routes/sekro/terms'
 import { Route as SekroPrivacyRouteImport } from './routes/sekro/privacy'
 import { Route as SekroDeleteAccountRouteImport } from './routes/sekro/delete-account'
+import { Route as EsSekroIndexRouteImport } from './routes/es/sekro/index'
 import { Route as EsSekroTermsRouteImport } from './routes/es/sekro/terms'
 import { Route as EsSekroPrivacyRouteImport } from './routes/es/sekro/privacy'
 import { Route as EsSekroDeleteAccountRouteImport } from './routes/es/sekro/delete-account'
@@ -46,6 +48,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SekroIndexRoute = SekroIndexRouteImport.update({
+  id: '/sekro/',
+  path: '/sekro/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SekroTermsRoute = SekroTermsRouteImport.update({
   id: '/sekro/terms',
   path: '/sekro/terms',
@@ -59,6 +66,11 @@ const SekroPrivacyRoute = SekroPrivacyRouteImport.update({
 const SekroDeleteAccountRoute = SekroDeleteAccountRouteImport.update({
   id: '/sekro/delete-account',
   path: '/sekro/delete-account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsSekroIndexRoute = EsSekroIndexRouteImport.update({
+  id: '/es/sekro/',
+  path: '/es/sekro/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsSekroTermsRoute = EsSekroTermsRouteImport.update({
@@ -86,9 +98,11 @@ export interface FileRoutesByFullPath {
   '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/sekro/': typeof SekroIndexRoute
   '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
   '/es/sekro/privacy': typeof EsSekroPrivacyRoute
   '/es/sekro/terms': typeof EsSekroTermsRoute
+  '/es/sekro/': typeof EsSekroIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,9 +113,11 @@ export interface FileRoutesByTo {
   '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/sekro': typeof SekroIndexRoute
   '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
   '/es/sekro/privacy': typeof EsSekroPrivacyRoute
   '/es/sekro/terms': typeof EsSekroTermsRoute
+  '/es/sekro': typeof EsSekroIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,9 +129,11 @@ export interface FileRoutesById {
   '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/sekro/': typeof SekroIndexRoute
   '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
   '/es/sekro/privacy': typeof EsSekroPrivacyRoute
   '/es/sekro/terms': typeof EsSekroTermsRoute
+  '/es/sekro/': typeof EsSekroIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -128,9 +146,11 @@ export interface FileRouteTypes {
     | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/sekro/'
     | '/es/sekro/delete-account'
     | '/es/sekro/privacy'
     | '/es/sekro/terms'
+    | '/es/sekro/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -141,9 +161,11 @@ export interface FileRouteTypes {
     | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/sekro'
     | '/es/sekro/delete-account'
     | '/es/sekro/privacy'
     | '/es/sekro/terms'
+    | '/es/sekro'
   id:
     | '__root__'
     | '/'
@@ -154,9 +176,11 @@ export interface FileRouteTypes {
     | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/sekro/'
     | '/es/sekro/delete-account'
     | '/es/sekro/privacy'
     | '/es/sekro/terms'
+    | '/es/sekro/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -168,9 +192,11 @@ export interface RootRouteChildren {
   SekroDeleteAccountRoute: typeof SekroDeleteAccountRoute
   SekroPrivacyRoute: typeof SekroPrivacyRoute
   SekroTermsRoute: typeof SekroTermsRoute
+  SekroIndexRoute: typeof SekroIndexRoute
   EsSekroDeleteAccountRoute: typeof EsSekroDeleteAccountRoute
   EsSekroPrivacyRoute: typeof EsSekroPrivacyRoute
   EsSekroTermsRoute: typeof EsSekroTermsRoute
+  EsSekroIndexRoute: typeof EsSekroIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -210,6 +236,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sekro/': {
+      id: '/sekro/'
+      path: '/sekro'
+      fullPath: '/sekro/'
+      preLoaderRoute: typeof SekroIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sekro/terms': {
       id: '/sekro/terms'
       path: '/sekro/terms'
@@ -229,6 +262,13 @@ declare module '@tanstack/react-router' {
       path: '/sekro/delete-account'
       fullPath: '/sekro/delete-account'
       preLoaderRoute: typeof SekroDeleteAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/sekro/': {
+      id: '/es/sekro/'
+      path: '/es/sekro'
+      fullPath: '/es/sekro/'
+      preLoaderRoute: typeof EsSekroIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/sekro/terms': {
@@ -264,9 +304,11 @@ const rootRouteChildren: RootRouteChildren = {
   SekroDeleteAccountRoute: SekroDeleteAccountRoute,
   SekroPrivacyRoute: SekroPrivacyRoute,
   SekroTermsRoute: SekroTermsRoute,
+  SekroIndexRoute: SekroIndexRoute,
   EsSekroDeleteAccountRoute: EsSekroDeleteAccountRoute,
   EsSekroPrivacyRoute: EsSekroPrivacyRoute,
   EsSekroTermsRoute: EsSekroTermsRoute,
+  EsSekroIndexRoute: EsSekroIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

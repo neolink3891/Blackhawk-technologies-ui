@@ -53,8 +53,8 @@ export const deleteAccountSections: LegalSection[] = [
     body: (
       <p>
         If you can't use the app, email <Mail /> from the email address registered on your Sekro account, and include
-        your username. We'll confirm the request with you and delete your account within{" "}
-        {SEKRO_LEGAL.emailDeletionDays} days. Everything described below applies in the same way.
+        your username. We'll confirm the request with you and delete your account{" "}
+        {SEKRO_LEGAL.emailDeletionDeadline.en}. Everything described below applies in the same way.
       </p>
     ),
   },

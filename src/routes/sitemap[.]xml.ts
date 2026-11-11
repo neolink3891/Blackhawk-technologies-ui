@@ -16,6 +16,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/about", changefreq: "monthly", priority: "0.8" },
           { path: "/solutions", changefreq: "monthly", priority: "0.9" },
           { path: "/contact", changefreq: "yearly", priority: "0.7" },
+          { path: "/sekro", changefreq: "monthly", priority: "0.8" },
+          { path: "/es/sekro", changefreq: "monthly", priority: "0.8" },
           { path: "/sekro/privacy", changefreq: "yearly", priority: "0.5" },
           { path: "/sekro/terms", changefreq: "yearly", priority: "0.5" },
           { path: "/sekro/delete-account", changefreq: "yearly", priority: "0.5" },

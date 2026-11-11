@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import type { Solution } from "@/lib/solutions";
 import { ArrowRight, Check } from "lucide-react";
 
@@ -12,14 +13,19 @@ export function SolutionCard({ solution }: { solution: Solution }) {
   return (
     <article className="group relative flex flex-col rounded-2xl border border-border/60 bg-gradient-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow">
       <div className="flex items-center justify-between">
-        <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-primary shadow-glow">
-          <Icon className="h-5 w-5 text-primary-foreground" />
-        </div>
+        {solution.image ? (
+          <img src={solution.image} alt="" width={44} height={44} className="h-11 w-11 rounded-xl shadow-glow" />
+        ) : (
+          <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-primary shadow-glow">
+            <Icon className="h-5 w-5 text-primary-foreground" />
+          </div>
+        )}
         <span className={`rounded-full border px-2.5 py-1 text-xs font-medium ${statusStyles[solution.status]}`}>
           {solution.status}
         </span>
       </div>
       <h3 className="mt-5 text-lg font-semibold text-foreground">{solution.name}</h3>
+      {solution.tagline && <p className="mt-1 text-sm font-medium text-primary">{solution.tagline}</p>}
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{solution.description}</p>
       {solution.features && solution.features.length > 0 && (
         <ul className="mt-4 space-y-1.5">
@@ -31,9 +37,18 @@ export function SolutionCard({ solution }: { solution: Solution }) {
           ))}
         </ul>
       )}
-      <button className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-primary-glow">
-        Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-      </button>
+      {solution.href ? (
+        <Link
+          to={solution.href}
+          className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary transition-colors after:absolute after:inset-0 after:content-[''] hover:text-primary-glow"
+        >
+          Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      ) : (
+        <button className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-primary-glow">
+          Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </button>
+      )}
     </article>
   );
 }

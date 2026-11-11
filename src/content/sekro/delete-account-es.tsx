@@ -50,8 +50,7 @@ export const deleteAccountSections: LegalSection[] = [
     body: (
       <p>
         Si no puedes usar la app, escribe a <Mail /> desde el correo electrónico registrado en tu cuenta de Sekro e
-        indica tu nombre de usuario. Confirmaremos la solicitud contigo y eliminaremos tu cuenta en un plazo de{" "}
-        {SEKRO_LEGAL.emailDeletionDays} días. Todo lo que se describe a continuación se aplica igual.
+        indica tu nombre de usuario. Confirmaremos la solicitud contigo y eliminaremos tu cuenta {SEKRO_LEGAL.emailDeletionDeadline.es}. Todo lo que se describe a continuación se aplica igual.
       </p>
     ),
   },

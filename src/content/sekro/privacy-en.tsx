@@ -1,5 +1,5 @@
 import { A, B, H3, Mail, UL, type LegalSection } from "@/components/site/LegalPage";
-import { SEKRO_LEGAL, SEKRO_PATHS, SEKRO_RETENTION } from "@/lib/sekro-legal";
+import { SEKRO_FIGURES, SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
 
 // Every statement here was checked against sekro-api and the Sekro iOS app (Nov 2026).
 // Keep it in step with the code: if what we store changes, change this page.
@@ -350,10 +350,13 @@ export const privacySections: LegalSection[] = [
             or saved keeps working wherever it is, and we can't recall it.
           </li>
           <li>
-            <B>Reports</B>: {SEKRO_RETENTION.reports.en}.
+            <B>Reports</B>: kept while they're open, and deleted {SEKRO_FIGURES.reportRetentionDays} days (12 months) after
+            they're resolved. The content shared with a report (what the reporter's device revealed, and the Sekro image)
+            is deleted with it, and in any case no later than {SEKRO_FIGURES.moderationFileDays} days after it was sent
+            to us.
           </li>
           <li>
-            <B>Security logs</B>: {SEKRO_RETENTION.securityLogs.en}.
+            <B>Security logs</B> (our servers' technical logs): {SEKRO_FIGURES.serverLogDays} days.
           </li>
           <li>
             <B>Rate-limit records (including IP addresses)</B>: about two hours. Email and password-reset codes: a few
@@ -371,7 +374,7 @@ export const privacySections: LegalSection[] = [
         <p>
           You can delete your account in the app: <B>Profile › Account › Delete account</B>. You'll be asked for your
           password and to confirm. It's immediate and can't be undone. If you can't use the app, email <Mail /> from the
-          address on your account and we'll do it for you within one month.
+          address on your account and we'll do it for you {SEKRO_LEGAL.emailDeletionDeadline.en}.
         </p>
         <p>
           We delete straight away: your account details (username, email, password hash, display name, profile photo),
@@ -389,7 +392,8 @@ export const privacySections: LegalSection[] = [
           </li>
           <li>Reports about you, or made by you, are kept for moderation for the period above, with your username.</li>
           <li>
-            Records of your signed-out sessions (an account ID, no personal details) expire within 90 days. They let us
+            Records of your signed-out sessions (an account ID, no personal details) expire within{" "}
+            {SEKRO_FIGURES.sessionRecordDays} days. They let us
             tell your other devices to erase your data.
           </li>
           <li>Security logs are kept for the period above, and we keep anything the law requires us to keep.</li>
@@ -414,7 +418,9 @@ export const privacySections: LegalSection[] = [
         <UL>
           <li>get a copy of the personal data we hold about you (access);</li>
           <li>have inaccurate data corrected;</li>
-          <li>have your data deleted;</li>
+          <li>
+            have your data deleted (see <A href={SEKRO_PATHS.deleteAccount.en}>Delete your Sekro account</A>);
+          </li>
           <li>receive your data in a portable format;</li>
           <li>object to, or ask us to restrict, how we use your data.</li>
         </UL>
