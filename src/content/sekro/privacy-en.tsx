@@ -275,7 +275,8 @@ export const privacySections: LegalSection[] = [
           Only a small number of authorised staff can review reports. We use them to decide whether to take action, such
           as suspending or banning an account. We record the decision and the reason on the reported account. We may
           share reported content with the authorities where the law requires it, or where it involves the sexual
-          exploitation of children (see the Terms of Service).
+          exploitation of children (see the Terms of Service and our{" "}
+          <A href={SEKRO_PATHS.childSafety.en}>Child Safety Standards</A>).
         </p>
       </>
     ),

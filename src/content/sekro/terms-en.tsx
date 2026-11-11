@@ -130,6 +130,9 @@ export const termsSections: LegalSection[] = [
           report it to the relevant authorities, including the National Crime Agency (NCA) and the Internet Watch
           Foundation (IWF) in the UK.
         </p>
+        <p>
+          How to report it, and what we do: <A href={SEKRO_PATHS.childSafety.en}>Sekro Child Safety Standards</A>.
+        </p>
       </>
     ),
   },

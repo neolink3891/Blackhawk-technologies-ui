@@ -6,10 +6,13 @@ export const SEKRO_LEGAL = {
   companyNumber: "16154196",
   registeredOffice: "3rd Floor, 86-90 Paul Street, London EC2A 4NE, United Kingdom",
   supportEmail: "support.sekro@bhtapp.com",
+  // Child safety contact (Google Play Child Safety Standards).
+  safetyEmail: "safety.sekro@bhtapp.com",
   // Update both when either document changes.
   lastUpdated: { en: "11 November 2026", es: "11 de noviembre de 2026" },
   // The account deletion page (Google Play's "delete account" URL) has its own date.
   deleteAccountUpdated: { en: "11 November 2026", es: "11 de noviembre de 2026" },
+  childSafetyUpdated: { en: "11 November 2026", es: "11 de noviembre de 2026" },
   // How long an emailed deletion request (no app) can take: UK GDPR's "without undue delay, within one month".
   emailDeletionDeadline: { en: "within one month", es: "en el plazo de un mes" },
 };
@@ -33,4 +36,5 @@ export const SEKRO_PATHS = {
   privacy: { en: "/sekro/privacy", es: "/es/sekro/privacy" },
   terms: { en: "/sekro/terms", es: "/es/sekro/terms" },
   deleteAccount: { en: "/sekro/delete-account", es: "/es/sekro/delete-account" },
+  childSafety: { en: "/sekro/child-safety", es: "/es/sekro/child-safety" },
 } as const;

@@ -131,6 +131,10 @@ export const termsSections: LegalSection[] = [
           lo denunciamos a las autoridades competentes, incluidas la National Crime Agency (NCA) y la Internet Watch
           Foundation (IWF) del Reino Unido.
         </p>
+        <p>
+          Cómo denunciarlo y qué hacemos:{" "}
+          <A href={SEKRO_PATHS.childSafety.es}>Normas de protección infantil de Sekro</A>.
+        </p>
       </>
     ),
   },

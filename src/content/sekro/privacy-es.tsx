@@ -277,7 +277,8 @@ export const privacySections: LegalSection[] = [
           Solo un número reducido de personal autorizado puede revisar las denuncias. Las usamos para decidir si tomamos
           medidas, como suspender o cerrar definitivamente una cuenta. Registramos la decisión y el motivo en la cuenta
           denunciada. Podemos compartir el contenido denunciado con las autoridades cuando la ley lo exija o cuando se
-          trate de explotación sexual infantil (consulta los Términos del servicio).
+          trate de explotación sexual infantil (consulta los Términos del servicio y nuestras{" "}
+          <A href={SEKRO_PATHS.childSafety.es}>Normas de protección infantil</A>).
         </p>
       </>
     ),

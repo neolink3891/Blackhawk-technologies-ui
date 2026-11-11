@@ -50,6 +50,7 @@ export function Footer() {
             <li><Link to="/sekro/privacy" className="hover:text-foreground">Privacy Policy</Link></li>
             <li><Link to="/sekro/terms" className="hover:text-foreground">Terms of Service</Link></li>
             <li><Link to="/sekro/delete-account" className="hover:text-foreground">Delete your account</Link></li>
+            <li><Link to="/sekro/child-safety" className="hover:text-foreground">Child safety</Link></li>
             <li>
               <Link to="/es/sekro" hrefLang="es" className="hover:text-foreground">Español</Link>
               {" · "}

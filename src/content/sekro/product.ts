@@ -21,7 +21,7 @@ export interface SekroProductCopy {
   screenshots: { file: string; caption: string; alt: string }[];
   ageNote: string;
   linksTitle: string;
-  links: { privacy: string; terms: string; deleteAccount: string; support: string };
+  links: { privacy: string; terms: string; deleteAccount: string; childSafety: string; support: string };
   languageLabel: string;
   alternateLabel: string;
 }
@@ -131,6 +131,7 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       privacy: "Privacy Policy",
       terms: "Terms of Service",
       deleteAccount: "Delete your account",
+      childSafety: "Child safety",
       support: "Support",
     },
     languageLabel: "Language",
@@ -238,6 +239,7 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       privacy: "Política de privacidad",
       terms: "Términos del servicio",
       deleteAccount: "Eliminar tu cuenta",
+      childSafety: "Protección infantil",
       support: "Soporte",
     },
     languageLabel: "Idioma",

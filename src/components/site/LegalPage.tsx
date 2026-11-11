@@ -131,10 +131,10 @@ export function B({ children }: { children: ReactNode }) {
   return <strong className="font-semibold text-foreground">{children}</strong>;
 }
 
-export function Mail() {
+export function Mail({ to = SEKRO_LEGAL.supportEmail }: { to?: string }) {
   return (
-    <a href={`mailto:${SEKRO_LEGAL.supportEmail}`} className="text-primary hover:underline">
-      {SEKRO_LEGAL.supportEmail}
+    <a href={`mailto:${to}`} className="text-primary hover:underline">
+      {to}
     </a>
   );
 }

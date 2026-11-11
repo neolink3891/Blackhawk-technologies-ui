@@ -239,6 +239,7 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
               { to: SEKRO_PATHS.privacy[lang], label: t.links.privacy },
               { to: SEKRO_PATHS.terms[lang], label: t.links.terms },
               { to: SEKRO_PATHS.deleteAccount[lang], label: t.links.deleteAccount },
+              { to: SEKRO_PATHS.childSafety[lang], label: t.links.childSafety },
             ].map((l) => (
               <Link key={l.to} to={l.to} className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
                 {l.label} <ArrowRight className="h-4 w-4" />
