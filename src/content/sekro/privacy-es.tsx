@@ -357,9 +357,12 @@ export const privacySections: LegalSection[] = [
           </li>
           <li>
             <B>Denuncias</B>: se conservan mientras están abiertas y se eliminan {SEKRO_FIGURES.reportRetentionDays} días
-            (12 meses) después de resolverse. El contenido compartido con una denuncia (lo que mostró el dispositivo de
-            quien denuncia y la imagen del Sekro) se elimina con ella y, en cualquier caso, a más tardar{" "}
-            {SEKRO_FIGURES.moderationFileDays} días después de que nos llegara.
+            (12 meses) después de resolverse, junto con el contenido compartido con ellas (lo que mostró el dispositivo de
+            quien denuncia y la imagen del Sekro). Las denuncias bajo <B>conservación legal</B>, que incluyen todas las de
+            protección infantil, no se eliminan en ese plazo: la denuncia, el contenido compartido con ella y el mensaje,
+            el Sekro y el archivo de vídeo o audio denunciados se conservan hasta que dejan de ser necesarios para un
+            procedimiento judicial. Mientras una denuncia está bajo conservación legal, ese contenido denunciado queda
+            oculto para todos en la app pero se conserva en nuestros servidores, aunque se elimine en la app.
           </li>
           <li>
             <B>Registros de seguridad</B> (los registros técnicos de nuestros servidores): {SEKRO_FIGURES.serverLogDays}{" "}
@@ -384,6 +387,10 @@ export const privacySections: LegalSection[] = [
           correo de tu cuenta y lo haremos por ti {SEKRO_LEGAL.emailDeletionDeadline.es}.
         </p>
         <p>
+          Mientras se está tramitando una denuncia sobre tu cuenta (abierta o bajo conservación legal), no se puede
+          eliminar tu cuenta hasta que se haya resuelto.
+        </p>
+        <p>
           Borramos de inmediato: los datos de tu cuenta (nombre de usuario, correo, hash de la contraseña, nombre visible,
           foto de perfil), tus claves públicas, la copia de seguridad de tus claves y las claves de remitentes guardadas,
           tus contactos, invitaciones y bloqueos, tus dispositivos y tokens push, tus notificaciones, tu Galería y sus
@@ -399,7 +406,9 @@ export const privacySections: LegalSection[] = [
           </li>
           <li>
             Las denuncias sobre ti o hechas por ti se conservan para la moderación durante el plazo indicado arriba, con
-            tu nombre de usuario.
+            tu nombre de usuario. Mientras se conserve alguna, también conservamos un registro mínimo de tu cuenta: su
+            identificador de usuario, tu nombre de usuario, un hash de tu correo electrónico y las fechas de creación y
+            eliminación de la cuenta. Se elimina junto con la última de esas denuncias.
           </li>
           <li>
             Los registros de tus sesiones cerradas (un identificador de cuenta, sin datos personales) caducan en un plazo

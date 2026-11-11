@@ -44,6 +44,10 @@ export const deleteAccountSections: LegalSection[] = [
           Your account is deleted straight away and can't be undone. Every device signed in to it is signed out, and the
           app removes your keys and messages from each of them.
         </p>
+        <p>
+          While a report about your account is being handled (open, or under legal hold), your account can't be deleted,
+          in the app or by email, until it has been dealt with.
+        </p>
       </>
     ),
   },
@@ -110,10 +114,16 @@ export const deleteAccountSections: LegalSection[] = [
         </li>
         <li>
           <B>Reports.</B> Reports about you, or made by you, are kept for moderation, with your username. A report is
-          kept while it's open, and deleted {SEKRO_FIGURES.reportRetentionDays} days (12 months) after it's resolved.
-          The content a reporter chose to share with a report (what their device revealed, and the Sekro image) is
-          deleted with the report, and in any case no later than {SEKRO_FIGURES.moderationFileDays} days after it was
-          sent to us.
+          kept while it's open, and deleted {SEKRO_FIGURES.reportRetentionDays} days (12 months) after it's resolved,
+          together with the content a reporter chose to share with it (what their device revealed, and the Sekro image).
+          Reports under <B>legal hold</B>, which includes every child safety report, aren't deleted on that schedule: the
+          report, the content shared with it, and the reported message, Sekro and video or audio file are kept until
+          they're no longer needed for legal proceedings, hidden from everyone in the app even if they're deleted there.
+        </li>
+        <li>
+          <B>A minimal record of your account</B>, while any report about you or made by you is kept: its user ID, your
+          username, a hash of your email address, and when the account was created and deleted. It's deleted together
+          with the last of those reports.
         </li>
         <li>
           <B>Server logs.</B> Our servers' technical logs, which may include your account ID, are kept for{" "}

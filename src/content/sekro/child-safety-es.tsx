@@ -58,10 +58,9 @@ export const childSafetySections: LegalSection[] = [
         <p>Después:</p>
         <OL>
           <li>
-            En «¿Por qué lo denuncias?», elige <B>Contenido ilegal</B>.
-          </li>
-          <li>
-            En <B>Añade una nota (opcional)</B>, indica que afecta a un menor, para que podamos darle prioridad.
+            En «¿Por qué lo denuncias?», elige <B>Protección infantil (afecta a un menor)</B> en Android. En iPhone, hasta
+            que la próxima actualización de la app añada esa opción, elige <B>Contenido ilegal</B> e indica en{" "}
+            <B>Añade una nota (opcional)</B> que afecta a un menor, para que podamos darle prioridad.
           </li>
           <li>
             También puedes marcar <B>Bloquear también</B> a quien lo envió. Luego toca <B>Enviar denuncia</B>.
@@ -95,6 +94,22 @@ export const childSafetySections: LegalSection[] = [
           <B>Cerramos de forma permanente la cuenta</B> de cualquier persona que comparta material de abuso sexual
           infantil o explote a menores. Una cuenta cerrada pierde la sesión en todos sus dispositivos al instante y no
           puede volver a iniciarla, y su titular no puede eliminarla para eludir la moderación.
+        </li>
+        <li>
+          <B>Retiramos el contenido.</B> Retiramos el contenido denunciado y, cuando cerramos una cuenta por protección
+          infantil, todo lo que tenía guardado con nosotros: los mensajes y Sekros que envió, su Galería, sus archivos de
+          vídeo y audio y su foto de perfil. A partir de entonces, nadie puede verlos ni abrirlos en Sekro. (Un Sekro de
+          foto o de texto lleva su contenido dentro de la imagen, así que las copias guardadas o compartidas fuera de la
+          app quedan fuera de nuestro alcance.)
+        </li>
+        <li>
+          <B>Conservamos las pruebas.</B> Toda denuncia de protección infantil queda bajo conservación legal. La denuncia,
+          el contenido compartido con ella, el mensaje, el Sekro y el archivo de vídeo o audio denunciados, y la
+          información que tenemos sobre la cuenta se conservan para las autoridades hasta que dejan de ser necesarios para
+          un procedimiento judicial, aunque se eliminen en la app. Su titular no puede eliminar la cuenta mientras haya
+          una denuncia sobre ella abierta o bajo conservación legal y, si una cuenta se elimina, conservamos un registro
+          mínimo de ella (identificador de usuario, nombre de usuario, un hash del correo electrónico y fechas) mientras
+          se conserve alguna denuncia sobre ella.
         </li>
         <li>
           <B>Denunciamos el material aparente de abuso sexual infantil</B> al National Center for Missing &amp; Exploited

@@ -3,13 +3,15 @@ import { SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
 
 // Sekro's Child Safety Standards (Google Play, Social apps). Checked (Nov 2026) against sekro-api
 // (models/moderation.py, services/report_service.py, routers/reports.py, jobs/purge_reports.py) and the iOS / Android
-// report flows; UI labels are the apps' own. Say only what the apps and API do today:
-// - there is no "child safety" report reason yet (abuse / illegal / spam / other), so we point people to "Illegal
-//   content" + a note;
-// - admins can ban an account, but there is no admin endpoint to delete reported content from our servers, so this
-//   page doesn't promise removal;
-// - reports are purged on the normal schedule (no legal hold), so "preserve" is limited to passing it on with our report.
-// Update this page when any of that changes.
+// report flows; UI labels are the apps' own. Updated for API 1.0.4 / Android 1.0.0 (build 3):
+// - report reason child_safety ("Child safety (a minor is involved)") on Android; iOS gets it in 1.0.6, so iPhone
+//   users choose "Illegal content" + a note until then (update step 1 when iOS ships);
+// - every child_safety report is under legal hold (app/services/legal_hold.py): never purged, files outside any S3
+//   lifecycle, the reported message / PNG / video hidden from users but kept through every delete path;
+// - admin removal (app/services/moderation_service.py); a ban with category child_safety removes everything the account
+//   uploaded (sent messages, gallery, videos, photo PNGs, profile pictures);
+// - self-deletion refused while a report against the account is open or held; a deleted account a report names keeps
+//   a minimal record (deleted_accounts) while that report exists.
 
 export const childSafetyIntro = (
   <>
@@ -64,10 +66,9 @@ export const childSafetySections: LegalSection[] = [
         <p>Then:</p>
         <OL>
           <li>
-            Under “Why are you reporting this?”, choose <B>Illegal content</B>.
-          </li>
-          <li>
-            In <B>Add a note (optional)</B>, say that it involves a child, so we can prioritise it.
+            Under “Why are you reporting this?”, choose <B>Child safety (a minor is involved)</B> on Android. On iPhone,
+            until the next update of the app adds that option, choose <B>Illegal content</B> and say in{" "}
+            <B>Add a note (optional)</B> that a child is involved, so we can prioritise it.
           </li>
           <li>
             You can also tick <B>Also block</B> the sender. Then tap <B>Send report</B>.
@@ -100,6 +101,20 @@ export const childSafetySections: LegalSection[] = [
           <B>We permanently ban the account</B> of anyone we find sharing child sexual abuse material or exploiting
           children. A banned account is signed out of every device straight away and can't sign in again, and it can't
           be deleted by its owner to escape moderation.
+        </li>
+        <li>
+          <B>We remove the content.</B> We remove the reported content and, when we ban an account for child safety,
+          everything it stored with us: the messages and Sekros it sent, its Gallery, its video and audio files, and its
+          profile photo. After that, nobody can see or open them in Sekro. (A photo or text Sekro carries its content
+          inside the image, so copies saved or shared outside the app are out of our reach.)
+        </li>
+        <li>
+          <B>We preserve evidence.</B> Every child safety report is put under legal hold. The report, the content shared
+          with it, the reported message, Sekro and video or audio file, and the information we hold about the account
+          are kept for law enforcement until they're no longer needed for legal proceedings, even if they're deleted in
+          the app. The account's owner can't delete the account while a report about it is open or held, and if an
+          account is deleted, we keep a minimal record of it (user ID, username, a hash of the email address, and dates)
+          for as long as a report about it is kept.
         </li>
         <li>
           <B>We report apparent child sexual abuse material</B> to the National Center for Missing &amp; Exploited

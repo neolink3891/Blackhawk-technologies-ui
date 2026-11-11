@@ -125,11 +125,11 @@ export const termsSections: LegalSection[] = [
           </li>
         </UL>
         <H3>Tolerancia cero con la explotación infantil</H3>
-        {/* TODO(legal): confirm the NCA / IWF reporting process, as in terms-en.tsx. */}
+        {/* TODO(legal): confirm the NCMEC / NCA reporting process, as in terms-en.tsx. */}
         <p>
           Cerramos definitivamente cualquier cuenta que comparta material de abuso sexual infantil o explote a menores, y
-          lo denunciamos a las autoridades competentes, incluidas la National Crime Agency (NCA) y la Internet Watch
-          Foundation (IWF) del Reino Unido.
+          lo denunciamos al National Center for Missing &amp; Exploited Children (NCMEC) y a la National Crime Agency
+          (NCA) del Reino Unido.
         </p>
         <p>
           Cómo denunciarlo y qué hacemos:{" "}
@@ -145,8 +145,8 @@ export const termsSections: LegalSection[] = [
       <>
         <UL>
           <li>
-            Puedes denunciar desde la app cualquier mensaje o Sekro que recibas. Puedes elegir un motivo (abuso o acoso,
-            contenido ilegal, spam u otro), añadir una nota y bloquear al remitente al mismo tiempo.
+            Puedes denunciar desde la app cualquier mensaje o Sekro que recibas. Puedes elegir un motivo (protección infantil,
+            de momento solo en Android; abuso o acoso; contenido ilegal; spam u otro), añadir una nota y bloquear al remitente al mismo tiempo.
           </li>
           <li>
             Al denunciar, tu dispositivo nos envía lo que reveló (la foto, el vídeo, el audio o el texto, y la nota oculta

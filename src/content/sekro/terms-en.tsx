@@ -123,12 +123,12 @@ export const termsSections: LegalSection[] = [
           </li>
         </UL>
         <H3>Zero tolerance for child exploitation</H3>
-        {/* TODO(legal): confirm our reporting obligations and process (NCA, IWF; Online Safety Act 2023 s.66 CSEA
-            reporting duty) and how reported material is preserved and handed over. */}
+        {/* TODO(legal): confirm our reporting obligations and process (NCMEC, NCA; Online Safety Act 2023 s.66 CSEA
+            reporting duty). Keep the bodies named here the same as on the Child Safety Standards page. */}
         <p>
           We permanently ban any account we find sharing child sexual abuse material or exploiting children, and we
-          report it to the relevant authorities, including the National Crime Agency (NCA) and the Internet Watch
-          Foundation (IWF) in the UK.
+          report it to the National Center for Missing &amp; Exploited Children (NCMEC) and to the UK's National Crime
+          Agency (NCA).
         </p>
         <p>
           How to report it, and what we do: <A href={SEKRO_PATHS.childSafety.en}>Sekro Child Safety Standards</A>.
@@ -143,8 +143,8 @@ export const termsSections: LegalSection[] = [
       <>
         <UL>
           <li>
-            You can report any message or Sekro you receive from the app. You can choose a reason (abuse or harassment,
-            illegal content, spam, or other), add a note, and block the sender at the same time.
+            You can report any message or Sekro you receive from the app. You can choose a reason (child safety, on
+            Android for now; abuse or harassment; illegal content; spam; or other), add a note, and block the sender at the same time.
           </li>
           <li>
             When you report, your device sends us what it revealed (the photo, video, audio or text, and any hidden note),

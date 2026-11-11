@@ -41,6 +41,10 @@ export const deleteAccountSections: LegalSection[] = [
           Tu cuenta se elimina en el acto y no se puede deshacer. Se cierra la sesión en todos los dispositivos en los
           que la tenías abierta, y la app borra de ellos tus claves y tus mensajes.
         </p>
+        <p>
+          Mientras se está tramitando una denuncia sobre tu cuenta (abierta o bajo conservación legal), no se puede
+          eliminar tu cuenta, ni desde la app ni por correo, hasta que se haya resuelto.
+        </p>
       </>
     ),
   },
@@ -110,9 +114,16 @@ export const deleteAccountSections: LegalSection[] = [
         <li>
           <B>Denuncias.</B> Las denuncias sobre ti o hechas por ti se conservan para la moderación, con tu nombre de
           usuario. Una denuncia se conserva mientras está abierta y se elimina {SEKRO_FIGURES.reportRetentionDays} días
-          (12 meses) después de resolverse. El contenido que quien denuncia decidió compartir con la denuncia (lo que
-          mostró su dispositivo y la imagen del Sekro) se elimina con ella y, en cualquier caso, a más tardar{" "}
-          {SEKRO_FIGURES.moderationFileDays} días después de que nos llegara.
+          (12 meses) después de resolverse, junto con el contenido que quien denuncia decidió compartir con ella (lo que
+          mostró su dispositivo y la imagen del Sekro). Las denuncias bajo <B>conservación legal</B>, que incluyen todas
+          las de protección infantil, no se eliminan en ese plazo: la denuncia, el contenido compartido con ella y el
+          mensaje, el Sekro y el archivo de vídeo o audio denunciados se conservan hasta que dejan de ser necesarios para
+          un procedimiento judicial, ocultos para todos en la app aunque se eliminen en ella.
+        </li>
+        <li>
+          <B>Un registro mínimo de tu cuenta</B>, mientras se conserve alguna denuncia sobre ti o hecha por ti: su
+          identificador de usuario, tu nombre de usuario, un hash de tu correo electrónico y las fechas de creación y
+          eliminación de la cuenta. Se elimina junto con la última de esas denuncias.
         </li>
         <li>
           <B>Registros del servidor.</B> Los registros técnicos de nuestros servidores, que pueden incluir el

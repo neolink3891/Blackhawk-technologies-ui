@@ -352,9 +352,11 @@ export const privacySections: LegalSection[] = [
           </li>
           <li>
             <B>Reports</B>: kept while they're open, and deleted {SEKRO_FIGURES.reportRetentionDays} days (12 months) after
-            they're resolved. The content shared with a report (what the reporter's device revealed, and the Sekro image)
-            is deleted with it, and in any case no later than {SEKRO_FIGURES.moderationFileDays} days after it was sent
-            to us.
+            they're resolved, together with the content shared with them (what the reporter's device revealed, and the
+            Sekro image). Reports under <B>legal hold</B>, which includes every child safety report, aren't deleted on
+            that schedule: the report, the content shared with it, and the reported message, Sekro and video or audio
+            file are kept until they're no longer needed for legal proceedings. While a report is held, that reported
+            content is hidden from everyone in the app but kept on our servers, even if it's deleted in the app.
           </li>
           <li>
             <B>Security logs</B> (our servers' technical logs): {SEKRO_FIGURES.serverLogDays} days.
@@ -378,6 +380,10 @@ export const privacySections: LegalSection[] = [
           address on your account and we'll do it for you {SEKRO_LEGAL.emailDeletionDeadline.en}.
         </p>
         <p>
+          While a report about your account is being handled (open, or under legal hold), your account can't be deleted
+          until it has been dealt with.
+        </p>
+        <p>
           We delete straight away: your account details (username, email, password hash, display name, profile photo),
           your public keys, key backup and saved sender keys, your contacts, invites and blocks, your devices and push
           tokens, your notifications, your Gallery and its files, and the video and audio files only you were still
@@ -391,7 +397,12 @@ export const privacySections: LegalSection[] = [
             our servers, until they delete them. Copies on their devices, and Sekro files shared outside the app, are out
             of our reach.
           </li>
-          <li>Reports about you, or made by you, are kept for moderation for the period above, with your username.</li>
+          <li>
+            Reports about you, or made by you, are kept for moderation for the period above, with your username. While
+            any of them is kept, we also keep a minimal record of your account: its user ID, your username, a hash of your
+            email address, and when the account was created and deleted. It's deleted together with the last of those
+            reports.
+          </li>
           <li>
             Records of your signed-out sessions (an account ID, no personal details) expire within{" "}
             {SEKRO_FIGURES.sessionRecordDays} days. They let us

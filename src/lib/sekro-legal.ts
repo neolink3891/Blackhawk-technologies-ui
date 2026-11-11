@@ -19,11 +19,11 @@ export const SEKRO_LEGAL = {
 
 // Verified against sekro-api (Nov 2026). Change these if the API or deploy config changes.
 export const SEKRO_FIGURES = {
-  // REPORT_RETENTION_DAYS (app/core/config.py, app/jobs/purge_reports.py): resolved reports are purged this long after
-  // resolution; open reports are never purged.
+  // REPORT_RETENTION_DAYS (app/core/config.py, app/jobs/purge_reports.py, API 1.0.4): resolved reports, with their
+  // `moderation/` files, are purged this long after resolution. Open reports and reports under legal hold (every
+  // child_safety report; app/services/legal_hold.py) are never purged. No S3 lifecycle rule expires report files.
+  // A deleted account a report names keeps a minimal record (deleted_accounts) only while such a report exists.
   reportRetentionDays: 365,
-  // deploy/s3-lifecycle.json: `moderation/` objects expire this long after upload (a backstop to the purge job).
-  moderationFileDays: 365,
   // DEPLOY.md › Logs: CloudWatch retention on /ecs/sekro-api.
   serverLogDays: 90,
   // JWT_REFRESH_IDLE_DAYS: revoked session records expire within this.
