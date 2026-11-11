@@ -16,8 +16,10 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SekroTermsRouteImport } from './routes/sekro/terms'
 import { Route as SekroPrivacyRouteImport } from './routes/sekro/privacy'
+import { Route as SekroDeleteAccountRouteImport } from './routes/sekro/delete-account'
 import { Route as EsSekroTermsRouteImport } from './routes/es/sekro/terms'
 import { Route as EsSekroPrivacyRouteImport } from './routes/es/sekro/privacy'
+import { Route as EsSekroDeleteAccountRouteImport } from './routes/es/sekro/delete-account'
 
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
@@ -54,6 +56,11 @@ const SekroPrivacyRoute = SekroPrivacyRouteImport.update({
   path: '/sekro/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SekroDeleteAccountRoute = SekroDeleteAccountRouteImport.update({
+  id: '/sekro/delete-account',
+  path: '/sekro/delete-account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsSekroTermsRoute = EsSekroTermsRouteImport.update({
   id: '/es/sekro/terms',
   path: '/es/sekro/terms',
@@ -64,6 +71,11 @@ const EsSekroPrivacyRoute = EsSekroPrivacyRouteImport.update({
   path: '/es/sekro/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsSekroDeleteAccountRoute = EsSekroDeleteAccountRouteImport.update({
+  id: '/es/sekro/delete-account',
+  path: '/es/sekro/delete-account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,8 +83,10 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
   '/es/sekro/privacy': typeof EsSekroPrivacyRoute
   '/es/sekro/terms': typeof EsSekroTermsRoute
 }
@@ -82,8 +96,10 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
   '/es/sekro/privacy': typeof EsSekroPrivacyRoute
   '/es/sekro/terms': typeof EsSekroTermsRoute
 }
@@ -94,8 +110,10 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
   '/es/sekro/privacy': typeof EsSekroPrivacyRoute
   '/es/sekro/terms': typeof EsSekroTermsRoute
 }
@@ -107,8 +125,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/sitemap.xml'
     | '/solutions'
+    | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/es/sekro/delete-account'
     | '/es/sekro/privacy'
     | '/es/sekro/terms'
   fileRoutesByTo: FileRoutesByTo
@@ -118,8 +138,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/sitemap.xml'
     | '/solutions'
+    | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/es/sekro/delete-account'
     | '/es/sekro/privacy'
     | '/es/sekro/terms'
   id:
@@ -129,8 +151,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/sitemap.xml'
     | '/solutions'
+    | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/es/sekro/delete-account'
     | '/es/sekro/privacy'
     | '/es/sekro/terms'
   fileRoutesById: FileRoutesById
@@ -141,8 +165,10 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SolutionsRoute: typeof SolutionsRoute
+  SekroDeleteAccountRoute: typeof SekroDeleteAccountRoute
   SekroPrivacyRoute: typeof SekroPrivacyRoute
   SekroTermsRoute: typeof SekroTermsRoute
+  EsSekroDeleteAccountRoute: typeof EsSekroDeleteAccountRoute
   EsSekroPrivacyRoute: typeof EsSekroPrivacyRoute
   EsSekroTermsRoute: typeof EsSekroTermsRoute
 }
@@ -198,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SekroPrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sekro/delete-account': {
+      id: '/sekro/delete-account'
+      path: '/sekro/delete-account'
+      fullPath: '/sekro/delete-account'
+      preLoaderRoute: typeof SekroDeleteAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/sekro/terms': {
       id: '/es/sekro/terms'
       path: '/es/sekro/terms'
@@ -212,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsSekroPrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/sekro/delete-account': {
+      id: '/es/sekro/delete-account'
+      path: '/es/sekro/delete-account'
+      fullPath: '/es/sekro/delete-account'
+      preLoaderRoute: typeof EsSekroDeleteAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -221,8 +261,10 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SolutionsRoute: SolutionsRoute,
+  SekroDeleteAccountRoute: SekroDeleteAccountRoute,
   SekroPrivacyRoute: SekroPrivacyRoute,
   SekroTermsRoute: SekroTermsRoute,
+  EsSekroDeleteAccountRoute: EsSekroDeleteAccountRoute,
   EsSekroPrivacyRoute: EsSekroPrivacyRoute,
   EsSekroTermsRoute: EsSekroTermsRoute,
 }

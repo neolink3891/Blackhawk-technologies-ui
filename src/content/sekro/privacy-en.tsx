@@ -1,5 +1,5 @@
 import { A, B, H3, Mail, UL, type LegalSection } from "@/components/site/LegalPage";
-import { SEKRO_LEGAL, SEKRO_RETENTION } from "@/lib/sekro-legal";
+import { SEKRO_LEGAL, SEKRO_PATHS, SEKRO_RETENTION } from "@/lib/sekro-legal";
 
 // Every statement here was checked against sekro-api and the Sekro iOS app (Nov 2026).
 // Keep it in step with the code: if what we store changes, change this page.
@@ -397,6 +397,10 @@ export const privacySections: LegalSection[] = [
         <p>
           You can also sign out of Sekro on your device at any time. Signing out removes your keys and local chat history
           from that device.
+        </p>
+        <p>
+          Step-by-step instructions, and how to delete individual messages and Sekros:{" "}
+          <A href={SEKRO_PATHS.deleteAccount.en}>Delete your Sekro account</A>.
         </p>
       </>
     ),

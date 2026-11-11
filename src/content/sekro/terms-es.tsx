@@ -239,7 +239,8 @@ export const termsSections: LegalSection[] = [
       <>
         <p>
           Puedes dejar de usar Sekro cuando quieras y eliminar tu cuenta desde la app, en Perfil › Cuenta › Eliminar
-          cuenta (consulta la <A href={`${SEKRO_PATHS.privacy.es}#delete-account`}>Política de privacidad</A>).
+          cuenta (consulta <A href={SEKRO_PATHS.deleteAccount.es}>Eliminar tu cuenta de Sekro</A> y la{" "}
+          <A href={`${SEKRO_PATHS.privacy.es}#delete-account`}>Política de privacidad</A>).
         </p>
         <p>
           Podemos suspender o cerrar tu cuenta si incumples estos términos de forma grave o reiterada, si la ley lo exige

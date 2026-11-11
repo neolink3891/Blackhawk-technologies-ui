@@ -18,8 +18,10 @@ interface LegalPageProps {
   sections: LegalSection[];
   /** The same document in the other language. */
   alternate: { href: SekroPath; label: string };
-  /** The other Sekro document in this language. */
-  sibling: { href: SekroPath; label: string };
+  /** The other Sekro documents in this language (footer links). */
+  siblings: { href: SekroPath; label: string }[];
+  /** "Last updated" date, if this page isn't dated with the Privacy Policy and Terms. */
+  updated?: Record<Lang, string>;
 }
 
 const labels = {
@@ -28,7 +30,7 @@ const labels = {
 };
 
 /** Long-form legal document page (Sekro Privacy Policy / Terms), styled like the rest of the site. */
-export function LegalPage({ lang, title, intro, sections, alternate, sibling }: LegalPageProps) {
+export function LegalPage({ lang, title, intro, sections, alternate, siblings, updated }: LegalPageProps) {
   const t = labels[lang];
   return (
     <div lang={lang}>
@@ -58,7 +60,7 @@ export function LegalPage({ lang, title, intro, sections, alternate, sibling }: 
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
           <p className="mt-4 text-sm text-muted-foreground">
-            {t.updated}: {SEKRO_LEGAL.lastUpdated[lang]}
+            {t.updated}: {(updated ?? SEKRO_LEGAL.lastUpdated)[lang]}
           </p>
           <div className="mt-6 max-w-2xl space-y-4 text-muted-foreground md:text-lg">{intro}</div>
         </div>
@@ -99,9 +101,13 @@ export function LegalPage({ lang, title, intro, sections, alternate, sibling }: 
               {SEKRO_LEGAL.supportEmail}
             </a>
           </p>
-          <Link to={sibling.href} className="text-sm font-medium text-primary hover:underline">
-            {sibling.label} →
-          </Link>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {siblings.map((s) => (
+              <Link key={s.href} to={s.href} className="text-sm font-medium text-primary hover:underline">
+                {s.label} →
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -115,6 +121,10 @@ export function H3({ children }: { children: ReactNode }) {
 
 export function UL({ children }: { children: ReactNode }) {
   return <ul className="list-disc space-y-2 pl-6 marker:text-primary">{children}</ul>;
+}
+
+export function OL({ children }: { children: ReactNode }) {
+  return <ol className="list-decimal space-y-2 pl-6 marker:font-semibold marker:text-primary">{children}</ol>;
 }
 
 export function B({ children }: { children: ReactNode }) {

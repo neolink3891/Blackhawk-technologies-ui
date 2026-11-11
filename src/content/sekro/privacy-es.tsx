@@ -1,5 +1,5 @@
 import { A, B, H3, Mail, UL, type LegalSection } from "@/components/site/LegalPage";
-import { SEKRO_LEGAL, SEKRO_RETENTION } from "@/lib/sekro-legal";
+import { SEKRO_LEGAL, SEKRO_PATHS, SEKRO_RETENTION } from "@/lib/sekro-legal";
 
 // Spanish version of privacy-en.tsx. Keep both in step: same sections, same facts, same TODOs.
 // Neutral Spanish with "tú" (as in the app, valid for es-ES and es-419).
@@ -408,6 +408,10 @@ export const privacySections: LegalSection[] = [
         <p>
           También puedes cerrar sesión en Sekro en tu dispositivo cuando quieras. Al cerrar sesión se eliminan tus
           claves y tu historial de chats local de ese dispositivo.
+        </p>
+        <p>
+          Instrucciones paso a paso, y cómo eliminar mensajes y Sekros concretos:{" "}
+          <A href={SEKRO_PATHS.deleteAccount.es}>Eliminar tu cuenta de Sekro</A>.
         </p>
       </>
     ),

@@ -25,7 +25,10 @@ export const Route = createFileRoute("/sekro/terms")({
       intro={termsIntro}
       sections={termsSections}
       alternate={{ href: SEKRO_PATHS.terms.es, label: "Leer en español" }}
-      sibling={{ href: SEKRO_PATHS.privacy.en, label: "Privacy Policy" }}
+      siblings={[
+        { href: SEKRO_PATHS.privacy.en, label: "Privacy Policy" },
+        { href: SEKRO_PATHS.deleteAccount.en, label: "Delete your account" },
+      ]}
     />
   ),
 });

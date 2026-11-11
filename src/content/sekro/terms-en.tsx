@@ -235,7 +235,8 @@ export const termsSections: LegalSection[] = [
       <>
         <p>
           You can stop using Sekro at any time and delete your account in the app, in Profile › Account › Delete account
-          (see the <A href={`${SEKRO_PATHS.privacy.en}#delete-account`}>Privacy Policy</A>).
+          (see <A href={SEKRO_PATHS.deleteAccount.en}>Delete your Sekro account</A> and the{" "}
+          <A href={`${SEKRO_PATHS.privacy.en}#delete-account`}>Privacy Policy</A>).
         </p>
         <p>
           We may suspend or close your account if you seriously or repeatedly break these terms, if the law requires it,
