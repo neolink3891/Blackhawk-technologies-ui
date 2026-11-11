@@ -37,7 +37,18 @@ const featureIcons: Record<FeatureKey, LucideIcon> = {
   deleteEverywhere: Trash2,
 };
 
-/** Store badge: a link when the listing is live, otherwise a muted "Coming soon" tile. */
+/** Apple's official badge artwork, unmodified, 52px tall (minimum 40px); the row's gap-4 keeps the clear space
+ * Apple asks for (a quarter of the badge height). */
+function AppStoreBadge({ href, src, alt, newTab }: { href: string; src: string; alt: string; newTab: string }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+      <img src={src} alt={alt} width={156} height={52} className="h-[52px] w-auto" />
+      <span className="sr-only"> ({newTab})</span>
+    </a>
+  );
+}
+
+/** Text store badge: a link when the listing is live, otherwise a muted "Coming soon" tile. */
 function StoreBadge({ href, top, name, icon: Icon, comingSoon }: {
   href: string;
   top: string;
@@ -54,7 +65,7 @@ function StoreBadge({ href, top, name, icon: Icon, comingSoon }: {
       </span>
     </>
   );
-  const base = "inline-flex min-w-[11rem] items-center gap-3 rounded-xl border px-4 py-2.5";
+  const base = "inline-flex h-[52px] min-w-[11rem] items-center gap-3 rounded-xl border px-4";
   return href ? (
     <a
       href={href}
@@ -115,14 +126,23 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
             </div>
           </div>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground md:text-xl">{t.summary}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <StoreBadge
-              href={SEKRO_LINKS.appStore}
-              top={t.badges.appStoreTop}
-              name="App Store"
-              icon={Smartphone}
-              comingSoon={t.badges.comingSoon}
-            />
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            {SEKRO_LINKS.appStore ? (
+              <AppStoreBadge
+                href={SEKRO_LINKS.appStore}
+                src={SEKRO_IMAGES.appStoreBadge[lang]}
+                alt={t.badges.appStoreAlt}
+                newTab={lang === "en" ? "opens in a new tab" : "se abre en una pestaña nueva"}
+              />
+            ) : (
+              <StoreBadge
+                href=""
+                top={t.badges.appStoreTop}
+                name="App Store"
+                icon={Smartphone}
+                comingSoon={t.badges.comingSoon}
+              />
+            )}
             <StoreBadge
               href={SEKRO_LINKS.googlePlay}
               top={t.badges.googlePlayTop}

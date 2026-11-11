@@ -10,7 +10,7 @@ export interface SekroProductCopy {
   eyebrow: string;
   tagline: string;
   summary: string;
-  badges: { appStoreTop: string; googlePlayTop: string; comingSoon: string };
+  badges: { appStoreTop: string; googlePlayTop: string; comingSoon: string; appStoreAlt: string };
   howTitle: string;
   howSteps: { title: string; body: string }[];
   hideTitle: string;
@@ -37,7 +37,12 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
     tagline: "Hidden in plain sight.",
     summary:
       "Hide photos, videos, voice notes and text inside ordinary images. Only the person you choose can open them.",
-    badges: { appStoreTop: "Download on the", googlePlayTop: "Get it on", comingSoon: "Coming soon" },
+    badges: {
+      appStoreTop: "Download on the",
+      googlePlayTop: "Get it on",
+      comingSoon: "Coming soon",
+      appStoreAlt: "Download on the App Store",
+    },
     howTitle: "How it works",
     howSteps: [
       {
@@ -145,7 +150,13 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
     tagline: "Oculto a simple vista.",
     summary:
       "Oculta fotos, vídeos, notas de voz y texto dentro de imágenes normales. Solo quien tú elijas puede abrirlos.",
-    badges: { appStoreTop: "Descárgalo en el", googlePlayTop: "Disponible en", comingSoon: "Próximamente" },
+    badges: {
+      appStoreTop: "Descárgalo en el",
+      googlePlayTop: "Disponible en",
+      comingSoon: "Próximamente",
+      // Matches the words on Apple's es-ES badge artwork.
+      appStoreAlt: "Consíguelo en el App Store",
+    },
     howTitle: "Cómo funciona",
     howSteps: [
       {
