@@ -15,6 +15,8 @@ export interface Solution {
   icon: LucideIcon;
   /** App icon image; shown instead of `icon`. */
   image?: string;
+  /** Alt text for `image` (default empty: the product name follows it). */
+  imageAlt?: string;
   /** Product page; makes "Learn more" a link. */
   href?: "/sekro";
   /** External product site, opened in a new tab (instead of `href`). */
@@ -63,16 +65,23 @@ export const solutions: Solution[] = [
   },
   {
     name: "HawkTrack",
+    tagline: "Workforce attendance, simplified.",
+    // Facts as stated on hawktrack.bhtapp.com (hawktrack-ui src/routes/index.tsx). The iPhone app isn't on the App
+    // Store yet and Android is on the way: no store or platform claims here.
     description:
-      "A workforce and attendance tracking platform for managing employee check-ins, NFC and location-based attendance, workplace presence, and operational visibility.",
+      "Plan the week's shifts, let staff check in from their phone by QR code, NFC tag or location, and see missed check-ins and breaks as alerts. 30-day free trial.",
     status: "Available",
     icon: Users,
+    image: "/hawktrack/logo.webp",
+    imageAlt: "HawkTrack logo",
+    externalUrl: "https://hawktrack.bhtapp.com",
+    linkLabel: "Visit HawkTrack",
     features: [
-      "Employee Check-In & Check-Out",
-      "NFC Attendance",
-      "Location Verification",
-      "Workforce Analytics",
-      "Real-Time Visibility",
+      "Weekly Shift Planning",
+      "Check-In by QR Code, NFC Tag or Location",
+      "Check-Ins, Breaks & Check-Outs on One Dashboard",
+      "Alerts for Missed Check-Ins & Breaks",
+      "30-Day Free Trial",
     ],
   },
   {
