@@ -19,20 +19,29 @@ export const inviteUrl = (username: string) => `${SITE_URL}${SEKRO_INVITE_PATH}/
 
 export const ANDROID_PACKAGE = "com.blackhawktechnologies.sekro";
 
-export const INVITE_STORE_LINKS = {
-  /** iPhone / iPad: the listing link as given for invites. */
-  appStore: "https://apps.apple.com/us/app/sekro/id6832626608",
-  /** Play listing with an install referrer (`add=<username>`), so the app can add the contact after installing. */
-  googlePlay: (username: string) =>
-    `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}&referrer=${encodeURIComponent(`add=${username}`)}`,
-};
+/** Play listing with an install referrer (`add=<username>`), so the app can add the contact after installing. */
+export const googlePlayInviteUrl = (username: string) =>
+  `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}&referrer=${encodeURIComponent(`add=${username}`)}`;
+
+/** "Open in Sekro" on the invite page. The https link itself is the primary path (Universal Links / App Links open the
+ *  app before this page loads); this is the fallback for when they didn't, e.g. a tap on a link to the same site.
+ *  - iPhone / iPad: the app's custom scheme, sekro://add/<username>;
+ *  - Android: an intent:// URL for the same scheme, limited to the Sekro package; Chrome opens the Play listing
+ *    (S.browser_fallback_url) when the app isn't installed. */
+export const SEKRO_SCHEME = "sekro";
+
+export const openInAppUrl = (platform: "ios" | "android", username: string) =>
+  platform === "ios"
+    ? `${SEKRO_SCHEME}://add/${username}`
+    : `intent://add/${username}#Intent;scheme=${SEKRO_SCHEME};package=${ANDROID_PACKAGE};` +
+      `S.browser_fallback_url=${encodeURIComponent(googlePlayInviteUrl(username))};end`;
 
 // ---------------------------------------------------------------------------------------------------------------
-// App link verification files (served by src/routes/[.]well-known/*). TODO: replace the placeholders with the real
-// values before deploying; until then both files are well-formed but verify nothing.
+// App link verification files (served by src/routes/[.]well-known/*). TODO: the Android fingerprints are placeholders;
+// replace them before deploying (until then assetlinks.json is well-formed but verifies nothing).
 
-/** "<Team ID>.<iOS bundle id>" */
-export const IOS_APP_ID = "<TEAM_ID>.<IOS_BUNDLE_ID>";
+/** "<Team ID>.<iOS bundle id>": team and app target bundle id from the Xcode project (case-sensitive). */
+export const IOS_APP_ID = "4V2B872QV3.com.blackhawktechnologies.Sekro";
 
 /** SHA-256 certificate fingerprints ("AB:CD:…"): Play App Signing key (Play Console › App integrity), then the
  *  upload / debug key used for builds installed outside Play. */

@@ -7,7 +7,12 @@ import type { Lang } from "@/components/site/LegalPage";
 import { AppStoreBadge, StoreBadge } from "@/components/site/SekroProductPage";
 import { sekroInvite } from "@/content/sekro/invite";
 import { SEKRO_HOME, SEKRO_IMAGES, SEKRO_LINKS } from "@/lib/sekro";
-import { INVITE_STORE_LINKS, type InvitePlatform, inviteUrl } from "@/lib/sekro-invite";
+import {
+  googlePlayInviteUrl,
+  type InvitePlatform,
+  inviteUrl,
+  openInAppUrl,
+} from "@/lib/sekro-invite";
 
 /** How long the iPhone page waits for the app to open before going to the App Store. */
 const IOS_REDIRECT_MS = 1500;
@@ -69,10 +74,18 @@ function Shell({ lang, children }: { lang: Lang; children: React.ReactNode }) {
   );
 }
 
-function OpenInSekro({ username, label }: { username: string; label: string }) {
+function OpenInSekro({
+  platform,
+  username,
+  label,
+}: {
+  platform: "ios" | "android";
+  username: string;
+  label: string;
+}) {
   return (
     <a
-      href={inviteUrl(username)}
+      href={openInAppUrl(platform, username)}
       className="inline-flex h-12 w-full max-w-xs items-center justify-center gap-2 rounded-xl border border-border bg-secondary/60 px-5 font-medium text-foreground transition-colors hover:border-primary/50"
     >
       <ExternalLink className="h-4 w-4" />
@@ -132,7 +145,7 @@ export function SekroInvitePage({
       } catch {
         /* ignore */
       }
-      window.location.href = INVITE_STORE_LINKS.appStore;
+      window.location.href = SEKRO_LINKS.appStore;
     }, IOS_REDIRECT_MS);
     return () => {
       window.clearTimeout(timer);
@@ -151,7 +164,7 @@ export function SekroInvitePage({
   );
   const googlePlay = (
     <StoreBadge
-      href={INVITE_STORE_LINKS.googlePlay(username)}
+      href={googlePlayInviteUrl(username)}
       top={t.googlePlayTop}
       name="Google Play"
       icon={Play}
@@ -176,12 +189,12 @@ export function SekroInvitePage({
 
       {platform === "ios" && (
         <div className="mt-8 flex flex-col items-center gap-4">
-          {appStore(INVITE_STORE_LINKS.appStore)}
+          {appStore(SEKRO_LINKS.appStore)}
           <p aria-live="polite" className="min-h-5 text-sm text-muted-foreground">
             {redirecting ? t.redirecting : ""}
           </p>
           <p className="text-sm text-muted-foreground">{t.alreadyInstalled}</p>
-          <OpenInSekro username={username} label={t.openInSekro} />
+          <OpenInSekro platform="ios" username={username} label={t.openInSekro} />
         </div>
       )}
 
@@ -189,7 +202,7 @@ export function SekroInvitePage({
         <div className="mt-8 flex flex-col items-center gap-4">
           {googlePlay}
           <p className="mt-2 text-sm text-muted-foreground">{t.alreadyInstalled}</p>
-          <OpenInSekro username={username} label={t.openInSekro} />
+          <OpenInSekro platform="android" username={username} label={t.openInSekro} />
         </div>
       )}
 
