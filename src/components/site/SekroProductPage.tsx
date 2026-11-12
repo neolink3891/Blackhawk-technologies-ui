@@ -39,7 +39,7 @@ const featureIcons: Record<FeatureKey, LucideIcon> = {
 
 /** Apple's official badge artwork, unmodified, 52px tall (minimum 40px); the row's gap-4 keeps the clear space
  * Apple asks for (a quarter of the badge height). */
-function AppStoreBadge({ href, src, alt, newTab }: { href: string; src: string; alt: string; newTab: string }) {
+export function AppStoreBadge({ href, src, alt, newTab }: { href: string; src: string; alt: string; newTab: string }) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
       <img src={src} alt={alt} width={156} height={52} className="h-[52px] w-auto" />
@@ -49,7 +49,7 @@ function AppStoreBadge({ href, src, alt, newTab }: { href: string; src: string; 
 }
 
 /** Text store badge: a link when the listing is live, otherwise a muted "Coming soon" tile. */
-function StoreBadge({ href, top, name, icon: Icon, comingSoon }: {
+export function StoreBadge({ href, top, name, icon: Icon, comingSoon }: {
   href: string;
   top: string;
   name: string;
