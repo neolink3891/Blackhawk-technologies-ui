@@ -12,8 +12,18 @@ ALB. Hosting, DNS and the load balancer don't change for a release.
 | DNS | GoDaddy (`ns45/ns46.domaincontrol.com`). `www` → CNAME `bht-apps-alb-1372409103.eu-west-2.elb.amazonaws.com`; the bare `blackhawk-technologies.com` is GoDaddy forwarding (301 → `https://www.…`) |
 | Load balancer | `bht-apps-alb` (eu-west-2) |
 | Image | ECR `088136761930.dkr.ecr.eu-west-2.amazonaws.com/blackhawk-technologies-ui:<VERSION>` (`build.sh`) |
-| ECS | cluster `<TODO: cluster>`, service `<TODO: service>`, task definition `<TODO: family>` (container port 4173) |
+| ECS | cluster `bhtapps-prod`, service `blackhawk-technologies-ui-service`, task definition family `blackhawk-technologies-ui` (container port 4173) |
 | Production branch | `main` (`development` is merged into it for a release) |
+
+## Deploy history
+
+Newest first. Task definition revisions are `blackhawk-technologies-ui:<n>`; roll back by updating the service to the
+previous one:
+`aws ecs update-service --region eu-west-2 --cluster bhtapps-prod --service blackhawk-technologies-ui-service --task-definition blackhawk-technologies-ui:<previous>`.
+
+| Date | Version | Task definition | Notes |
+|---|---|---|---|
+| 2026-11-12 | 1.0.5 | `blackhawk-technologies-ui:6` (rollback `:5`) | Sekro invite page + .well-known, HawkTrack card, Adhki Cogno/NeoLogger removal, lockfile fix for npm 10 |
 
 ## Local check
 
@@ -24,6 +34,10 @@ docker run --rm -p 8080:4173 blackhawk-technologies-ui:test
 ```
 
 ## Release
+
+> **ECR tags are mutable.** Pushing a tag that already exists silently replaces that image, including the one
+> production may be running. Always bump `VERSION` (and commit it) before running `build.sh`; check the existing tags
+> with `aws ecr describe-images --repository-name blackhawk-technologies-ui --region eu-west-2`.
 
 1. Merge and tag:
    ```bash
@@ -37,12 +51,13 @@ docker run --rm -p 8080:4173 blackhawk-technologies-ui:test
 3. Roll out: in ECS, create a new revision of the task definition with the new image tag, then update the service to
    that revision (rolling deploy; the target group's health check gates it). CLI equivalent:
    ```bash
-   aws ecs describe-task-definition --task-definition <family> --query taskDefinition > td.json
+   aws ecs describe-task-definition --task-definition blackhawk-technologies-ui --region eu-west-2 --query taskDefinition > td.json
    # edit td.json: set containerDefinitions[0].image to the new tag; remove taskDefinitionArn, revision, status,
    # requiresAttributes, compatibilities, registeredAt, registeredBy
-   aws ecs register-task-definition --cli-input-json file://td.json
-   aws ecs update-service --cluster <cluster> --service <service> --task-definition <family>
-   aws ecs wait services-stable --cluster <cluster> --services <service>
+   aws ecs register-task-definition --region eu-west-2 --cli-input-json file://td.json
+   aws ecs update-service --region eu-west-2 --cluster bhtapps-prod --service blackhawk-technologies-ui-service \
+     --task-definition blackhawk-technologies-ui
+   aws ecs wait services-stable --region eu-west-2 --cluster bhtapps-prod --services blackhawk-technologies-ui-service
    ```
 4. Push the branch: `git push origin main development`.
 
