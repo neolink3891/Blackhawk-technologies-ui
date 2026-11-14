@@ -23,6 +23,7 @@ previous one:
 
 | Date | Version | Task definition | Notes |
 |---|---|---|---|
+| 2026-11-14 | 1.0.6 | `blackhawk-technologies-ui:7` (rollback `:6`) | assetlinks.json: Sekro Play app-signing + upload key fingerprints (verified by Google's Digital Asset Links API) |
 | 2026-11-12 | 1.0.5 | `blackhawk-technologies-ui:6` (rollback `:5`) | Sekro invite page + .well-known, HawkTrack card, Adhki Cogno/NeoLogger removal, lockfile fix for npm 10 |
 
 ## Local check
@@ -52,7 +53,8 @@ docker run --rm -p 8080:4173 blackhawk-technologies-ui:test
    that revision (rolling deploy; the target group's health check gates it). CLI equivalent:
    ```bash
    aws ecs describe-task-definition --task-definition blackhawk-technologies-ui --region eu-west-2 --query taskDefinition > td.json
-   # edit td.json: set containerDefinitions[0].image to the new tag; remove taskDefinitionArn, revision, status,
+   # edit td.json: set containerDefinitions[0].image to the new image (:6 onwards pin it by digest,
+   # …/blackhawk-technologies-ui@sha256:<digest of the new tag>, from aws ecr describe-images); remove taskDefinitionArn, revision, status,
    # requiresAttributes, compatibilities, registeredAt, registeredBy
    aws ecs register-task-definition --region eu-west-2 --cli-input-json file://td.json
    aws ecs update-service --region eu-west-2 --cluster bhtapps-prod --service blackhawk-technologies-ui-service \
