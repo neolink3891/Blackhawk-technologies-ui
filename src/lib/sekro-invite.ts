@@ -37,8 +37,7 @@ export const openInAppUrl = (platform: "ios" | "android", username: string) =>
       `S.browser_fallback_url=${encodeURIComponent(googlePlayInviteUrl(username))};end`;
 
 // ---------------------------------------------------------------------------------------------------------------
-// App link verification files (served by src/routes/[.]well-known/*). TODO: the Android fingerprints are placeholders;
-// replace them before deploying (until then assetlinks.json is well-formed but verifies nothing).
+// App link verification files (served by src/routes/[.]well-known/*).
 
 /** "<Team ID>.<iOS bundle id>": team and app target bundle id from the Xcode project (case-sensitive). */
 export const IOS_APP_ID = "4V2B872QV3.com.blackhawktechnologies.Sekro";
@@ -46,8 +45,10 @@ export const IOS_APP_ID = "4V2B872QV3.com.blackhawktechnologies.Sekro";
 /** SHA-256 certificate fingerprints ("AB:CD:…"): Play App Signing key (Play Console › App integrity), then the
  *  upload / debug key used for builds installed outside Play. */
 export const ANDROID_CERT_FINGERPRINTS = [
-  "<PLAY_APP_SIGNING_SHA256>",
-  "<UPLOAD_OR_DEBUG_KEY_SHA256>",
+  // Play App Signing key
+  "B4:B6:1B:3E:0D:F6:04:4A:C7:29:CA:0B:14:0F:74:EC:73:9E:9A:E5:09:ED:5C:82:2C:C6:23:DD:2A:14:8A:91",
+  // Upload key
+  "23:24:8D:DE:50:1B:18:98:77:2D:50:8E:C1:F8:8C:F4:75:BF:1C:6D:42:BE:B5:28:54:C0:7D:1B:90:F1:04:D2",
 ];
 
 /** /.well-known/apple-app-site-association. `components` is the iOS 13+ format; `appID` + `paths` keep iOS 12 and
