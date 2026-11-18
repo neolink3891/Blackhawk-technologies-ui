@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Hexagon } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/blackhawk-logo.png";
 
 const links = [
   { to: "/", label: "Home" },
@@ -14,11 +15,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary shadow-glow">
-            <Hexagon className="h-4 w-4 text-primary-foreground" strokeWidth={2.5} />
-          </span>
-          <span className="text-base">BlackHawk<span className="text-primary"> Technologies</span></span>
+        <Link to="/" className="flex shrink-0 items-center">
+          <img
+            src={logo}
+            alt="BlackHawk Technologies"
+            width={129}
+            height={44}
+            className="h-11 w-auto"
+          />
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {links.map((l) => (

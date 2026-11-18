@@ -1,17 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import { Hexagon, Linkedin, Github, Twitter } from "lucide-react";
+import logo from "@/assets/blackhawk-logo.png";
+import { Linkedin, Github, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
     <footer className="border-t border-border/60 bg-background">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-5">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-2 font-semibold">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary">
-              <Hexagon className="h-4 w-4 text-primary-foreground" strokeWidth={2.5} />
-            </span>
-            BlackHawk Technologies
-          </div>
+          <Link to="/" className="inline-flex">
+            <img
+              src={logo}
+              alt="BlackHawk Technologies"
+              width={129}
+              height={44}
+              className="h-11 w-auto"
+              loading="lazy"
+            />
+          </Link>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
             Building intelligent software for modern businesses.
           </p>
