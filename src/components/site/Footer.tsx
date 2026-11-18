@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/blackhawk-logo.png";
+import { footerLogo } from "@/lib/brand-logo";
 import { Linkedin, Github, Twitter } from "lucide-react";
 
 export function Footer() {
@@ -9,10 +9,11 @@ export function Footer() {
         <div className="md:col-span-2">
           <Link to="/" className="inline-flex">
             <img
-              src={logo}
+              src={footerLogo.src}
+              srcSet={footerLogo.srcSet}
               alt="BlackHawk Technologies"
-              width={129}
-              height={44}
+              width={footerLogo.width}
+              height={footerLogo.height}
               className="h-11 w-auto"
               loading="lazy"
             />

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/blackhawk-logo.png";
+import { navIcon, navLogo, SM_UP } from "@/lib/brand-logo";
 
 const links = [
   { to: "/", label: "Home" },
@@ -16,13 +16,22 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="flex shrink-0 items-center">
-          <img
-            src={logo}
-            alt="BlackHawk Technologies"
-            width={129}
-            height={44}
-            className="h-11 w-auto"
-          />
+          {/* Icon only below sm, full logo from sm up; one <picture>, so only the shown image is downloaded. */}
+          <picture>
+            <source
+              media={SM_UP}
+              srcSet={navLogo.srcSet}
+              width={navLogo.width}
+              height={navLogo.height}
+            />
+            <img
+              src={navIcon.src}
+              alt="BlackHawk Technologies"
+              width={navIcon.width}
+              height={navIcon.height}
+              className="h-12 w-12 sm:h-14 sm:w-auto"
+            />
+          </picture>
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
