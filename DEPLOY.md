@@ -102,6 +102,19 @@ aws elbv2 modify-rule --region eu-west-2 \
 
 The rule only matches `*blackhawk-technologies.com`; the other services' rules and the 443 listener are unaffected.
 
+**Verification, 2026-11-19 10:21 UTC: failed.** The rule change was reported as made, but plain HTTP is still
+served, not redirected:
+
+| Request                                                      | Expected                                        | Got                |
+| ------------------------------------------------------------ | ----------------------------------------------- | ------------------ |
+| `HEAD`/`GET http://www.blackhawk-technologies.com/`          | 301 → `https://www.blackhawk-technologies.com/` | 200, no `Location` |
+| `HEAD`/`GET http://www.blackhawk-technologies.com/sekro?x=1` | 301 → `https://…/sekro?x=1`                     | 200, no `Location` |
+| the same, sent to each ALB IP (3 nodes), again after 20 s    | 301                                             | 200 on all         |
+| `HEAD https://www.blackhawk-technologies.com/`               | 200                                             | 200                |
+
+The rule itself wasn't inspected: the `bht-deploy` AWS profile isn't configured on this machine. Check rule 4
+(`a1601d4614b9986e`) on the **port 80** listener (`afb00534c975ade2`) with `describe-rules`, then rerun the checks above.
+
 ### 2. The bare domain is GoDaddy forwarding, not the ALB
 
 `blackhawk-technologies.com` resolves to GoDaddy's forwarding service (`3.33.251.168`, `15.197.225.128`). `GET /`
