@@ -23,6 +23,7 @@ previous one:
 
 | Date       | Version | Task definition                               | Notes                                                                                                            |
 | ---------- | ------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| 2026-11-19 | 1.0.7   | `blackhawk-technologies-ui:8` (rollback `:7`) | New favicons + web manifest, WebP logos, Sekro on Google Play (badges, JSON-LD), repo-wide prettier              |
 | 2026-11-14 | 1.0.6   | `blackhawk-technologies-ui:7` (rollback `:6`) | assetlinks.json: Sekro Play app-signing + upload key fingerprints (verified by Google's Digital Asset Links API) |
 | 2026-11-12 | 1.0.5   | `blackhawk-technologies-ui:6` (rollback `:5`) | Sekro invite page + .well-known, HawkTrack card, Adhki Cogno/NeoLogger removal, lockfile fix for npm 10          |
 
@@ -75,5 +76,7 @@ done
 
 ## Known gaps in the current setup (not changed by a release)
 
+- `/site.webmanifest` is served as `application/octet-stream` (srvx's static handler doesn't know `.webmanifest`);
+  browsers still read it.
 - `http://www.blackhawk-technologies.com/` answers 200 instead of redirecting to HTTPS: the ALB's HTTP:80 listener
   rule for this host forwards rather than redirects.
