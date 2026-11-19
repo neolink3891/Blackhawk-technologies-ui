@@ -76,7 +76,5 @@ done
 
 ## Known gaps in the current setup (not changed by a release)
 
-- `/site.webmanifest` is served as `application/octet-stream` (srvx's static handler doesn't know `.webmanifest`);
-  browsers still read it.
 - `http://www.blackhawk-technologies.com/` answers 200 instead of redirecting to HTTPS: the ALB's HTTP:80 listener
   rule for this host forwards rather than redirects.
