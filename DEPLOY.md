@@ -76,5 +76,93 @@ done
 
 ## Known gaps in the current setup (not changed by a release)
 
-- `http://www.blackhawk-technologies.com/` answers 200 instead of redirecting to HTTPS: the ALB's HTTP:80 listener
-  rule for this host forwards rather than redirects.
+### 1. `http://www.blackhawk-technologies.com` answers 200 instead of redirecting to HTTPS
+
+On `bht-apps-alb`'s HTTP:80 listener, the listener's default action already 301s to HTTPS. What stops it is rule
+priority 4 (`a1601d4614b9986e`, host `*blackhawk-technologies.com`), which forwards to the
+`blackhawk-technologies-ui` target group. The fix changes that rule's action to the same 301. **Not applied yet** (as of 2026-11-19):
+the `bht-latineats-api` IAM user is not allowed `elasticloadbalancing:ModifyRule`. Run it as a user that is:
+
+```bash
+# Apply: rule 4 on the port 80 listener -> 301 to https://#{host}/#{path}?#{query}
+aws elbv2 modify-rule --region eu-west-2 \
+  --rule-arn arn:aws:elasticloadbalancing:eu-west-2:088136761930:listener-rule/app/bht-apps-alb/9b2385ebef0f4325/afb00534c975ade2/a1601d4614b9986e \
+  --actions '[{"Type":"redirect","RedirectConfig":{"Protocol":"HTTPS","Port":"443","Host":"#{host}","Path":"/#{path}","Query":"#{query}","StatusCode":"HTTP_301"}}]'
+
+# Verify: both 301 to the https equivalent; https still 200
+curl -sI http://www.blackhawk-technologies.com/ | grep -iE '^HTTP|^location'
+curl -s -o /dev/null -D - "http://www.blackhawk-technologies.com/sekro?x=1" | grep -iE '^HTTP|^location'
+curl -sI https://www.blackhawk-technologies.com/ | head -1
+
+# Rollback: forward plain HTTP to the site again (the rule's action before the change)
+aws elbv2 modify-rule --region eu-west-2 \
+  --rule-arn arn:aws:elasticloadbalancing:eu-west-2:088136761930:listener-rule/app/bht-apps-alb/9b2385ebef0f4325/afb00534c975ade2/a1601d4614b9986e \
+  --actions '[{"Type":"forward","TargetGroupArn":"arn:aws:elasticloadbalancing:eu-west-2:088136761930:targetgroup/blackhawk-technologies-ui/d686c0da61b659d5"}]'
+```
+
+The rule only matches `*blackhawk-technologies.com`; the other services' rules and the 443 listener are unaffected.
+
+### 2. The bare domain is GoDaddy forwarding, not the ALB
+
+`blackhawk-technologies.com` resolves to GoDaddy's forwarding service (`3.33.251.168`, `15.197.225.128`). `GET /`
+301s to `https://www.blackhawk-technologies.com`, but `HEAD` gets 405 and any path (`/sekro?x=1`) gets 404: the
+path and query are dropped. The fix is to move DNS to Route 53 and point the apex at the ALB, which already handles it.
+
+**What's in place already** (checked 2026-11-19, read-only):
+
+- Certificate: the 443 listener serves an Amazon-issued (ACM) certificate for `blackhawk-technologies.com` and
+  `*.blackhawk-technologies.com` (expires 2027-06-03; ACM renews it automatically while its DNS validation record
+  still resolves).
+- ALB rules for the apex: priority 1 on both listeners 301s `blackhawk-technologies.com` to
+  `https://www.blackhawk-technologies.com/#{path}?#{query}`.
+- Registrar: GoDaddy. **The registration expires on 2026-12-26.** Confirm auto-renew (or renew) before anything else,
+  and don't change nameservers in the days just before expiry.
+- DNSSEC: unsigned (nothing to carry over).
+
+**Current GoDaddy records** (from querying `ns45.domaincontrol.com` directly; the server refuses a full zone
+transfer, so this covers the apex and about 70 common names, not everything):
+
+| Name                             | Type  | Value                                                               |
+| -------------------------------- | ----- | ------------------------------------------------------------------- |
+| `blackhawk-technologies.com`     | NS    | `ns45.domaincontrol.com`, `ns46.domaincontrol.com`                  |
+| `blackhawk-technologies.com`     | SOA   | `ns45.domaincontrol.com. dns.jomax.net. … 600` (negative TTL 600 s) |
+| `blackhawk-technologies.com`     | A     | `3.33.251.168`, `15.197.225.128` (GoDaddy forwarding)               |
+| `www.blackhawk-technologies.com` | CNAME | `bht-apps-alb-1372409103.eu-west-2.elb.amazonaws.com`               |
+| `_domainconnect`                 | CNAME | `_domainconnect.gd.domaincontrol.com` (GoDaddy-only; don't copy)    |
+| ACM validation (`_<hash>`)       | CNAME | `_<hash>.acm-validations.aws` (name not discoverable without ACM)   |
+
+**Email:** there is no MX, SPF, DKIM, DMARC, MTA-STS or autodiscover record (apex `MX`/`TXT` are empty; `_dmarc`, `mail`,
+and the usual DKIM selectors (`google`, `selector1`/`selector2`, `default`, `k1`, `s1`/`s2`, `zoho`, `resend`, …) all
+return nothing). The domain doesn't send or receive mail today (the site's contact address is `@bhtapp.com`), so
+the move can't break email. Confirm against the GoDaddy zone export in step 1.
+
+**Plan:**
+
+1. **Inventory.** In GoDaddy: renew the domain or confirm auto-renew. Then export the zone file (DNS → ⋯ → Export zone
+   file), which is the authoritative list. In ACM (eu-west-2), open the `blackhawk-technologies.com` certificate and
+   copy its DNS validation CNAME name and value. Diff both against the table above.
+2. **Permissions.** Use an IAM user with Route 53 access (`bht-latineats-api` has none) and `elasticloadbalancing:Describe*`.
+3. **Create the zone.** Route 53 → public hosted zone `blackhawk-technologies.com`. Note its four `awsdns` nameservers.
+4. **Records in Route 53:**
+   - `blackhawk-technologies.com` A **alias** → `bht-apps-alb` (dualstack name, eu-west-2), replacing GoDaddy forwarding;
+   - `www` A **alias** → `bht-apps-alb` (or keep the CNAME);
+   - the ACM validation CNAME, exactly as ACM shows it (without it the certificate won't auto-renew in 2027);
+   - anything else the zone export shows, except `_domainconnect` and GoDaddy's forwarding A records;
+   - optional, recommended since the domain sends no mail: `TXT "v=spf1 -all"`, `_dmarc TXT "v=DMARC1; p=reject"`,
+     and a null MX (`0 .`), so nobody can spoof `@blackhawk-technologies.com`.
+5. **Check before switching.** Query the new zone directly, e.g. `dig @ns-XXX.awsdns-XX.com blackhawk-technologies.com A`, for
+   every record. And confirm in ACM that the certificate still shows the validation record as found.
+6. **Lower TTLs** on the GoDaddy records to 600 s a day ahead (the `.com` NS delegation itself is cached up to 48 h).
+7. **Switch.** GoDaddy → Domain → Nameservers → "I'll use my own nameservers" → the four Route 53 nameservers. Leave
+   the GoDaddy DNS records and forwarding settings in place (unused once the NS change propagates) as the rollback.
+8. **Verify** over the next 48 h:
+   ```bash
+   dig +short NS blackhawk-technologies.com           # the awsdns servers
+   curl -sI http://blackhawk-technologies.com/sekro?x=1  # 301 -> https://www.blackhawk-technologies.com/sekro?x=1
+   curl -sI https://blackhawk-technologies.com/         # 301 -> https://www.blackhawk-technologies.com/
+   curl -sI https://www.blackhawk-technologies.com/     # 200
+   ```
+   (`http://` bare goes through port 80 rule 1, which already redirects straight to `https://www`.)
+9. **Rollback:** set the nameservers back to GoDaddy's defaults (`ns45`/`ns46.domaincontrol.com`); the old zone is still
+   there. Delete nothing at GoDaddy until a week after the switch.
+10. **Afterwards:** update the DNS row in "The existing setup" and remove this section.
