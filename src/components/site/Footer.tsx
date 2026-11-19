@@ -43,26 +43,68 @@ export function Footer() {
         <div>
           <h4 className="text-sm font-semibold text-foreground">Navigate</h4>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/" className="hover:text-foreground">Home</Link></li>
-            <li><Link to="/about" className="hover:text-foreground">About</Link></li>
-            <li><Link to="/solutions" className="hover:text-foreground">Solutions</Link></li>
-            <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
+            <li>
+              <Link to="/" className="hover:text-foreground">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="hover:text-foreground">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/solutions" className="hover:text-foreground">
+                Solutions
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-foreground">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
           <h4 className="text-sm font-semibold text-foreground">Sekro</h4>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/sekro" className="hover:text-foreground">About Sekro</Link></li>
-            <li><Link to="/sekro/privacy" className="hover:text-foreground">Privacy Policy</Link></li>
-            <li><Link to="/sekro/terms" className="hover:text-foreground">Terms of Service</Link></li>
-            <li><Link to="/sekro/delete-account" className="hover:text-foreground">Delete your account</Link></li>
-            <li><Link to="/sekro/child-safety" className="hover:text-foreground">Child safety</Link></li>
             <li>
-              <Link to="/es/sekro" hrefLang="es" className="hover:text-foreground">Español</Link>
+              <Link to="/sekro" className="hover:text-foreground">
+                About Sekro
+              </Link>
+            </li>
+            <li>
+              <Link to="/sekro/privacy" className="hover:text-foreground">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link to="/sekro/terms" className="hover:text-foreground">
+                Terms of Service
+              </Link>
+            </li>
+            <li>
+              <Link to="/sekro/delete-account" className="hover:text-foreground">
+                Delete your account
+              </Link>
+            </li>
+            <li>
+              <Link to="/sekro/child-safety" className="hover:text-foreground">
+                Child safety
+              </Link>
+            </li>
+            <li>
+              <Link to="/es/sekro" hrefLang="es" className="hover:text-foreground">
+                Español
+              </Link>
               {" · "}
-              <Link to="/es/sekro/privacy" hrefLang="es" className="hover:text-foreground">Privacidad</Link>
+              <Link to="/es/sekro/privacy" hrefLang="es" className="hover:text-foreground">
+                Privacidad
+              </Link>
               {" · "}
-              <Link to="/es/sekro/terms" hrefLang="es" className="hover:text-foreground">Términos</Link>
+              <Link to="/es/sekro/terms" hrefLang="es" className="hover:text-foreground">
+                Términos
+              </Link>
             </li>
           </ul>
         </div>

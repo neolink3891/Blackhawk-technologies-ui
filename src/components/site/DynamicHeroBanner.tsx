@@ -78,8 +78,7 @@ export function DynamicHeroBanner() {
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -87,7 +86,6 @@ export function DynamicHeroBanner() {
       {/* Content */}
       <div className="relative mx-auto max-w-7xl px-6 py-28 md:py-40">
         <div className="mx-auto max-w-3xl text-center animate-fade-up">
-
           <h1 className="mt-8 text-4xl font-semibold tracking-tight text-white md:text-6xl lg:text-7xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
             Intelligent Hardware for{" "}
             <span className="bg-gradient-to-r from-sky-300 via-blue-300 to-slate-300 bg-clip-text text-transparent">
@@ -95,7 +93,8 @@ export function DynamicHeroBanner() {
             </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/60 md:text-lg drop-shadow-[0_1px_10px_rgba(0,0,0,0.3)]">
-            BlackHawk Technologies designs smart devices, privacy systems, and connected hardware solutions that bring digital control into physical spaces.
+            BlackHawk Technologies designs smart devices, privacy systems, and connected hardware
+            solutions that bring digital control into physical spaces.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link

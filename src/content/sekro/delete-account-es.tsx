@@ -7,8 +7,9 @@ import { SEKRO_FIGURES, SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
 export const deleteAccountIntro = (
   <>
     <p>
-      Puedes eliminar tu cuenta de Sekro, y los datos asociados, cuando quieras. Sekro lo ofrece {SEKRO_LEGAL.company}.
-      Esta página explica cómo hacerlo, con o sin la app, qué se elimina y qué conservamos y durante cuánto tiempo.
+      Puedes eliminar tu cuenta de Sekro, y los datos asociados, cuando quieras. Sekro lo ofrece{" "}
+      {SEKRO_LEGAL.company}. Esta página explica cómo hacerlo, con o sin la app, qué se elimina y
+      qué conservamos y durante cuánto tiempo.
     </p>
   </>
 );
@@ -34,16 +35,19 @@ export const deleteAccountSections: LegalSection[] = [
             Escribe tu contraseña de inicio de sesión para confirmar y toca <B>Eliminar cuenta</B>.
           </li>
           <li>
-            Cuando aparezca «¿Eliminar tu cuenta para siempre?», toca <B>Eliminar cuenta</B> otra vez.
+            Cuando aparezca «¿Eliminar tu cuenta para siempre?», toca <B>Eliminar cuenta</B> otra
+            vez.
           </li>
         </OL>
         <p>
-          Tu cuenta se elimina en el acto y no se puede deshacer. Se cierra la sesión en todos los dispositivos en los
-          que la tenías abierta, y la app borra de ellos tus claves y tus mensajes.
+          Tu cuenta se elimina en el acto y no se puede deshacer. Se cierra la sesión en todos los
+          dispositivos en los que la tenías abierta, y la app borra de ellos tus claves y tus
+          mensajes.
         </p>
         <p>
-          Mientras se está tramitando una denuncia sobre tu cuenta (abierta o bajo conservación legal), no se puede
-          eliminar tu cuenta, ni desde la app ni por correo, hasta que se haya resuelto.
+          Mientras se está tramitando una denuncia sobre tu cuenta (abierta o bajo conservación
+          legal), no se puede eliminar tu cuenta, ni desde la app ni por correo, hasta que se haya
+          resuelto.
         </p>
       </>
     ),
@@ -53,8 +57,10 @@ export const deleteAccountSections: LegalSection[] = [
     title: "Sin la app",
     body: (
       <p>
-        Si no puedes usar la app, escribe a <Mail /> desde el correo electrónico registrado en tu cuenta de Sekro e
-        indica tu nombre de usuario. Confirmaremos la solicitud contigo y eliminaremos tu cuenta {SEKRO_LEGAL.emailDeletionDeadline.es}. Todo lo que se describe a continuación se aplica igual.
+        Si no puedes usar la app, escribe a <Mail /> desde el correo electrónico registrado en tu
+        cuenta de Sekro e indica tu nombre de usuario. Confirmaremos la solicitud contigo y
+        eliminaremos tu cuenta {SEKRO_LEGAL.emailDeletionDeadline.es}. Todo lo que se describe a
+        continuación se aplica igual.
       </p>
     ),
   },
@@ -66,7 +72,8 @@ export const deleteAccountSections: LegalSection[] = [
         <p>Al eliminarse tu cuenta, borramos de nuestros servidores, de inmediato:</p>
         <UL>
           <li>
-            tu <B>cuenta</B>: nombre de usuario, correo electrónico, hash de la contraseña e idioma de la app;
+            tu <B>cuenta</B>: nombre de usuario, correo electrónico, hash de la contraseña e idioma
+            de la app;
           </li>
           <li>
             tu <B>perfil</B>: nombre visible y foto de perfil;
@@ -75,25 +82,27 @@ export const deleteAccountSections: LegalSection[] = [
             tus <B>contactos</B>, las invitaciones que enviaste y recibiste, y tus bloqueos;
           </li>
           <li>
-            tus <B>mensajes</B>: se quitan de tu lado de cada conversación, y los que la otra persona ya había eliminado
-            se borran definitivamente (más abajo se explica qué pasa con los que aún conserva);
+            tus <B>mensajes</B>: se quitan de tu lado de cada conversación, y los que la otra
+            persona ya había eliminado se borran definitivamente (más abajo se explica qué pasa con
+            los que aún conserva);
           </li>
           <li>
-            los <B>elementos de tu Galería y sus archivos</B>, y los Sekros de foto y los archivos cifrados de vídeo y
-            audio que subiste y que nadie más conserva;
+            los <B>elementos de tu Galería y sus archivos</B>, y los Sekros de foto y los archivos
+            cifrados de vídeo y audio que subiste y que nadie más conserva;
           </li>
           <li>
-            tus <B>claves de cifrado</B>: tus claves públicas, la <B>copia de seguridad cifrada de tus claves</B> y las
-            claves de remitentes guardadas;
+            tus <B>claves de cifrado</B>: tus claves públicas, la{" "}
+            <B>copia de seguridad cifrada de tus claves</B> y las claves de remitentes guardadas;
           </li>
           <li>
-            tus <B>dispositivos y tokens push</B>, tus notificaciones y cualquier código de verificación de correo o de
-            restablecimiento de contraseña.
+            tus <B>dispositivos y tokens push</B>, tus notificaciones y cualquier código de
+            verificación de correo o de restablecimiento de contraseña.
           </li>
         </UL>
         <p>
-          Si en ese momento no se puede borrar algún archivo del almacenamiento (por ejemplo, por una caída breve), queda
-          en cola y lo borra automáticamente un proceso de limpieza que se ejecuta cada hora.
+          Si en ese momento no se puede borrar algún archivo del almacenamiento (por ejemplo, por
+          una caída breve), queda en cola y lo borra automáticamente un proceso de limpieza que se
+          ejecuta cada hora.
         </p>
       </>
     ),
@@ -104,36 +113,40 @@ export const deleteAccountSections: LegalSection[] = [
     body: (
       <UL>
         <li>
-          <B>Las conversaciones que la otra persona aún conserva.</B> Los mensajes y Sekros que intercambiaste con
-          alguien siguen disponibles para esa persona, también en nuestros servidores, hasta que ella también los
-          elimine; entonces se borran. Las copias en sus dispositivos y las imágenes de Sekro guardadas o compartidas
-          fuera de la app quedan fuera de nuestro alcance. Guardamos un breve registro de que un mensaje se eliminó (su
-          identificador y la hora, sin contenido) durante un máximo de {SEKRO_FIGURES.tombstoneDays} días, para que sus
-          dispositivos también lo quiten.
+          <B>Las conversaciones que la otra persona aún conserva.</B> Los mensajes y Sekros que
+          intercambiaste con alguien siguen disponibles para esa persona, también en nuestros
+          servidores, hasta que ella también los elimine; entonces se borran. Las copias en sus
+          dispositivos y las imágenes de Sekro guardadas o compartidas fuera de la app quedan fuera
+          de nuestro alcance. Guardamos un breve registro de que un mensaje se eliminó (su
+          identificador y la hora, sin contenido) durante un máximo de {SEKRO_FIGURES.tombstoneDays}{" "}
+          días, para que sus dispositivos también lo quiten.
         </li>
         <li>
-          <B>Denuncias.</B> Las denuncias sobre ti o hechas por ti se conservan para la moderación, con tu nombre de
-          usuario. Una denuncia se conserva mientras está abierta y se elimina {SEKRO_FIGURES.reportRetentionDays} días
-          (12 meses) después de resolverse, junto con el contenido que quien denuncia decidió compartir con ella (lo que
-          mostró su dispositivo y la imagen del Sekro). Las denuncias bajo <B>conservación legal</B>, que incluyen todas
-          las de protección infantil, no se eliminan en ese plazo: la denuncia, el contenido compartido con ella y el
-          mensaje, el Sekro y el archivo de vídeo o audio denunciados se conservan hasta que dejan de ser necesarios para
-          un procedimiento judicial, ocultos para todos en la app aunque se eliminen en ella.
+          <B>Denuncias.</B> Las denuncias sobre ti o hechas por ti se conservan para la moderación,
+          con tu nombre de usuario. Una denuncia se conserva mientras está abierta y se elimina{" "}
+          {SEKRO_FIGURES.reportRetentionDays} días (12 meses) después de resolverse, junto con el
+          contenido que quien denuncia decidió compartir con ella (lo que mostró su dispositivo y la
+          imagen del Sekro). Las denuncias bajo <B>conservación legal</B>, que incluyen todas las de
+          protección infantil, no se eliminan en ese plazo: la denuncia, el contenido compartido con
+          ella y el mensaje, el Sekro y el archivo de vídeo o audio denunciados se conservan hasta
+          que dejan de ser necesarios para un procedimiento judicial, ocultos para todos en la app
+          aunque se eliminen en ella.
         </li>
         <li>
-          <B>Un registro mínimo de tu cuenta</B>, mientras se conserve alguna denuncia sobre ti o hecha por ti: su
-          identificador de usuario, tu nombre de usuario, un hash de tu correo electrónico y las fechas de creación y
-          eliminación de la cuenta. Se elimina junto con la última de esas denuncias.
+          <B>Un registro mínimo de tu cuenta</B>, mientras se conserve alguna denuncia sobre ti o
+          hecha por ti: su identificador de usuario, tu nombre de usuario, un hash de tu correo
+          electrónico y las fechas de creación y eliminación de la cuenta. Se elimina junto con la
+          última de esas denuncias.
         </li>
         <li>
-          <B>Registros del servidor.</B> Los registros técnicos de nuestros servidores, que pueden incluir el
-          identificador de tu cuenta, se conservan {SEKRO_FIGURES.serverLogDays} días. Nunca contienen contraseñas,
-          códigos, claves, contenido de mensajes ni imágenes.
+          <B>Registros del servidor.</B> Los registros técnicos de nuestros servidores, que pueden
+          incluir el identificador de tu cuenta, se conservan {SEKRO_FIGURES.serverLogDays} días.
+          Nunca contienen contraseñas, códigos, claves, contenido de mensajes ni imágenes.
         </li>
         <li>
-          <B>Los registros de tus sesiones cerradas</B> (un identificador de cuenta, sin datos personales) caducan en un
-          plazo de {SEKRO_FIGURES.sessionRecordDays} días. Nos permiten indicar a tus otros dispositivos que borren tus
-          datos.
+          <B>Los registros de tus sesiones cerradas</B> (un identificador de cuenta, sin datos
+          personales) caducan en un plazo de {SEKRO_FIGURES.sessionRecordDays} días. Nos permiten
+          indicar a tus otros dispositivos que borren tus datos.
         </li>
         <li>Lo que la ley nos obligue a conservar.</li>
       </UL>
@@ -147,39 +160,41 @@ export const deleteAccountSections: LegalSection[] = [
         <p>No hace falta eliminar tu cuenta para borrar algo:</p>
         <UL>
           <li>
-            <B>Un mensaje del chat</B>: mantenlo pulsado y toca <B>Eliminar para mí</B>. Se elimina de todos tus
-            dispositivos; la otra persona conserva su copia. Cuando ambas personas lo han eliminado, se borra de nuestros
-            servidores.
+            <B>Un mensaje del chat</B>: mantenlo pulsado y toca <B>Eliminar para mí</B>. Se elimina
+            de todos tus dispositivos; la otra persona conserva su copia. Cuando ambas personas lo
+            han eliminado, se borra de nuestros servidores.
           </li>
           <li>
-            <B>Un elemento de la Galería</B>: ábrelo y toca <B>Eliminar</B>. Se elimina de todos tus dispositivos. Las
-            copias que ya enviaste se quedan en esos chats.
+            <B>Un elemento de la Galería</B>: ábrelo y toca <B>Eliminar</B>. Se elimina de todos tus
+            dispositivos. Las copias que ya enviaste se quedan en esos chats.
           </li>
         </UL>
         <p>
-          <B>Eliminar en todas partes</B> retira un <B>Sekro de vídeo o audio que hayas creado</B>, incluidas las copias
-          que enviaste:
+          <B>Eliminar en todas partes</B> retira un <B>Sekro de vídeo o audio que hayas creado</B>,
+          incluidas las copias que enviaste:
         </p>
         <UL>
           <li>
-            en un chat, mantén pulsado uno que enviaste y toca <B>Eliminar vídeo en todas partes</B> (o{" "}
-            <B>Eliminar audio en todas partes</B>);
+            en un chat, mantén pulsado uno que enviaste y toca <B>Eliminar vídeo en todas partes</B>{" "}
+            (o <B>Eliminar audio en todas partes</B>);
           </li>
           <li>
             en la Galería, ábrelo, toca <B>Eliminar</B> y luego <B>Eliminar en todas partes…</B>.
           </li>
         </UL>
         <p>
-          Se elimina de tu Galería (incluidas las copias que compartiste) y de todos los chats a los que lo enviaste, y el
-          archivo cifrado se borra de nuestros servidores en el acto. Las personas a las que se lo enviaste conservan la
-          imagen de portada, pero ven «Este vídeo ya no está disponible.» (o «Este audio ya no está disponible.»), y las
-          copias guardadas o compartidas fuera de la app también dejan de funcionar.
+          Se elimina de tu Galería (incluidas las copias que compartiste) y de todos los chats a los
+          que lo enviaste, y el archivo cifrado se borra de nuestros servidores en el acto. Las
+          personas a las que se lo enviaste conservan la imagen de portada, pero ven «Este vídeo ya
+          no está disponible.» (o «Este audio ya no está disponible.»), y las copias guardadas o
+          compartidas fuera de la app también dejan de funcionar.
         </p>
         <p>
-          Los Sekros de foto y de texto llevan su contenido dentro de la imagen, así que <B>Eliminar en todas partes</B>{" "}
-          no está disponible para ellos: una copia que alguien haya recibido o guardado sigue funcionando y no podemos
-          retirarla. Si quieres retirar un Sekro de vídeo o audio, usa <B>Eliminar en todas partes</B> antes de eliminar
-          tu cuenta; después, sigue disponible para quienes lo conserven, hasta que lo eliminen.
+          Los Sekros de foto y de texto llevan su contenido dentro de la imagen, así que{" "}
+          <B>Eliminar en todas partes</B> no está disponible para ellos: una copia que alguien haya
+          recibido o guardado sigue funcionando y no podemos retirarla. Si quieres retirar un Sekro
+          de vídeo o audio, usa <B>Eliminar en todas partes</B> antes de eliminar tu cuenta;
+          después, sigue disponible para quienes lo conserven, hasta que lo eliminen.
         </p>
       </>
     ),
@@ -189,9 +204,10 @@ export const deleteAccountSections: LegalSection[] = [
     title: "El contenido eliminado no se puede recuperar",
     body: (
       <p>
-        Tus Sekros y mensajes están cifrados de extremo a extremo, y nunca tenemos las claves para abrirlos. Cuando se
-        elimina un mensaje, un Sekro o tu cuenta (con la copia de seguridad cifrada de tus claves), nadie puede
-        recuperarlo, ni siquiera nosotros. Si vuelves a registrarte más adelante, será una cuenta nueva con claves nuevas.
+        Tus Sekros y mensajes están cifrados de extremo a extremo, y nunca tenemos las claves para
+        abrirlos. Cuando se elimina un mensaje, un Sekro o tu cuenta (con la copia de seguridad
+        cifrada de tus claves), nadie puede recuperarlo, ni siquiera nosotros. Si vuelves a
+        registrarte más adelante, será una cuenta nueva con claves nuevas.
       </p>
     ),
   },

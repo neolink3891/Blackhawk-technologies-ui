@@ -5,7 +5,11 @@ import { SITE_URL } from "@/lib/site";
 
 const BASE_URL = SITE_URL;
 
-interface SitemapEntry { path: string; changefreq?: string; priority?: string; }
+interface SitemapEntry {
+  path: string;
+  changefreq?: string;
+  priority?: string;
+}
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -27,8 +31,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/es/sekro/delete-account", changefreq: "yearly", priority: "0.5" },
           { path: "/es/sekro/child-safety", changefreq: "yearly", priority: "0.5" },
         ];
-        const urls = entries.map((e) =>
-          `  <url>\n    <loc>${BASE_URL}${e.path}</loc>\n    <changefreq>${e.changefreq}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`
+        const urls = entries.map(
+          (e) =>
+            `  <url>\n    <loc>${BASE_URL}${e.path}</loc>\n    <changefreq>${e.changefreq}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`,
         );
         const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>`;
         return new Response(xml, {

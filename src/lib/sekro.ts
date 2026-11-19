@@ -21,6 +21,9 @@ export const SEKRO_IMAGES = {
   // Google's official "Get it on Google Play" badges (play.google.com/intl/en_us/badges: en, and es, whose artwork
   // reads "Disponible en Google Play"), with only the transparent padding trimmed so they match the App Store
   // badge's height. Both 3.36:1 (en 564×168, es 646×192).
-  googlePlayBadge: { en: "/sekro/badges/google-play-en.png", es: "/sekro/badges/google-play-es.png" },
+  googlePlayBadge: {
+    en: "/sekro/badges/google-play-en.png",
+    es: "/sekro/badges/google-play-es.png",
+  },
   screenshot: (lang: "en" | "es", name: string) => `/sekro/screenshots/${lang}/${name}.webp`,
 };

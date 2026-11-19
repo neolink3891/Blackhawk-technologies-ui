@@ -8,9 +8,17 @@ export const Route = createFileRoute("/es/sekro/privacy")({
   head: () => ({
     meta: [
       { title: "Política de privacidad de Sekro — BlackHawk Technologies" },
-      { name: "description", content: "Qué datos recoge Sekro, qué no puede ver (tu contenido cifrado de extremo a extremo) y tus derechos." },
+      {
+        name: "description",
+        content:
+          "Qué datos recoge Sekro, qué no puede ver (tu contenido cifrado de extremo a extremo) y tus derechos.",
+      },
       { property: "og:title", content: "Política de privacidad de Sekro — BlackHawk Technologies" },
-      { property: "og:description", content: "Qué datos recoge Sekro, qué no puede ver (tu contenido cifrado de extremo a extremo) y tus derechos." },
+      {
+        property: "og:description",
+        content:
+          "Qué datos recoge Sekro, qué no puede ver (tu contenido cifrado de extremo a extremo) y tus derechos.",
+      },
     ],
     links: [
       { rel: "canonical", href: `${SITE_URL}/es/sekro/privacy` },

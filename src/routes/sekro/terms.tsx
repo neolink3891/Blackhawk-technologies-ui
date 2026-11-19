@@ -8,9 +8,17 @@ export const Route = createFileRoute("/sekro/terms")({
   head: () => ({
     meta: [
       { title: "Sekro Terms of Service — BlackHawk Technologies" },
-      { name: "description", content: "The rules for using Sekro: eligibility, your passphrase, acceptable use, moderation and liability." },
+      {
+        name: "description",
+        content:
+          "The rules for using Sekro: eligibility, your passphrase, acceptable use, moderation and liability.",
+      },
       { property: "og:title", content: "Sekro Terms of Service — BlackHawk Technologies" },
-      { property: "og:description", content: "The rules for using Sekro: eligibility, your passphrase, acceptable use, moderation and liability." },
+      {
+        property: "og:description",
+        content:
+          "The rules for using Sekro: eligibility, your passphrase, acceptable use, moderation and liability.",
+      },
     ],
     links: [
       { rel: "canonical", href: `${SITE_URL}/sekro/terms` },

@@ -6,14 +6,14 @@ ALB. Hosting, DNS and the load balancer don't change for a release.
 
 ## The existing setup
 
-| | |
-|---|---|
-| Site | `https://www.blackhawk-technologies.com` (`SITE_URL` in `src/lib/site.ts`: sitemap, canonical, hreflang) |
-| DNS | GoDaddy (`ns45/ns46.domaincontrol.com`). `www` → CNAME `bht-apps-alb-1372409103.eu-west-2.elb.amazonaws.com`; the bare `blackhawk-technologies.com` is GoDaddy forwarding (301 → `https://www.…`) |
-| Load balancer | `bht-apps-alb` (eu-west-2) |
-| Image | ECR `088136761930.dkr.ecr.eu-west-2.amazonaws.com/blackhawk-technologies-ui:<VERSION>` (`build.sh`) |
-| ECS | cluster `bhtapps-prod`, service `blackhawk-technologies-ui-service`, task definition family `blackhawk-technologies-ui` (container port 4173) |
-| Production branch | `main` (`development` is merged into it for a release) |
+|                   |                                                                                                                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Site              | `https://www.blackhawk-technologies.com` (`SITE_URL` in `src/lib/site.ts`: sitemap, canonical, hreflang)                                                                                          |
+| DNS               | GoDaddy (`ns45/ns46.domaincontrol.com`). `www` → CNAME `bht-apps-alb-1372409103.eu-west-2.elb.amazonaws.com`; the bare `blackhawk-technologies.com` is GoDaddy forwarding (301 → `https://www.…`) |
+| Load balancer     | `bht-apps-alb` (eu-west-2)                                                                                                                                                                        |
+| Image             | ECR `088136761930.dkr.ecr.eu-west-2.amazonaws.com/blackhawk-technologies-ui:<VERSION>` (`build.sh`)                                                                                               |
+| ECS               | cluster `bhtapps-prod`, service `blackhawk-technologies-ui-service`, task definition family `blackhawk-technologies-ui` (container port 4173)                                                     |
+| Production branch | `main` (`development` is merged into it for a release)                                                                                                                                            |
 
 ## Deploy history
 
@@ -21,10 +21,10 @@ Newest first. Task definition revisions are `blackhawk-technologies-ui:<n>`; rol
 previous one:
 `aws ecs update-service --region eu-west-2 --cluster bhtapps-prod --service blackhawk-technologies-ui-service --task-definition blackhawk-technologies-ui:<previous>`.
 
-| Date | Version | Task definition | Notes |
-|---|---|---|---|
-| 2026-11-14 | 1.0.6 | `blackhawk-technologies-ui:7` (rollback `:6`) | assetlinks.json: Sekro Play app-signing + upload key fingerprints (verified by Google's Digital Asset Links API) |
-| 2026-11-12 | 1.0.5 | `blackhawk-technologies-ui:6` (rollback `:5`) | Sekro invite page + .well-known, HawkTrack card, Adhki Cogno/NeoLogger removal, lockfile fix for npm 10 |
+| Date       | Version | Task definition                               | Notes                                                                                                            |
+| ---------- | ------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| 2026-11-14 | 1.0.6   | `blackhawk-technologies-ui:7` (rollback `:6`) | assetlinks.json: Sekro Play app-signing + upload key fingerprints (verified by Google's Digital Asset Links API) |
+| 2026-11-12 | 1.0.5   | `blackhawk-technologies-ui:6` (rollback `:5`) | Sekro invite page + .well-known, HawkTrack card, Adhki Cogno/NeoLogger removal, lockfile fix for npm 10          |
 
 ## Local check
 

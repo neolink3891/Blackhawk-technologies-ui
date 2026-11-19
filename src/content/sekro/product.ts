@@ -27,12 +27,25 @@ export interface SekroProductCopy {
   screenshots: { file: string; caption: string; alt: string }[];
   ageNote: string;
   linksTitle: string;
-  links: { privacy: string; terms: string; deleteAccount: string; childSafety: string; support: string };
+  links: {
+    privacy: string;
+    terms: string;
+    deleteAccount: string;
+    childSafety: string;
+    support: string;
+  };
   languageLabel: string;
   alternateLabel: string;
 }
 
-export type FeatureKey = "e2e" | "recipients" | "keys" | "contacts" | "capture" | "watermark" | "deleteEverywhere";
+export type FeatureKey =
+  | "e2e"
+  | "recipients"
+  | "keys"
+  | "contacts"
+  | "capture"
+  | "watermark"
+  | "deleteEverywhere";
 
 export const sekroProduct: Record<Lang, SekroProductCopy> = {
   en: {
@@ -69,7 +82,10 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
     hideItems: [
       { title: "Photos", body: "Any photo you choose." },
       { title: "Videos", body: "Up to 7 minutes." },
-      { title: "Voice notes and audio", body: "Record a voice note or pick an audio file, up to 10 minutes." },
+      {
+        title: "Voice notes and audio",
+        body: "Record a voice note or pick an audio file, up to 10 minutes.",
+      },
       { title: "Text", body: "Up to 5,000 characters." },
       {
         title: "A hidden note",
@@ -185,7 +201,10 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
     hideItems: [
       { title: "Fotos", body: "Cualquier foto que elijas." },
       { title: "Vídeos", body: "De hasta 7 minutos." },
-      { title: "Notas de voz y audio", body: "Graba una nota de voz o elige un archivo de audio, de hasta 10 minutos." },
+      {
+        title: "Notas de voz y audio",
+        body: "Graba una nota de voz o elige un archivo de audio, de hasta 10 minutos.",
+      },
       { title: "Texto", body: "De hasta 5.000 caracteres." },
       {
         title: "Una nota oculta",

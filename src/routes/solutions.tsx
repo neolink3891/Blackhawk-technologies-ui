@@ -8,9 +8,17 @@ export const Route = createFileRoute("/solutions")({
   head: () => ({
     meta: [
       { title: "Solutions — BlackHawk Technologies" },
-      { name: "description", content: "Explore software products and services by BlackHawk Technologies: Sekro, HawkSells, HawkTrack, Atlas, GetMunching, custom software, and AI automation." },
+      {
+        name: "description",
+        content:
+          "Explore software products and services by BlackHawk Technologies: Sekro, HawkSells, HawkTrack, Atlas, GetMunching, custom software, and AI automation.",
+      },
       { property: "og:title", content: "Solutions — BlackHawk Technologies" },
-      { property: "og:description", content: "Products and services we build — from workforce platforms to AI-powered automation." },
+      {
+        property: "og:description",
+        content:
+          "Products and services we build — from workforce platforms to AI-powered automation.",
+      },
     ],
   }),
   component: SolutionsPage,
@@ -26,7 +34,8 @@ function SolutionsPage() {
             Products and services for <span className="text-gradient">ambitious teams</span>.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-muted-foreground md:text-lg">
-            A growing portfolio of platforms, products, and engineering services — built to help businesses operate, scale, and automate with confidence.
+            A growing portfolio of platforms, products, and engineering services — built to help
+            businesses operate, scale, and automate with confidence.
           </p>
         </div>
       </section>
@@ -39,14 +48,20 @@ function SolutionsPage() {
         </div>
 
         <div className="mt-20 overflow-hidden rounded-3xl border border-border/60 bg-gradient-card p-10 shadow-elegant md:p-14">
-          <p className="text-sm font-medium uppercase tracking-wider text-primary">Custom solutions</p>
+          <p className="text-sm font-medium uppercase tracking-wider text-primary">
+            Custom solutions
+          </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
             Built bespoke for your <span className="text-gradient">operations</span>.
           </h2>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            In addition to our products, we help organisations build bespoke software tailored to their unique operational requirements.
+            In addition to our products, we help organisations build bespoke software tailored to
+            their unique operational requirements.
           </p>
-          <Link to="/contact" className="mt-8 inline-flex items-center gap-2 rounded-md bg-gradient-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-glow">
+          <Link
+            to="/contact"
+            className="mt-8 inline-flex items-center gap-2 rounded-md bg-gradient-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-glow"
+          >
             Discuss your project <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

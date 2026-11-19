@@ -8,9 +8,17 @@ export const Route = createFileRoute("/es/sekro/terms")({
   head: () => ({
     meta: [
       { title: "Términos del servicio de Sekro — BlackHawk Technologies" },
-      { name: "description", content: "Las normas para usar Sekro: requisitos, tu frase de contraseña, uso aceptable, moderación y responsabilidad." },
+      {
+        name: "description",
+        content:
+          "Las normas para usar Sekro: requisitos, tu frase de contraseña, uso aceptable, moderación y responsabilidad.",
+      },
       { property: "og:title", content: "Términos del servicio de Sekro — BlackHawk Technologies" },
-      { property: "og:description", content: "Las normas para usar Sekro: requisitos, tu frase de contraseña, uso aceptable, moderación y responsabilidad." },
+      {
+        property: "og:description",
+        content:
+          "Las normas para usar Sekro: requisitos, tu frase de contraseña, uso aceptable, moderación y responsabilidad.",
+      },
     ],
     links: [
       { rel: "canonical", href: `${SITE_URL}/es/sekro/terms` },

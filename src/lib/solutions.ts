@@ -1,5 +1,13 @@
 import {
-  Users, Home, UtensilsCrossed, PhoneCall, Terminal, Code2, Sparkles, Lock, ShoppingCart,
+  Users,
+  Home,
+  UtensilsCrossed,
+  PhoneCall,
+  Terminal,
+  Code2,
+  Sparkles,
+  Lock,
+  ShoppingCart,
   type LucideIcon,
 } from "lucide-react";
 import { SEKRO_IMAGES } from "@/lib/sekro";

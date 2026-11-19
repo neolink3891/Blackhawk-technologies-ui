@@ -26,11 +26,24 @@ interface LegalPageProps {
 
 const labels = {
   en: { eyebrow: "Sekro", updated: "Last updated", contents: "Contents", language: "Language" },
-  es: { eyebrow: "Sekro", updated: "Última actualización", contents: "Contenido", language: "Idioma" },
+  es: {
+    eyebrow: "Sekro",
+    updated: "Última actualización",
+    contents: "Contenido",
+    language: "Idioma",
+  },
 };
 
 /** Long-form legal document page (Sekro Privacy Policy / Terms), styled like the rest of the site. */
-export function LegalPage({ lang, title, intro, sections, alternate, siblings, updated }: LegalPageProps) {
+export function LegalPage({
+  lang,
+  title,
+  intro,
+  sections,
+  alternate,
+  siblings,
+  updated,
+}: LegalPageProps) {
   const t = labels[lang];
   return (
     <div lang={lang}>
@@ -38,10 +51,17 @@ export function LegalPage({ lang, title, intro, sections, alternate, siblings, u
         <div className="mx-auto max-w-4xl px-6 py-20 md:py-24">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t.eyebrow}</p>
-            <nav aria-label={t.language} className="flex rounded-md border border-border/60 p-0.5 text-xs font-medium">
+            <nav
+              aria-label={t.language}
+              className="flex rounded-md border border-border/60 p-0.5 text-xs font-medium"
+            >
               {(["en", "es"] as const).map((code) =>
                 code === lang ? (
-                  <span key={code} aria-current="page" className="rounded bg-secondary px-2.5 py-1 text-foreground">
+                  <span
+                    key={code}
+                    aria-current="page"
+                    className="rounded bg-secondary px-2.5 py-1 text-foreground"
+                  >
                     {code.toUpperCase()}
                   </span>
                 ) : (
@@ -71,7 +91,9 @@ export function LegalPage({ lang, title, intro, sections, alternate, siblings, u
           aria-label={t.contents}
           className="rounded-2xl border border-border/60 bg-gradient-card p-6 md:p-8"
         >
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-primary">{t.contents}</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-primary">
+            {t.contents}
+          </h2>
           <ol className="mt-4 grid gap-x-8 gap-y-2 text-sm text-muted-foreground sm:grid-cols-2">
             {sections.map((s, i) => (
               <li key={s.id}>
@@ -103,7 +125,11 @@ export function LegalPage({ lang, title, intro, sections, alternate, siblings, u
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {siblings.map((s) => (
-              <Link key={s.href} to={s.href} className="text-sm font-medium text-primary hover:underline">
+              <Link
+                key={s.href}
+                to={s.href}
+                className="text-sm font-medium text-primary hover:underline"
+              >
                 {s.label} →
               </Link>
             ))}
@@ -124,7 +150,11 @@ export function UL({ children }: { children: ReactNode }) {
 }
 
 export function OL({ children }: { children: ReactNode }) {
-  return <ol className="list-decimal space-y-2 pl-6 marker:font-semibold marker:text-primary">{children}</ol>;
+  return (
+    <ol className="list-decimal space-y-2 pl-6 marker:font-semibold marker:text-primary">
+      {children}
+    </ol>
+  );
 }
 
 export function B({ children }: { children: ReactNode }) {

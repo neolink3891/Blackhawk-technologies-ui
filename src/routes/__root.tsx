@@ -90,7 +90,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "BlackHawk Technologies Ltd" },
       { property: "og:site_name", content: "BlackHawk Technologies" },
       { property: "og:title", content: "BlackHawk Technologies" },
-      { property: "og:description", content: "Building intelligent software for modern businesses." },
+      {
+        property: "og:description",
+        content: "Building intelligent software for modern businesses.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "theme-color", content: "#0B0F17" },
