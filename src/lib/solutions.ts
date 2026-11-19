@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 import { SEKRO_IMAGES } from "@/lib/sekro";
 
-export type SolutionStatus = "Available" | "Available on iOS" | "In Development" | "Coming Soon";
+export type SolutionStatus = "Available" | "In Development" | "Coming Soon";
 
 export interface Solution {
   name: string;
@@ -32,8 +32,8 @@ export const solutions: Solution[] = [
     tagline: "Hidden in plain sight.",
     description:
       "Hide photos, videos, voice notes and text inside ordinary images. Only the person you choose can open them. End-to-end encrypted, for iPhone and Android.",
-    // On the App Store; Google Play to follow (see SEKRO_LINKS).
-    status: "Available on iOS",
+    // On the App Store and Google Play (see SEKRO_LINKS).
+    status: "Available",
     icon: Lock,
     image: SEKRO_IMAGES.icon,
     href: "/sekro",

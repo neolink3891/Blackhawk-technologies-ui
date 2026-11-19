@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ExternalLink, Play } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 
 import type { Lang } from "@/components/site/LegalPage";
-import { AppStoreBadge, StoreBadge } from "@/components/site/SekroProductPage";
+import { AppStoreBadge, GooglePlayBadge } from "@/components/site/SekroProductPage";
 import { sekroInvite } from "@/content/sekro/invite";
 import { SEKRO_HOME, SEKRO_IMAGES, SEKRO_LINKS } from "@/lib/sekro";
 import {
@@ -162,13 +162,13 @@ export function SekroInvitePage({
       newTab={t.newTab}
     />
   );
+  // The Play listing with the install referrer, so the app can add @username after installing.
   const googlePlay = (
-    <StoreBadge
+    <GooglePlayBadge
       href={googlePlayInviteUrl(username)}
-      top={t.googlePlayTop}
-      name="Google Play"
-      icon={Play}
-      comingSoon=""
+      src={SEKRO_IMAGES.googlePlayBadge[lang]}
+      alt={t.googlePlayAlt}
+      newTab={t.newTab}
     />
   );
 

@@ -13,7 +13,7 @@ export interface SekroInviteCopy {
   alreadyInstalled: string;
   redirecting: string;
   appStoreButton: string;
-  googlePlayTop: string;
+  googlePlayAlt: string;
   scanTitle: string;
   scanBody: string;
   qrAlt: (u: string) => string;
@@ -38,7 +38,7 @@ export const sekroInvite: Record<Lang, SekroInviteCopy> = {
     alreadyInstalled: "Already have Sekro?",
     redirecting: "Taking you to the App Store…",
     appStoreButton: "Download on the App Store",
-    googlePlayTop: "Get it on",
+    googlePlayAlt: "Get it on Google Play",
     scanTitle: "On your phone",
     scanBody: "Scan this code with your phone's camera to open the invite there.",
     qrAlt: (u) => `QR code for @${u}'s Sekro invite link`,
@@ -62,7 +62,8 @@ export const sekroInvite: Record<Lang, SekroInviteCopy> = {
     redirecting: "Abriendo el App Store…",
     // Matches the words on Apple's es-ES badge artwork.
     appStoreButton: "Consíguelo en el App Store",
-    googlePlayTop: "Disponible en",
+    // Matches the words on Google's Spanish badge artwork.
+    googlePlayAlt: "Disponible en Google Play",
     scanTitle: "En tu móvil",
     scanBody: "Escanea este código con la cámara del móvil para abrir la invitación allí.",
     qrAlt: (u) => `Código QR del enlace de invitación de @${u} a Sekro`,

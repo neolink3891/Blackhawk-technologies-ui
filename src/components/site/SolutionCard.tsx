@@ -4,7 +4,6 @@ import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 
 const statusStyles: Record<Solution["status"], string> = {
   Available: "bg-primary/15 text-primary border-primary/30",
-  "Available on iOS": "bg-primary/15 text-primary border-primary/30",
   "In Development": "bg-amber-500/10 text-amber-300 border-amber-500/30",
   "Coming Soon": "bg-muted text-muted-foreground border-border",
 };

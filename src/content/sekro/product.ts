@@ -10,7 +10,13 @@ export interface SekroProductCopy {
   eyebrow: string;
   tagline: string;
   summary: string;
-  badges: { appStoreTop: string; googlePlayTop: string; comingSoon: string; appStoreAlt: string };
+  badges: {
+    appStoreTop: string;
+    googlePlayTop: string;
+    comingSoon: string;
+    appStoreAlt: string;
+    googlePlayAlt: string;
+  };
   howTitle: string;
   howSteps: { title: string; body: string }[];
   hideTitle: string;
@@ -42,6 +48,7 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       googlePlayTop: "Get it on",
       comingSoon: "Coming soon",
       appStoreAlt: "Download on the App Store",
+      googlePlayAlt: "Get it on Google Play",
     },
     howTitle: "How it works",
     howSteps: [
@@ -156,6 +163,8 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       comingSoon: "Próximamente",
       // Matches the words on Apple's es-ES badge artwork.
       appStoreAlt: "Consíguelo en el App Store",
+      // Matches the words on Google's Spanish badge artwork.
+      googlePlayAlt: "Disponible en Google Play",
     },
     howTitle: "Cómo funciona",
     howSteps: [

@@ -37,15 +37,37 @@ const featureIcons: Record<FeatureKey, LucideIcon> = {
   deleteEverywhere: Trash2,
 };
 
-/** Apple's official badge artwork, unmodified, 52px tall (minimum 40px); the row's gap-4 keeps the clear space
- * Apple asks for (a quarter of the badge height). */
-export function AppStoreBadge({ href, src, alt, newTab }: { href: string; src: string; alt: string; newTab: string }) {
+interface OfficialBadgeProps {
+  href: string;
+  src: string;
+  alt: string;
+  newTab: string;
+}
+
+/** An official store badge image, 52px tall, opening the listing in a new tab. */
+function OfficialBadge({ href, src, alt, newTab, width }: OfficialBadgeProps & { width: number }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
-      <img src={src} alt={alt} width={156} height={52} className="h-[52px] w-auto" />
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+    >
+      <img src={src} alt={alt} width={width} height={52} className="h-[52px] w-auto" />
       <span className="sr-only"> ({newTab})</span>
     </a>
   );
+}
+
+/** Apple's official badge artwork, unmodified, 52px tall (minimum 40px); the row's gap-4 keeps the clear space
+ * Apple asks for (a quarter of the badge height). */
+export function AppStoreBadge(props: OfficialBadgeProps) {
+  return <OfficialBadge {...props} width={156} />;
+}
+
+/** Google's official badge (padding trimmed), the same 52px tall as the App Store badge. */
+export function GooglePlayBadge(props: OfficialBadgeProps) {
+  return <OfficialBadge {...props} width={175} />;
 }
 
 /** Text store badge: a link when the listing is live, otherwise a muted "Coming soon" tile. */
@@ -143,13 +165,22 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
                 comingSoon={t.badges.comingSoon}
               />
             )}
-            <StoreBadge
-              href={SEKRO_LINKS.googlePlay}
-              top={t.badges.googlePlayTop}
-              name="Google Play"
-              icon={Play}
-              comingSoon={t.badges.comingSoon}
-            />
+            {SEKRO_LINKS.googlePlay ? (
+              <GooglePlayBadge
+                href={SEKRO_LINKS.googlePlay}
+                src={SEKRO_IMAGES.googlePlayBadge[lang]}
+                alt={t.badges.googlePlayAlt}
+                newTab={lang === "en" ? "opens in a new tab" : "se abre en una pestaña nueva"}
+              />
+            ) : (
+              <StoreBadge
+                href=""
+                top={t.badges.googlePlayTop}
+                name="Google Play"
+                icon={Play}
+                comingSoon={t.badges.comingSoon}
+              />
+            )}
           </div>
         </div>
       </section>
