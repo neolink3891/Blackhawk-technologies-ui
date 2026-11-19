@@ -63,7 +63,7 @@ export const homeProducts: HomeProduct[] = [
       "An AI sales assistant that answers every comment and message 24/7 and hands you qualified leads.",
     audience: "Businesses that sell on Facebook and Instagram.",
     status: "Available",
-    platforms: "Web, for Facebook and Instagram · launching in Central America",
+    platforms: "Web, for Facebook and Instagram · available in Central America",
     link: { href: "https://hawksells.bhtapp.com" },
   },
   {

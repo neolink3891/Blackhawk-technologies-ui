@@ -21,6 +21,8 @@ export interface Solution {
   /** Link text for `externalUrl` (default "Learn more"). */
   linkLabel?: string;
   features?: string[];
+  /** Kept in code but not shown on /products (e.g. not ready to announce). */
+  hidden?: boolean;
 }
 
 export const solutions: Solution[] = [
@@ -46,7 +48,7 @@ export const solutions: Solution[] = [
     name: "HawkSells",
     tagline: "You Post. HawkSells.",
     description:
-      "An AI sales assistant for businesses that sell on Facebook and Instagram. It replies to every comment and message 24/7, answers from your own products, prices and delivery options, and delivers qualified leads with the order total. Live, launching in Central America.",
+      "An AI sales assistant for businesses that sell on Facebook and Instagram. It replies to every comment and message 24/7, answers from your own products, prices and delivery options, and delivers qualified leads with the order total. Available in Central America.",
     status: "Available",
     icon: ShoppingCart,
     image: "/hawksells/logo.png",
@@ -86,6 +88,8 @@ export const solutions: Solution[] = [
     description:
       "An upcoming smart home and home integration platform built around the Atlas Hub — connecting devices, automating routines, and providing unified mobile control.",
     status: "In Development",
+    // Not shown for now (2026-11-19): the site is positioned on software, and Atlas's hub is hardware.
+    hidden: true,
     icon: Home,
     features: [
       "Home Automation",

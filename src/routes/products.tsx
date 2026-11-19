@@ -43,9 +43,11 @@ function ProductsPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {solutions.map((s) => (
-            <SolutionCard key={s.name} solution={s} />
-          ))}
+          {solutions
+            .filter((s) => !s.hidden)
+            .map((s) => (
+              <SolutionCard key={s.name} solution={s} />
+            ))}
         </div>
 
         <div className="mt-20 overflow-hidden rounded-3xl border border-border/60 bg-gradient-card p-10 shadow-elegant md:p-14">

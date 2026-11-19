@@ -20,7 +20,7 @@ export function Footer() {
             />
           </Link>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            Building intelligent software for modern businesses.
+            Software products, custom development and AI for modern businesses.
           </p>
           <div className="mt-6 flex items-center gap-3">
             {[
