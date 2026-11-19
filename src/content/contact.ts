@@ -13,16 +13,6 @@ export const PROJECT_TYPES = [
 ] as const;
 export type ProjectType = (typeof PROJECT_TYPES)[number];
 
-/** Project type as it appears in the email subject and body (the inbox is read in English). */
-export const PROJECT_TYPE_EMAIL_LABELS: Record<ProjectType, string> = {
-  "custom-software": "Custom software",
-  "mobile-app": "Mobile app",
-  "ai-automation": "AI / Automation",
-  "saas-platform": "SaaS platform",
-  consultation: "Consultation",
-  other: "Other",
-};
-
 export interface ContactCopy {
   meta: { title: string; description: string; ogTitle: string; ogDescription: string };
   eyebrow: string;
@@ -43,21 +33,31 @@ export interface ContactCopy {
     /** Shown after a required field's label (screen readers read the word, not the asterisk). */
     required: string;
     submit: string;
-    sending: string;
-    sent: string;
     errors: { required: string; email: string };
-    /** Why a message wasn't sent; each is followed by the email fallback. */
-    failure: {
-      tooFast: string;
-      invalid: string;
-      rateLimited: string;
-      sendFailed: string;
-      fallback: string;
+    /** The email the form prepares (in the visitor's language). */
+    mail: {
+      name: string;
+      email: string;
+      company: string;
+      projectType: string;
+      language: string;
+      languageValue: string;
+      page: string;
+      message: string;
+      none: string;
+      trimmedNote: string;
     };
-    /** Label of the hidden anti-spam field (only ever announced if a screen reader reaches it). */
-    honeypot: string;
-    /** Under the form: who processes the message. `{formspree}` becomes a link to Formspree's privacy policy. */
-    privacy: string;
+    /** Shown after the email app is opened. */
+    opened: {
+      before: string;
+      after: string;
+      openAgain: string;
+      copyAddress: string;
+      copied: string;
+      copyFailed: string;
+    };
+    /** Shown when the message was too long for the link and had to be shortened. */
+    trimmed: { text: string; copyMessage: string };
   };
 }
 
@@ -96,21 +96,35 @@ export const contactCopy: Record<Lang, ContactCopy> = {
       messagePlaceholder: "Tell us about your project...",
       required: "required",
       submit: "Send Message",
-      sending: "Sending...",
-      sent: "Message sent — we'll be in touch shortly.",
       errors: {
         required: "Please fill in this field.",
         email: "Please enter a valid email address.",
       },
-      failure: {
-        tooFast: "That was quick! Please check your message, then send it again.",
-        invalid: "Some details don't look right. Please check the form and try again.",
-        rateLimited: "You've sent several messages in a short time. Please try again later.",
-        sendFailed: "Sorry, your message couldn't be sent. Please try again in a moment.",
-        fallback: "You can also email us directly at",
+      mail: {
+        name: "Name",
+        email: "Email",
+        company: "Company",
+        projectType: "Project type",
+        language: "Language",
+        languageValue: "English (en-GB)",
+        page: "Page",
+        message: "Message",
+        none: "—",
+        trimmedNote: "[Shortened to fit an email link — please paste your full message here.]",
       },
-      honeypot: "Leave this field empty",
-      privacy: "Messages sent with this form are processed by {formspree} to deliver them to us.",
+      opened: {
+        before:
+          "Your email app should open with your message ready — just press Send there. If it didn't open, email us at",
+        after: ".",
+        openAgain: "Open your email app again",
+        copyAddress: "Copy address",
+        copied: "Copied!",
+        copyFailed: "Couldn't copy — please select the address",
+      },
+      trimmed: {
+        text: "Your message was too long to fit in an email link, so it's been shortened. Please paste the full text into the email before you send it.",
+        copyMessage: "Copy full message",
+      },
     },
   },
 
@@ -148,21 +162,36 @@ export const contactCopy: Record<Lang, ContactCopy> = {
       messagePlaceholder: "Cuéntanos sobre tu proyecto…",
       required: "obligatorio",
       submit: "Enviar mensaje",
-      sending: "Enviando…",
-      sent: "Mensaje enviado. Te responderemos pronto.",
       errors: {
         required: "Completa este campo.",
         email: "Ingresa un correo electrónico válido.",
       },
-      failure: {
-        tooFast: "¡Qué rápido! Revisa tu mensaje y vuelve a enviarlo.",
-        invalid: "Algunos datos no parecen correctos. Revisa el formulario e intenta de nuevo.",
-        rateLimited: "Enviaste varios mensajes en poco tiempo. Intenta de nuevo más tarde.",
-        sendFailed: "No pudimos enviar tu mensaje. Intenta de nuevo en un momento.",
-        fallback: "También puedes escribirnos directamente a",
+      mail: {
+        name: "Nombre",
+        email: "Correo",
+        company: "Empresa",
+        projectType: "Tipo de proyecto",
+        language: "Idioma",
+        languageValue: "Español (es-419)",
+        page: "Página",
+        message: "Mensaje",
+        none: "—",
+        trimmedNote:
+          "[Mensaje acortado para que quepa en un enlace de correo: pega aquí tu mensaje completo.]",
       },
-      honeypot: "Deja este campo vacío",
-      privacy: "{formspree} procesa los mensajes de este formulario para hacérnoslos llegar.",
+      opened: {
+        before:
+          "Tu app de correo debería abrirse con tu mensaje listo; solo presiona Enviar. Si no se abrió, escríbenos a",
+        after: ".",
+        openAgain: "Abrir tu app de correo de nuevo",
+        copyAddress: "Copiar dirección",
+        copied: "¡Copiado!",
+        copyFailed: "No se pudo copiar; selecciona la dirección",
+      },
+      trimmed: {
+        text: "Tu mensaje era demasiado largo para un enlace de correo, así que lo acortamos. Pega el texto completo en el correo antes de enviarlo.",
+        copyMessage: "Copiar mensaje completo",
+      },
     },
   },
 };

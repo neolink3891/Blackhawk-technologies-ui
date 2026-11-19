@@ -1,22 +1,10 @@
-import { useEffect, useRef, useState, type FormEvent, type InvalidEvent } from "react";
-import { Mail, MapPin, Send } from "lucide-react";
-import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
-import {
-  type ContactCopy,
-  contactCopy,
-  PROJECT_TYPE_EMAIL_LABELS,
-  PROJECT_TYPES,
-  type ProjectType,
-} from "@/content/contact";
-import { FORMSPREE_PRIVACY_URL, submitToFormspree } from "@/lib/formspree";
-import { siteCopy } from "@/content/site";
-import { HTML_LANG, type Lang } from "@/lib/i18n";
+import { useState, type FormEvent, type InvalidEvent } from "react";
+import { Check, Copy, Mail, MapPin, Send } from "lucide-react";
+import { type ContactCopy, contactCopy, PROJECT_TYPES, type ProjectType } from "@/content/contact";
+import type { Lang } from "@/lib/i18n";
+import { buildMailto, CONTACT_EMAIL } from "@/lib/mailto";
 
 type Field = HTMLInputElement | HTMLTextAreaElement;
-
-/** Minimum time between showing the form and sending it (bots fill forms instantly). */
-const MIN_FORM_MS = 3000;
 
 /** Browser validation, with the message in the page's language instead of the browser's. */
 function validationHandlers(errors: ContactCopy["form"]["errors"]) {
@@ -35,54 +23,41 @@ const inputClass =
 export function ContactPage({ lang }: { lang: Lang }) {
   const t = contactCopy[lang];
   const f = t.form;
-  const [submitting, setSubmitting] = useState(false);
-  const [failure, setFailure] = useState<keyof ContactCopy["form"]["failure"] | null>(null);
-  const startedAt = useRef(0);
+  const [result, setResult] = useState<{
+    url: string;
+    trimmed: boolean;
+    fullMessage: string;
+  } | null>(null);
   const validation = validationHandlers(f.errors);
 
-  // When the form was shown: anything sent within a few seconds is almost certainly a bot.
-  useEffect(() => {
-    startedAt.current = Date.now();
-  }, []);
-
-  // Posted straight to Formspree, which emails contactus@bhtapp.com. Success is shown only on a 2xx from Formspree.
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  // Builds the email and opens the visitor's email app (mailto:). Nothing is sent by the site: the visitor presses
+  // Send in their own app, so there's no "Message sent" here.
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const fd = new FormData(form);
+    const fd = new FormData(e.currentTarget);
     const get = (k: string) => String(fd.get(k) ?? "").trim();
-    setFailure(null);
-    if (Date.now() - startedAt.current < MIN_FORM_MS) {
-      setFailure("tooFast");
-      return;
-    }
-    const name = get("name").replace(/[\r\n]+/g, " ");
-    const email = get("email");
-    const type = PROJECT_TYPE_EMAIL_LABELS[get("projectType") as ProjectType] ?? get("projectType");
-    setSubmitting(true);
-    const res = await submitToFormspree({
-      _subject: `[Website ${lang === "es" ? "ES" : "EN"}] ${type} — ${name}`,
-      _replyto: email,
-      // Honeypot: Formspree discards submissions where this is filled in.
-      _gotcha: get("website"),
-      name,
-      email,
-      company: get("company"),
-      projectType: type,
-      message: get("message"),
-      language: HTML_LANG[lang],
-      page: window.location.href,
+    const m = f.mail;
+    const projectType = f.projectTypes[get("projectType") as ProjectType] ?? get("projectType");
+    const message = get("message");
+    const mail = buildMailto({
+      tag: lang === "es" ? "ES" : "EN",
+      projectType,
+      name: get("name"),
+      details: [
+        [m.name, get("name")],
+        [m.email, get("email")],
+        [m.company, get("company") || m.none],
+        [m.projectType, projectType],
+        [m.language, m.languageValue],
+        [m.page, window.location.href],
+      ],
+      messageLabel: m.message,
+      message,
+      trimmedNote: m.trimmedNote,
     });
-    setSubmitting(false);
-    if (res.ok) {
-      toast.success(f.sent);
-      form.reset();
-    } else {
-      setFailure(res.reason);
-    }
+    setResult({ url: mail.url, trimmed: mail.trimmed, fullMessage: message });
+    window.location.href = mail.url;
   }
-
-  const [privacyBefore, privacyAfter] = f.privacy.split("{formspree}");
 
   const label = (text: string, htmlFor: string, required?: boolean) => (
     <label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
@@ -101,7 +76,6 @@ export function ContactPage({ lang }: { lang: Lang }) {
 
   return (
     <>
-      <Toaster />
       <section className="bg-gradient-hero">
         <div className="mx-auto max-w-5xl px-6 py-24 text-center md:py-32">
           <p className="text-sm font-medium uppercase tracking-wider text-primary">{t.eyebrow}</p>
@@ -126,7 +100,7 @@ export function ContactPage({ lang }: { lang: Lang }) {
                   <p className="text-xs uppercase tracking-wider text-muted-foreground">
                     {t.emailLabel}
                   </p>
-                  <p className="text-sm font-medium">contactus@bhtapp.com</p>
+                  <p className="text-sm font-medium">{CONTACT_EMAIL}</p>
                 </div>
               </div>
             </div>
@@ -152,18 +126,6 @@ export function ContactPage({ lang }: { lang: Lang }) {
             onSubmit={onSubmit}
             className="relative rounded-2xl border border-border/60 bg-gradient-card p-8 shadow-elegant"
           >
-            <input type="hidden" name="lang" value={HTML_LANG[lang]} />
-            {/* Honeypot: hidden from people, filled in by bots. */}
-            <div aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden">
-              <label htmlFor="contact-website">{f.honeypot}</label>
-              <input
-                id="contact-website"
-                name="website"
-                type="text"
-                tabIndex={-1}
-                autoComplete="off"
-              />
-            </div>
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 {label(f.name, "contact-name", true)}
@@ -224,44 +186,87 @@ export function ContactPage({ lang }: { lang: Lang }) {
                 {...validation}
               />
             </div>
-            {failure && (
+            {result && (
               <div
-                role="alert"
-                className="mt-6 rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3 text-sm text-foreground"
+                role="status"
+                className="mt-6 space-y-3 rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-sm text-foreground"
               >
-                {f.failure[failure]} {f.failure.fallback}{" "}
-                <a
-                  href="mailto:contactus@bhtapp.com"
-                  className="font-medium text-primary underline"
-                >
-                  contactus@bhtapp.com
-                </a>
-                .
+                <p>
+                  {f.opened.before}{" "}
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="font-medium text-primary underline"
+                  >
+                    {CONTACT_EMAIL}
+                  </a>
+                  {f.opened.after}
+                </p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <CopyButton text={CONTACT_EMAIL} label={f.opened.copyAddress} copy={f.opened} />
+                  <a href={result.url} className="font-medium text-primary underline">
+                    {f.opened.openAgain}
+                  </a>
+                </div>
+                {result.trimmed && (
+                  <div className="border-t border-primary/30 pt-3">
+                    <p>{f.trimmed.text}</p>
+                    <div className="mt-2">
+                      <CopyButton
+                        text={result.fullMessage}
+                        label={f.trimmed.copyMessage}
+                        copy={f.opened}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             )}
             <button
               type="submit"
-              disabled={submitting}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-gradient-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-glow transition-transform hover:scale-[1.01] disabled:opacity-60 md:w-auto"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-gradient-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-glow transition-transform hover:scale-[1.01] md:w-auto"
             >
-              {submitting ? f.sending : f.submit} <Send className="h-4 w-4" />
+              {f.submit} <Send className="h-4 w-4" />
             </button>
-            <p className="mt-4 text-xs text-muted-foreground">
-              {privacyBefore}
-              <a
-                href={FORMSPREE_PRIVACY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-foreground"
-              >
-                Formspree
-                <span className="sr-only"> ({siteCopy[lang].newTab})</span>
-              </a>
-              {privacyAfter}
-            </p>
           </form>
         </div>
       </section>
     </>
+  );
+}
+
+/** Copies text to the clipboard, with "Copied!" (or a fallback hint) as feedback. */
+function CopyButton({
+  text,
+  label,
+  copy,
+}: {
+  text: string;
+  label: string;
+  copy: Pick<ContactCopy["form"]["opened"], "copied" | "copyFailed">;
+}) {
+  const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          setState("copied");
+        } catch {
+          setState("failed");
+        }
+        setTimeout(() => setState("idle"), 2500);
+      }}
+      className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background/60 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-primary/50"
+    >
+      {state === "copied" ? (
+        <Check className="h-3.5 w-3.5 text-primary" />
+      ) : (
+        <Copy className="h-3.5 w-3.5" />
+      )}
+      <span aria-live="polite">
+        {state === "copied" ? copy.copied : state === "failed" ? copy.copyFailed : label}
+      </span>
+    </button>
   );
 }
