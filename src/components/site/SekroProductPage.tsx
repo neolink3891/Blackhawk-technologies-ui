@@ -44,7 +44,12 @@ interface OfficialBadgeProps {
   newTab: string;
 }
 
-/** An official store badge image, 52px tall, opening the listing in a new tab. */
+/** Store badge height: 52px, or 48px below 400px wide so both fit side by side on a 390px phone (143.6 + 12 + 161.5
+ *  = 317px of the 342px available). Rows use BADGE_ROW_GAP: Apple's clear space, a quarter of the badge height. */
+export const BADGE_HEIGHT = "h-12 min-[400px]:h-[52px]";
+export const BADGE_ROW_GAP = "gap-3 min-[400px]:gap-4";
+
+/** An official store badge image, opening the listing in a new tab. */
 function OfficialBadge({ href, src, alt, newTab, width }: OfficialBadgeProps & { width: number }) {
   return (
     <a
@@ -53,25 +58,30 @@ function OfficialBadge({ href, src, alt, newTab, width }: OfficialBadgeProps & {
       rel="noopener noreferrer"
       className="inline-flex rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
     >
-      <img src={src} alt={alt} width={width} height={52} className="h-[52px] w-auto" />
+      <img src={src} alt={alt} width={width} height={52} className={`${BADGE_HEIGHT} w-auto`} />
       <span className="sr-only"> ({newTab})</span>
     </a>
   );
 }
 
-/** Apple's official badge artwork, unmodified, 52px tall (minimum 40px); the row's gap-4 keeps the clear space
- * Apple asks for (a quarter of the badge height). */
+/** Apple's official badge artwork, unmodified, 48–52px tall (minimum 40px). */
 export function AppStoreBadge(props: OfficialBadgeProps) {
   return <OfficialBadge {...props} width={156} />;
 }
 
-/** Google's official badge (padding trimmed), the same 52px tall as the App Store badge. */
+/** Google's official badge (padding trimmed), the same height as the App Store badge. */
 export function GooglePlayBadge(props: OfficialBadgeProps) {
   return <OfficialBadge {...props} width={175} />;
 }
 
 /** Text store badge: a link when the listing is live, otherwise a muted "Coming soon" tile. */
-export function StoreBadge({ href, top, name, icon: Icon, comingSoon }: {
+export function StoreBadge({
+  href,
+  top,
+  name,
+  icon: Icon,
+  comingSoon,
+}: {
   href: string;
   top: string;
   name: string;
@@ -87,7 +97,7 @@ export function StoreBadge({ href, top, name, icon: Icon, comingSoon }: {
       </span>
     </>
   );
-  const base = "inline-flex h-[52px] min-w-[11rem] items-center gap-3 rounded-xl border px-4";
+  const base = `inline-flex ${BADGE_HEIGHT} min-w-[11rem] items-center gap-3 rounded-xl border px-4`;
   return href ? (
     <a
       href={href}
@@ -98,7 +108,10 @@ export function StoreBadge({ href, top, name, icon: Icon, comingSoon }: {
       {inner}
     </a>
   ) : (
-    <div aria-disabled="true" className={`${base} border-dashed border-border/70 text-muted-foreground opacity-80`}>
+    <div
+      aria-disabled="true"
+      className={`${base} border-dashed border-border/70 text-muted-foreground opacity-80`}
+    >
       {inner}
     </div>
   );
@@ -148,7 +161,7 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
             </div>
           </div>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground md:text-xl">{t.summary}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className={`mt-8 flex flex-wrap items-center ${BADGE_ROW_GAP}`}>
             {SEKRO_LINKS.appStore ? (
               <AppStoreBadge
                 href={SEKRO_LINKS.appStore}

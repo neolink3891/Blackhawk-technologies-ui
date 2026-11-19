@@ -4,7 +4,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 
 import type { Lang } from "@/components/site/LegalPage";
-import { AppStoreBadge, GooglePlayBadge } from "@/components/site/SekroProductPage";
+import { AppStoreBadge, BADGE_ROW_GAP, GooglePlayBadge } from "@/components/site/SekroProductPage";
 import { sekroInvite } from "@/content/sekro/invite";
 import { SEKRO_HOME, SEKRO_IMAGES, SEKRO_LINKS } from "@/lib/sekro";
 import {
@@ -208,7 +208,7 @@ export function SekroInvitePage({
 
       {platform === "desktop" && (
         <>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className={`mt-8 flex flex-wrap items-center justify-center ${BADGE_ROW_GAP}`}>
             {appStore(SEKRO_LINKS.appStore)}
             {googlePlay}
           </div>
