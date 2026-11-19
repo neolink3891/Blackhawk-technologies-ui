@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import type { Lang } from "@/components/site/LegalPage";
 import { type FeatureKey, sekroProduct } from "@/content/sekro/product";
+import { siteCopy } from "@/content/site";
 import { SEKRO_HOME, SEKRO_IMAGES, SEKRO_LINKS } from "@/lib/sekro";
 import { SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
 
@@ -192,7 +193,7 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
                 href={SEKRO_LINKS.appStore}
                 src={SEKRO_IMAGES.appStoreBadge[lang]}
                 alt={t.badges.appStoreAlt}
-                newTab={lang === "en" ? "opens in a new tab" : "se abre en una pestaña nueva"}
+                newTab={siteCopy[lang].newTab}
               />
             ) : (
               <StoreBadge
@@ -208,7 +209,7 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
                 href={SEKRO_LINKS.googlePlay}
                 src={SEKRO_IMAGES.googlePlayBadge[lang]}
                 alt={t.badges.googlePlayAlt}
-                newTab={lang === "en" ? "opens in a new tab" : "se abre en una pestaña nueva"}
+                newTab={siteCopy[lang].newTab}
               />
             ) : (
               <StoreBadge

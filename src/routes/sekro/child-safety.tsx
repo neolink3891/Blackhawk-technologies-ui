@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { hreflangLinks, OG_LOCALE } from "@/lib/i18n";
 import { LegalPage } from "@/components/site/LegalPage";
 import { childSafetyIntro, childSafetySections } from "@/content/sekro/child-safety-en";
 import { SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
-import { SITE_URL } from "@/lib/site";
 
 const title = "Sekro Child Safety Standards";
 const description =
@@ -11,16 +11,13 @@ const description =
 export const Route = createFileRoute("/sekro/child-safety")({
   head: () => ({
     meta: [
+      { property: "og:locale", content: OG_LOCALE.en },
       { title: `${title} — BlackHawk Technologies` },
       { name: "description", content: description },
       { property: "og:title", content: `${title} — BlackHawk Technologies` },
       { property: "og:description", content: description },
     ],
-    links: [
-      { rel: "canonical", href: `${SITE_URL}/sekro/child-safety` },
-      { rel: "alternate", hrefLang: "en", href: `${SITE_URL}${SEKRO_PATHS.childSafety.en}` },
-      { rel: "alternate", hrefLang: "es", href: `${SITE_URL}${SEKRO_PATHS.childSafety.es}` },
-    ],
+    links: hreflangLinks("sekroChildSafety", "en"),
   }),
   component: () => (
     <LegalPage

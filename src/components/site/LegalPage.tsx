@@ -2,7 +2,8 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
 
-export type Lang = "en" | "es";
+export type { Lang } from "@/lib/i18n";
+import type { Lang } from "@/lib/i18n";
 export type SekroPath = (typeof SEKRO_PATHS)[keyof typeof SEKRO_PATHS][Lang];
 
 export interface LegalSection {

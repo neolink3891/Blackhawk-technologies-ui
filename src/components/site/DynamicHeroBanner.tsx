@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowDown } from "lucide-react";
-import { HOME_ANCHORS, hero } from "@/content/home";
+import { HOME_ANCHORS, type HomeCopy } from "@/content/home";
+import { PAGES, type Lang } from "@/lib/i18n";
 
 function CircuitLine({ className = "" }: { className?: string }) {
   return (
@@ -12,7 +13,7 @@ function CircuitLine({ className = "" }: { className?: string }) {
   );
 }
 
-export function DynamicHeroBanner() {
+export function DynamicHeroBanner({ lang, hero }: { lang: Lang; hero: HomeCopy["hero"] }) {
   return (
     <section className="relative isolate overflow-hidden">
       {/* Base dark layer */}
@@ -104,7 +105,7 @@ export function DynamicHeroBanner() {
               {hero.primary} <ArrowDown className="h-4 w-4" />
             </a>
             <Link
-              to="/contact"
+              to={PAGES.contact[lang]}
               className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-6 py-3.5 text-sm font-medium text-white/90 backdrop-blur-sm transition-all hover:bg-white/[0.08] hover:border-white/20"
             >
               {hero.secondary}

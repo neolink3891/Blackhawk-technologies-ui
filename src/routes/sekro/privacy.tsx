@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { hreflangLinks, OG_LOCALE } from "@/lib/i18n";
 import { LegalPage } from "@/components/site/LegalPage";
 import { privacyIntro, privacySections } from "@/content/sekro/privacy-en";
 import { SEKRO_PATHS } from "@/lib/sekro-legal";
-import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/sekro/privacy")({
   head: () => ({
     meta: [
+      { property: "og:locale", content: OG_LOCALE.en },
       { title: "Sekro Privacy Policy — BlackHawk Technologies" },
       {
         name: "description",
@@ -20,11 +21,7 @@ export const Route = createFileRoute("/sekro/privacy")({
           "What Sekro collects, what it can't see (your end-to-end encrypted content), and your rights.",
       },
     ],
-    links: [
-      { rel: "canonical", href: `${SITE_URL}/sekro/privacy` },
-      { rel: "alternate", hrefLang: "en", href: `${SITE_URL}${SEKRO_PATHS.privacy.en}` },
-      { rel: "alternate", hrefLang: "es", href: `${SITE_URL}${SEKRO_PATHS.privacy.es}` },
-    ],
+    links: hreflangLinks("sekroPrivacy", "en"),
   }),
   component: () => (
     <LegalPage

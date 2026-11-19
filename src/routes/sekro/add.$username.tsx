@@ -6,6 +6,7 @@ import type { Lang } from "@/components/site/LegalPage";
 import { SekroInviteInvalid, SekroInvitePage } from "@/components/site/SekroInvitePage";
 import { sekroInvite } from "@/content/sekro/invite";
 import { SEKRO_IMAGES } from "@/lib/sekro";
+import { OG_LOCALE } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 import { detectPlatform, inviteUrl, parseUsername } from "@/lib/sekro-invite";
 
@@ -56,7 +57,7 @@ export const Route = createFileRoute("/sekro/add/$username")({
         { property: "og:title", content: t.title(username) },
         { property: "og:description", content: t.summary },
         { property: "og:url", content: inviteUrl(username) },
-        { property: "og:locale", content: lang === "es" ? "es_ES" : "en_GB" },
+        { property: "og:locale", content: OG_LOCALE[lang] },
         { property: "og:image", content: `${SITE_URL}${SEKRO_IMAGES.ogImage}` },
         { property: "og:image:alt", content: "Sekro" },
       ],

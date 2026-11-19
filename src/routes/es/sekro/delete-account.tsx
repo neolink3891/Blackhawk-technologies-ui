@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { hreflangLinks, OG_LOCALE } from "@/lib/i18n";
 import { LegalPage } from "@/components/site/LegalPage";
 import { deleteAccountIntro, deleteAccountSections } from "@/content/sekro/delete-account-es";
 import { SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
-import { SITE_URL } from "@/lib/site";
 
 const description =
   "Cómo eliminar tu cuenta de Sekro, desde la app o por correo, qué se elimina y qué conserva BlackHawk Technologies y durante cuánto tiempo.";
@@ -10,16 +10,13 @@ const description =
 export const Route = createFileRoute("/es/sekro/delete-account")({
   head: () => ({
     meta: [
+      { property: "og:locale", content: OG_LOCALE.es },
       { title: "Eliminar tu cuenta de Sekro — BlackHawk Technologies" },
       { name: "description", content: description },
       { property: "og:title", content: "Eliminar tu cuenta de Sekro — BlackHawk Technologies" },
       { property: "og:description", content: description },
     ],
-    links: [
-      { rel: "canonical", href: `${SITE_URL}/es/sekro/delete-account` },
-      { rel: "alternate", hrefLang: "en", href: `${SITE_URL}${SEKRO_PATHS.deleteAccount.en}` },
-      { rel: "alternate", hrefLang: "es", href: `${SITE_URL}${SEKRO_PATHS.deleteAccount.es}` },
-    ],
+    links: hreflangLinks("sekroDeleteAccount", "es"),
   }),
   component: () => (
     <LegalPage

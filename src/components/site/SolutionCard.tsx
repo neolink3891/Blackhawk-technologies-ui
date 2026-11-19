@@ -1,14 +1,23 @@
 import { Link } from "@tanstack/react-router";
-import type { Solution } from "@/lib/solutions";
+import type { Solution } from "@/content/products";
+import { type Lang, PAGES } from "@/lib/i18n";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 
 const statusStyles: Record<Solution["status"], string> = {
-  Available: "bg-primary/15 text-primary border-primary/30",
-  "In Development": "bg-amber-500/10 text-amber-300 border-amber-500/30",
-  "Coming Soon": "bg-muted text-muted-foreground border-border",
+  available: "bg-primary/15 text-primary border-primary/30",
+  inDevelopment: "bg-amber-500/10 text-amber-300 border-amber-500/30",
+  comingSoon: "bg-muted text-muted-foreground border-border",
 };
 
-export function SolutionCard({ solution }: { solution: Solution }) {
+export function SolutionCard({
+  solution,
+  lang,
+  labels,
+}: {
+  solution: Solution;
+  lang: Lang;
+  labels: { status: Record<Solution["status"], string>; learnMore: string; newTab: string };
+}) {
   const Icon = solution.icon;
   return (
     <article className="group relative flex flex-col rounded-2xl border border-border/60 bg-gradient-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow">
@@ -29,7 +38,7 @@ export function SolutionCard({ solution }: { solution: Solution }) {
         <span
           className={`rounded-full border px-2.5 py-1 text-xs font-medium ${statusStyles[solution.status]}`}
         >
-          {solution.status}
+          {labels.status[solution.status]}
         </span>
       </div>
       <h3 className="mt-5 text-lg font-semibold text-foreground">{solution.name}</h3>
@@ -56,21 +65,21 @@ export function SolutionCard({ solution }: { solution: Solution }) {
           rel="noopener noreferrer"
           className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary transition-colors after:absolute after:inset-0 after:content-[''] hover:text-primary-glow"
         >
-          {solution.linkLabel ?? "Learn more"}{" "}
+          {solution.linkLabel ?? labels.learnMore}{" "}
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          <span className="sr-only"> (opens in a new tab)</span>
+          <span className="sr-only"> ({labels.newTab})</span>
         </a>
-      ) : solution.href ? (
+      ) : solution.sekroPage ? (
         <Link
-          to={solution.href}
+          to={PAGES.sekro[lang]}
           className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary transition-colors after:absolute after:inset-0 after:content-[''] hover:text-primary-glow"
         >
-          Learn more{" "}
+          {labels.learnMore}{" "}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       ) : (
         <button className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-primary-glow">
-          Learn more{" "}
+          {labels.learnMore}{" "}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </button>
       )}

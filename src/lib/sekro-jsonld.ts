@@ -1,5 +1,5 @@
 // schema.org MobileApplication for /sekro and /es/sekro (JSON-LD in <head>).
-import type { Lang } from "@/components/site/LegalPage";
+import { HTML_LANG, type Lang } from "@/lib/i18n";
 import { sekroProduct } from "@/content/sekro/product";
 import { SEKRO_HOME, SEKRO_IMAGES, SEKRO_LINKS } from "@/lib/sekro";
 import { SITE_URL } from "@/lib/site";
@@ -15,7 +15,7 @@ export function sekroJsonLd(lang: Lang) {
     description: sekroProduct[lang].metaDescription,
     url: `${SITE_URL}${SEKRO_HOME[lang]}`,
     image: `${SITE_URL}${SEKRO_IMAGES.icon}`,
-    inLanguage: lang,
+    inLanguage: HTML_LANG[lang],
     operatingSystem: "iOS, Android",
     applicationCategory: "CommunicationApplication",
     offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },

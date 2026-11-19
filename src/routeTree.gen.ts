@@ -16,10 +16,14 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SekroIndexRouteImport } from './routes/sekro/index'
+import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as SekroTermsRouteImport } from './routes/sekro/terms'
 import { Route as SekroPrivacyRouteImport } from './routes/sekro/privacy'
 import { Route as SekroDeleteAccountRouteImport } from './routes/sekro/delete-account'
 import { Route as SekroChildSafetyRouteImport } from './routes/sekro/child-safety'
+import { Route as EsProductsRouteImport } from './routes/es/products'
+import { Route as EsContactRouteImport } from './routes/es/contact'
+import { Route as EsAboutRouteImport } from './routes/es/about'
 import { Route as DotwellKnownAssetlinksDotjsonRouteImport } from './routes/[.]well-known/assetlinks[.]json'
 import { Route as DotwellKnownAppleAppSiteAssociationRouteImport } from './routes/[.]well-known/apple-app-site-association'
 import { Route as EsSekroIndexRouteImport } from './routes/es/sekro/index'
@@ -64,6 +68,11 @@ const SekroIndexRoute = SekroIndexRouteImport.update({
   path: '/sekro/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsIndexRoute = EsIndexRouteImport.update({
+  id: '/es/',
+  path: '/es/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SekroTermsRoute = SekroTermsRouteImport.update({
   id: '/sekro/terms',
   path: '/sekro/terms',
@@ -82,6 +91,21 @@ const SekroDeleteAccountRoute = SekroDeleteAccountRouteImport.update({
 const SekroChildSafetyRoute = SekroChildSafetyRouteImport.update({
   id: '/sekro/child-safety',
   path: '/sekro/child-safety',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsProductsRoute = EsProductsRouteImport.update({
+  id: '/es/products',
+  path: '/es/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsContactRoute = EsContactRouteImport.update({
+  id: '/es/contact',
+  path: '/es/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsAboutRoute = EsAboutRouteImport.update({
+  id: '/es/about',
+  path: '/es/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DotwellKnownAssetlinksDotjsonRoute =
@@ -136,10 +160,14 @@ export interface FileRoutesByFullPath {
   '/solutions': typeof SolutionsRoute
   '/.well-known/apple-app-site-association': typeof DotwellKnownAppleAppSiteAssociationRoute
   '/.well-known/assetlinks.json': typeof DotwellKnownAssetlinksDotjsonRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/contact': typeof EsContactRoute
+  '/es/products': typeof EsProductsRoute
   '/sekro/child-safety': typeof SekroChildSafetyRoute
   '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/es/': typeof EsIndexRoute
   '/sekro/': typeof SekroIndexRoute
   '/es/sekro/child-safety': typeof EsSekroChildSafetyRoute
   '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
@@ -157,10 +185,14 @@ export interface FileRoutesByTo {
   '/solutions': typeof SolutionsRoute
   '/.well-known/apple-app-site-association': typeof DotwellKnownAppleAppSiteAssociationRoute
   '/.well-known/assetlinks.json': typeof DotwellKnownAssetlinksDotjsonRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/contact': typeof EsContactRoute
+  '/es/products': typeof EsProductsRoute
   '/sekro/child-safety': typeof SekroChildSafetyRoute
   '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/es': typeof EsIndexRoute
   '/sekro': typeof SekroIndexRoute
   '/es/sekro/child-safety': typeof EsSekroChildSafetyRoute
   '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
@@ -179,10 +211,14 @@ export interface FileRoutesById {
   '/solutions': typeof SolutionsRoute
   '/.well-known/apple-app-site-association': typeof DotwellKnownAppleAppSiteAssociationRoute
   '/.well-known/assetlinks.json': typeof DotwellKnownAssetlinksDotjsonRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/contact': typeof EsContactRoute
+  '/es/products': typeof EsProductsRoute
   '/sekro/child-safety': typeof SekroChildSafetyRoute
   '/sekro/delete-account': typeof SekroDeleteAccountRoute
   '/sekro/privacy': typeof SekroPrivacyRoute
   '/sekro/terms': typeof SekroTermsRoute
+  '/es/': typeof EsIndexRoute
   '/sekro/': typeof SekroIndexRoute
   '/es/sekro/child-safety': typeof EsSekroChildSafetyRoute
   '/es/sekro/delete-account': typeof EsSekroDeleteAccountRoute
@@ -202,10 +238,14 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/.well-known/apple-app-site-association'
     | '/.well-known/assetlinks.json'
+    | '/es/about'
+    | '/es/contact'
+    | '/es/products'
     | '/sekro/child-safety'
     | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/es/'
     | '/sekro/'
     | '/es/sekro/child-safety'
     | '/es/sekro/delete-account'
@@ -223,10 +263,14 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/.well-known/apple-app-site-association'
     | '/.well-known/assetlinks.json'
+    | '/es/about'
+    | '/es/contact'
+    | '/es/products'
     | '/sekro/child-safety'
     | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/es'
     | '/sekro'
     | '/es/sekro/child-safety'
     | '/es/sekro/delete-account'
@@ -244,10 +288,14 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/.well-known/apple-app-site-association'
     | '/.well-known/assetlinks.json'
+    | '/es/about'
+    | '/es/contact'
+    | '/es/products'
     | '/sekro/child-safety'
     | '/sekro/delete-account'
     | '/sekro/privacy'
     | '/sekro/terms'
+    | '/es/'
     | '/sekro/'
     | '/es/sekro/child-safety'
     | '/es/sekro/delete-account'
@@ -266,10 +314,14 @@ export interface RootRouteChildren {
   SolutionsRoute: typeof SolutionsRoute
   DotwellKnownAppleAppSiteAssociationRoute: typeof DotwellKnownAppleAppSiteAssociationRoute
   DotwellKnownAssetlinksDotjsonRoute: typeof DotwellKnownAssetlinksDotjsonRoute
+  EsAboutRoute: typeof EsAboutRoute
+  EsContactRoute: typeof EsContactRoute
+  EsProductsRoute: typeof EsProductsRoute
   SekroChildSafetyRoute: typeof SekroChildSafetyRoute
   SekroDeleteAccountRoute: typeof SekroDeleteAccountRoute
   SekroPrivacyRoute: typeof SekroPrivacyRoute
   SekroTermsRoute: typeof SekroTermsRoute
+  EsIndexRoute: typeof EsIndexRoute
   SekroIndexRoute: typeof SekroIndexRoute
   EsSekroChildSafetyRoute: typeof EsSekroChildSafetyRoute
   EsSekroDeleteAccountRoute: typeof EsSekroDeleteAccountRoute
@@ -330,6 +382,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SekroIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/': {
+      id: '/es/'
+      path: '/es'
+      fullPath: '/es/'
+      preLoaderRoute: typeof EsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sekro/terms': {
       id: '/sekro/terms'
       path: '/sekro/terms'
@@ -356,6 +415,27 @@ declare module '@tanstack/react-router' {
       path: '/sekro/child-safety'
       fullPath: '/sekro/child-safety'
       preLoaderRoute: typeof SekroChildSafetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/products': {
+      id: '/es/products'
+      path: '/es/products'
+      fullPath: '/es/products'
+      preLoaderRoute: typeof EsProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/contact': {
+      id: '/es/contact'
+      path: '/es/contact'
+      fullPath: '/es/contact'
+      preLoaderRoute: typeof EsContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/about': {
+      id: '/es/about'
+      path: '/es/about'
+      fullPath: '/es/about'
+      preLoaderRoute: typeof EsAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.well-known/assetlinks.json': {
@@ -427,10 +507,14 @@ const rootRouteChildren: RootRouteChildren = {
   DotwellKnownAppleAppSiteAssociationRoute:
     DotwellKnownAppleAppSiteAssociationRoute,
   DotwellKnownAssetlinksDotjsonRoute: DotwellKnownAssetlinksDotjsonRoute,
+  EsAboutRoute: EsAboutRoute,
+  EsContactRoute: EsContactRoute,
+  EsProductsRoute: EsProductsRoute,
   SekroChildSafetyRoute: SekroChildSafetyRoute,
   SekroDeleteAccountRoute: SekroDeleteAccountRoute,
   SekroPrivacyRoute: SekroPrivacyRoute,
   SekroTermsRoute: SekroTermsRoute,
+  EsIndexRoute: EsIndexRoute,
   SekroIndexRoute: SekroIndexRoute,
   EsSekroChildSafetyRoute: EsSekroChildSafetyRoute,
   EsSekroDeleteAccountRoute: EsSekroDeleteAccountRoute,
