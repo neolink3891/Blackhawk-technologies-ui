@@ -126,10 +126,17 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
       <section className="bg-gradient-hero">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
           <div className="flex justify-end">
-            <nav aria-label={t.languageLabel} className="flex rounded-md border border-border/60 p-0.5 text-xs font-medium">
+            <nav
+              aria-label={t.languageLabel}
+              className="flex rounded-md border border-border/60 p-0.5 text-xs font-medium"
+            >
               {(["en", "es"] as const).map((code) =>
                 code === lang ? (
-                  <span key={code} aria-current="page" className="rounded bg-secondary px-2.5 py-1 text-foreground">
+                  <span
+                    key={code}
+                    aria-current="page"
+                    className="rounded bg-secondary px-2.5 py-1 text-foreground"
+                  >
                     {code.toUpperCase()}
                   </span>
                 ) : (
@@ -155,7 +162,9 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
               className="h-24 w-24 rounded-[22%] shadow-glow md:h-28 md:w-28"
             />
             <div>
-              <p className="text-sm font-medium uppercase tracking-wider text-primary">{t.eyebrow}</p>
+              <p className="text-sm font-medium uppercase tracking-wider text-primary">
+                {t.eyebrow}
+              </p>
               <h1 className="mt-2 text-5xl font-semibold tracking-tight md:text-6xl">Sekro</h1>
               <p className="mt-3 text-2xl font-medium text-gradient md:text-3xl">{t.tagline}</p>
             </div>
@@ -205,7 +214,10 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
           {t.howSteps.map((s, i) => {
             const Icon = stepIcons[i];
             return (
-              <li key={s.title} className="rounded-2xl border border-border/60 bg-gradient-card p-7">
+              <li
+                key={s.title}
+                className="rounded-2xl border border-border/60 bg-gradient-card p-7"
+              >
                 <div className="flex items-center gap-3">
                   <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-primary shadow-glow">
                     <Icon className="h-5 w-5 text-primary-foreground" />
@@ -249,7 +261,10 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
           {t.features.map((f) => {
             const Icon = featureIcons[f.key];
             return (
-              <div key={f.key} className="rounded-2xl border border-border/60 bg-gradient-card p-6 transition-colors hover:border-primary/40 md:last:col-span-2 lg:last:col-span-3">
+              <div
+                key={f.key}
+                className="rounded-2xl border border-border/60 bg-gradient-card p-6 transition-colors hover:border-primary/40 md:last:col-span-2 lg:last:col-span-3"
+              >
                 <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-primary shadow-glow">
                   <Icon className="h-5 w-5 text-primary-foreground" />
                 </div>
@@ -264,7 +279,9 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
       {/* Screenshots */}
       <section className="border-y border-border/60 bg-secondary/20">
         <div className="mx-auto max-w-7xl px-6 py-20">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{t.screenshotsTitle}</h2>
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+            {t.screenshotsTitle}
+          </h2>
           <ul className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-6 md:grid-cols-4">
             {t.screenshots.map((s) => (
               <li key={s.file}>
@@ -278,7 +295,9 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
                     decoding="async"
                     className="w-full rounded-3xl border border-border/60 shadow-elegant"
                   />
-                  <figcaption className="mt-3 text-center text-sm text-muted-foreground">{s.caption}</figcaption>
+                  <figcaption className="mt-3 text-center text-sm text-muted-foreground">
+                    {s.caption}
+                  </figcaption>
                 </figure>
               </li>
             ))}
@@ -293,7 +312,10 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
             <p className="font-semibold text-foreground">{t.ageNote}</p>
             <p className="mt-2 text-sm text-muted-foreground">
               {t.links.support}:{" "}
-              <a href={`mailto:${SEKRO_LEGAL.supportEmail}`} className="text-primary hover:underline">
+              <a
+                href={`mailto:${SEKRO_LEGAL.supportEmail}`}
+                className="text-primary hover:underline"
+              >
                 {SEKRO_LEGAL.supportEmail}
               </a>
             </p>
@@ -305,7 +327,11 @@ export function SekroProductPage({ lang }: { lang: Lang }) {
               { to: SEKRO_PATHS.deleteAccount[lang], label: t.links.deleteAccount },
               { to: SEKRO_PATHS.childSafety[lang], label: t.links.childSafety },
             ].map((l) => (
-              <Link key={l.to} to={l.to} className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+              <Link
+                key={l.to}
+                to={l.to}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+              >
                 {l.label} <ArrowRight className="h-4 w-4" />
               </Link>
             ))}
