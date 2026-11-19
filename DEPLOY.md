@@ -76,44 +76,39 @@ done
 
 ## Known gaps in the current setup (not changed by a release)
 
-### 1. `http://www.blackhawk-technologies.com` answers 200 instead of redirecting to HTTPS
+### 1. HTTP → HTTPS for `www`: fixed 2026-11-19
 
-On `bht-apps-alb`'s HTTP:80 listener, the listener's default action already 301s to HTTPS. What stops it is rule
-priority 4 (`a1601d4614b9986e`, host `*blackhawk-technologies.com`), which forwards to the
-`blackhawk-technologies-ui` target group. The fix changes that rule's action to the same 301. **Not applied yet** (as of 2026-11-19):
-the `bht-latineats-api` IAM user is not allowed `elasticloadbalancing:ModifyRule`. Run it as a user that is:
+`http://www.blackhawk-technologies.com` used to answer 200: on `bht-apps-alb`'s HTTP:80 listener, rule priority 4
+(`a1601d4614b9986e`, host `*blackhawk-technologies.com`) forwarded to the `blackhawk-technologies-ui` target group,
+so the listener's default 301 never applied. On 2026-11-19 that rule's action was changed (in the console) to a 301
+to `HTTPS:443`, keeping `#{host}/#{path}?#{query}`. The rule only matches `*blackhawk-technologies.com`; the other
+services' rules and the 443 listener weren't touched.
+
+**Verification, 2026-11-19 10:34 UTC: passed.** (An earlier check at 10:21 UTC, before the change was saved, still
+got 200.)
+
+| Request                                                                                                                                      | Result                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `HEAD`/`GET http://www.blackhawk-technologies.com/`                                                                                          | 301 → `https://www.blackhawk-technologies.com:443/`                         |
+| `HEAD`/`GET http://www.blackhawk-technologies.com/sekro?x=1`                                                                                 | 301 → `https://www.blackhawk-technologies.com:443/sekro?x=1`                |
+| `HEAD`/`GET http://www.blackhawk-technologies.com/es/sekro/privacy?a=1&b=2`                                                                  | 301 → `https://www.blackhawk-technologies.com:443/es/sekro/privacy?a=1&b=2` |
+| the `/sekro?x=1` request sent to each ALB IP (3 nodes)                                                                                       | 301 on all                                                                  |
+| following the redirect                                                                                                                       | 200 after 1 redirect                                                        |
+| `HEAD https://www.blackhawk-technologies.com/` (and `/sekro`, `/es/sekro`, `/sekro/privacy`, `/sitemap.xml`, `/.well-known/assetlinks.json`) | 200                                                                         |
+
+The `:443` in `Location` is how the ALB writes a redirect with an explicit port; browsers treat it as the default
+HTTPS port. Checks and rollback:
 
 ```bash
-# Apply: rule 4 on the port 80 listener -> 301 to https://#{host}/#{path}?#{query}
-aws elbv2 modify-rule --region eu-west-2 \
-  --rule-arn arn:aws:elasticloadbalancing:eu-west-2:088136761930:listener-rule/app/bht-apps-alb/9b2385ebef0f4325/afb00534c975ade2/a1601d4614b9986e \
-  --actions '[{"Type":"redirect","RedirectConfig":{"Protocol":"HTTPS","Port":"443","Host":"#{host}","Path":"/#{path}","Query":"#{query}","StatusCode":"HTTP_301"}}]'
-
-# Verify: both 301 to the https equivalent; https still 200
 curl -sI http://www.blackhawk-technologies.com/ | grep -iE '^HTTP|^location'
 curl -s -o /dev/null -D - "http://www.blackhawk-technologies.com/sekro?x=1" | grep -iE '^HTTP|^location'
 curl -sI https://www.blackhawk-technologies.com/ | head -1
 
 # Rollback: forward plain HTTP to the site again (the rule's action before the change)
-aws elbv2 modify-rule --region eu-west-2 \
+AWS_PROFILE=bht-deploy aws elbv2 modify-rule --region eu-west-2 \
   --rule-arn arn:aws:elasticloadbalancing:eu-west-2:088136761930:listener-rule/app/bht-apps-alb/9b2385ebef0f4325/afb00534c975ade2/a1601d4614b9986e \
   --actions '[{"Type":"forward","TargetGroupArn":"arn:aws:elasticloadbalancing:eu-west-2:088136761930:targetgroup/blackhawk-technologies-ui/d686c0da61b659d5"}]'
 ```
-
-The rule only matches `*blackhawk-technologies.com`; the other services' rules and the 443 listener are unaffected.
-
-**Verification, 2026-11-19 10:21 UTC: failed.** The rule change was reported as made, but plain HTTP is still
-served, not redirected:
-
-| Request                                                      | Expected                                        | Got                |
-| ------------------------------------------------------------ | ----------------------------------------------- | ------------------ |
-| `HEAD`/`GET http://www.blackhawk-technologies.com/`          | 301 → `https://www.blackhawk-technologies.com/` | 200, no `Location` |
-| `HEAD`/`GET http://www.blackhawk-technologies.com/sekro?x=1` | 301 → `https://…/sekro?x=1`                     | 200, no `Location` |
-| the same, sent to each ALB IP (3 nodes), again after 20 s    | 301                                             | 200 on all         |
-| `HEAD https://www.blackhawk-technologies.com/`               | 200                                             | 200                |
-
-The rule itself wasn't inspected: the `bht-deploy` AWS profile isn't configured on this machine. Check rule 4
-(`a1601d4614b9986e`) on the **port 80** listener (`afb00534c975ade2`) with `describe-rules`, then rerun the checks above.
 
 ### 2. The bare domain is GoDaddy forwarding, not the ALB
 
