@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
+import { HOME_ANCHORS, hero } from "@/content/home";
 
 function CircuitLine({ className = "" }: { className?: string }) {
   return (
@@ -87,27 +88,26 @@ export function DynamicHeroBanner() {
       <div className="relative mx-auto max-w-7xl px-6 py-28 md:py-40">
         <div className="mx-auto max-w-3xl text-center animate-fade-up">
           <h1 className="mt-8 text-4xl font-semibold tracking-tight text-white md:text-6xl lg:text-7xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
-            Intelligent Hardware for{" "}
+            {hero.headline[0]}{" "}
             <span className="bg-gradient-to-r from-sky-300 via-blue-300 to-slate-300 bg-clip-text text-transparent">
-              Connected Environments
+              {hero.headline[1]}
             </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/60 md:text-lg drop-shadow-[0_1px_10px_rgba(0,0,0,0.3)]">
-            BlackHawk Technologies designs smart devices, privacy systems, and connected hardware
-            solutions that bring digital control into physical spaces.
+            {hero.sub}
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/solutions"
+            <a
+              href={`#${HOME_ANCHORS.products}`}
               className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-medium text-[#0d1117] shadow-[0_0_40px_-8px_rgba(255,255,255,0.2)] transition-all hover:shadow-[0_0_60px_-8px_rgba(255,255,255,0.3)] hover:scale-[1.02]"
             >
-              Explore Products <ArrowRight className="h-4 w-4" />
-            </Link>
+              {hero.primary} <ArrowDown className="h-4 w-4" />
+            </a>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-6 py-3.5 text-sm font-medium text-white/90 backdrop-blur-sm transition-all hover:bg-white/[0.08] hover:border-white/20"
             >
-              Contact Us
+              {hero.secondary}
             </Link>
           </div>
         </div>

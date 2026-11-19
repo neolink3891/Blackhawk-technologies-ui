@@ -2,13 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navIcon, navLogo, SM_UP } from "@/lib/brand-logo";
-
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/solutions", label: "Solutions" },
-  { to: "/contact", label: "Contact" },
-] as const;
+import { NAV_LINKS } from "@/lib/nav";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -34,13 +28,14 @@ export function Header() {
           </picture>
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
-          {links.map((l) => (
+          {NAV_LINKS.map((l) => (
             <Link
-              key={l.to}
+              key={l.label}
               to={l.to}
+              hash={l.hash}
               activeProps={{ className: "text-foreground bg-secondary" }}
               inactiveProps={{ className: "text-muted-foreground hover:text-foreground" }}
-              activeOptions={{ exact: true }}
+              activeOptions={{ exact: true, includeHash: true }}
               className="rounded-md px-3 py-2 text-sm font-medium transition-colors"
             >
               {l.label}
@@ -64,10 +59,11 @@ export function Header() {
       {open && (
         <div className="border-t border-border/60 bg-background/95 md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
-            {links.map((l) => (
+            {NAV_LINKS.map((l) => (
               <Link
-                key={l.to}
+                key={l.label}
                 to={l.to}
+                hash={l.hash}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
               >

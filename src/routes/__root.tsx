@@ -85,14 +85,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "BlackHawk Technologies designs and develops scalable software, mobile apps, AI tools, and business automation platforms for modern companies.",
+          "BlackHawk Technologies is a UK software company: our own software products, custom software built to order, and AI adoption for businesses.",
       },
       { name: "author", content: "BlackHawk Technologies Ltd" },
       { property: "og:site_name", content: "BlackHawk Technologies" },
       { property: "og:title", content: "BlackHawk Technologies" },
       {
         property: "og:description",
-        content: "Building intelligent software for modern businesses.",
+        content: "Software products, custom development and AI adoption.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

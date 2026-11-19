@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { footerLogo } from "@/lib/brand-logo";
+import { NAV_LINKS } from "@/lib/nav";
 import { Linkedin, Github, Twitter } from "lucide-react";
 
 export function Footer() {
@@ -43,26 +44,13 @@ export function Footer() {
         <div>
           <h4 className="text-sm font-semibold text-foreground">Navigate</h4>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li>
-              <Link to="/" className="hover:text-foreground">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="hover:text-foreground">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/solutions" className="hover:text-foreground">
-                Solutions
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="hover:text-foreground">
-                Contact
-              </Link>
-            </li>
+            {NAV_LINKS.map((l) => (
+              <li key={l.label}>
+                <Link to={l.to} hash={l.hash} className="hover:text-foreground">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div>

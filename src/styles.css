@@ -151,6 +151,13 @@
 }
 
 @layer base {
+  /* In-page links (hero "Explore our products", nav "Services"); off for people who prefer reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   * {
     border-color: var(--color-border);
   }

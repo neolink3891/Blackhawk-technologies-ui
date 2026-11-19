@@ -42,15 +42,25 @@ interface OfficialBadgeProps {
   src: string;
   alt: string;
   newTab: string;
+  /** 40px (Apple's minimum), for tight spots such as a product card; rows use BADGE_ROW_GAP_SM. */
+  small?: boolean;
 }
 
 /** Store badge height: 52px, or 48px below 400px wide so both fit side by side on a 390px phone (143.6 + 12 + 161.5
  *  = 317px of the 342px available). Rows use BADGE_ROW_GAP: Apple's clear space, a quarter of the badge height. */
 export const BADGE_HEIGHT = "h-12 min-[400px]:h-[52px]";
 export const BADGE_ROW_GAP = "gap-3 min-[400px]:gap-4";
+export const BADGE_ROW_GAP_SM = "gap-2.5";
 
 /** An official store badge image, opening the listing in a new tab. */
-function OfficialBadge({ href, src, alt, newTab, width }: OfficialBadgeProps & { width: number }) {
+function OfficialBadge({
+  href,
+  src,
+  alt,
+  newTab,
+  small,
+  width,
+}: OfficialBadgeProps & { width: number }) {
   return (
     <a
       href={href}
@@ -58,7 +68,13 @@ function OfficialBadge({ href, src, alt, newTab, width }: OfficialBadgeProps & {
       rel="noopener noreferrer"
       className="inline-flex rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
     >
-      <img src={src} alt={alt} width={width} height={52} className={`${BADGE_HEIGHT} w-auto`} />
+      <img
+        src={src}
+        alt={alt}
+        width={small ? Math.round((width * 40) / 52) : width}
+        height={small ? 40 : 52}
+        className={`${small ? "h-10" : BADGE_HEIGHT} w-auto`}
+      />
       <span className="sr-only"> ({newTab})</span>
     </a>
   );
