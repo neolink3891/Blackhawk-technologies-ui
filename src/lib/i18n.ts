@@ -13,6 +13,14 @@ export const HTML_LANG = { en: "en-GB", es: "es-419" } as const;
 /** og:locale (Open Graph has no es_419; es_LA is its Latin American Spanish). */
 export const OG_LOCALE = { en: "en_GB", es: "es_LA" } as const;
 
+/** The Sekro legal pages' Spanish is Spain Spanish (left as written): es-ES / es_ES for those pages. */
+const SPAIN_SPANISH_PAGES = new Set<string>([
+  "sekroPrivacy",
+  "sekroTerms",
+  "sekroDeleteAccount",
+  "sekroChildSafety",
+]);
+
 /** Every page that exists in both languages. */
 export const PAGES = {
   home: { en: "/", es: "/es" },
@@ -28,6 +36,14 @@ export const PAGES = {
 
 export type PageKey = keyof typeof PAGES;
 export type PagePath = (typeof PAGES)[PageKey][Lang];
+
+/** <html lang> / hreflang for a page in a language (es-419, or es-ES for the Sekro legal pages). */
+export const htmlLangFor = (page: PageKey | null, lang: Lang): string =>
+  lang === "es" && page && SPAIN_SPANISH_PAGES.has(page) ? "es-ES" : HTML_LANG[lang];
+
+/** og:locale for a page in a language. */
+export const ogLocaleFor = (page: PageKey | null, lang: Lang): string =>
+  lang === "es" && page && SPAIN_SPANISH_PAGES.has(page) ? "es_ES" : OG_LOCALE[lang];
 
 const normalise = (pathname: string) =>
   pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
@@ -52,7 +68,7 @@ export function hreflangLinks(page: PageKey, lang: Lang) {
     { rel: "canonical", href: `${SITE_URL}${PAGES[page][lang]}` },
     ...LANGS.map((l) => ({
       rel: "alternate",
-      hrefLang: HTML_LANG[l],
+      hrefLang: htmlLangFor(page, l),
       href: `${SITE_URL}${PAGES[page][l]}`,
     })),
     { rel: "alternate", hrefLang: "x-default", href: `${SITE_URL}${PAGES[page].en}` },
@@ -85,8 +101,8 @@ export function pageHead({
       { property: "og:title", content: ogTitle },
       { property: "og:description", content: ogDescription },
       { property: "og:url", content: `${SITE_URL}${PAGES[page][lang]}` },
-      { property: "og:locale", content: OG_LOCALE[lang] },
-      { property: "og:locale:alternate", content: OG_LOCALE[other] },
+      { property: "og:locale", content: ogLocaleFor(page, lang) },
+      { property: "og:locale:alternate", content: ogLocaleFor(page, other) },
       ...meta,
     ],
     links: hreflangLinks(page, lang),

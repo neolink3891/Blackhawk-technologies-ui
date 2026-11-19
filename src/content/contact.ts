@@ -87,7 +87,7 @@ export const contactCopy: Record<Lang, ContactCopy> = {
     meta: {
       title: "Contacto — BlackHawk Technologies",
       description:
-        "Escríbele a BlackHawk Technologies para hablar de tu proyecto de software, plataforma, app móvil o automatización.",
+        "Contáctanos para hablar de tu proyecto de software, plataforma, app móvil o automatización.",
       ogTitle: "Contacta a BlackHawk Technologies",
       ogDescription: "Construyamos algo inteligente. Escríbenos.",
     },

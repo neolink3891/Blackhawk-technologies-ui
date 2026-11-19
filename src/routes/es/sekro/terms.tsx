@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { hreflangLinks, OG_LOCALE } from "@/lib/i18n";
+import { hreflangLinks, ogLocaleFor } from "@/lib/i18n";
 import { LegalPage } from "@/components/site/LegalPage";
 import { termsIntro, termsSections } from "@/content/sekro/terms-es";
 import { SEKRO_PATHS } from "@/lib/sekro-legal";
@@ -7,7 +7,7 @@ import { SEKRO_PATHS } from "@/lib/sekro-legal";
 export const Route = createFileRoute("/es/sekro/terms")({
   head: () => ({
     meta: [
-      { property: "og:locale", content: OG_LOCALE.es },
+      { property: "og:locale", content: ogLocaleFor("sekroTerms", "es") },
       { title: "Términos del servicio de Sekro — BlackHawk Technologies" },
       {
         name: "description",

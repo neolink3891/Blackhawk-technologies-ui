@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { hreflangLinks, OG_LOCALE } from "@/lib/i18n";
+import { hreflangLinks, ogLocaleFor } from "@/lib/i18n";
 import { LegalPage } from "@/components/site/LegalPage";
 import { childSafetyIntro, childSafetySections } from "@/content/sekro/child-safety-es";
 import { SEKRO_LEGAL, SEKRO_PATHS } from "@/lib/sekro-legal";
@@ -11,7 +11,7 @@ const description =
 export const Route = createFileRoute("/es/sekro/child-safety")({
   head: () => ({
     meta: [
-      { property: "og:locale", content: OG_LOCALE.es },
+      { property: "og:locale", content: ogLocaleFor("sekroChildSafety", "es") },
       { title: `${title} — BlackHawk Technologies` },
       { name: "description", content: description },
       { property: "og:title", content: `${title} — BlackHawk Technologies` },

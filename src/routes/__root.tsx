@@ -15,8 +15,8 @@ import { Header } from "../components/site/Header";
 import { Footer } from "../components/site/Footer";
 import { navLogoPreloads } from "../lib/brand-logo";
 import { siteCopy } from "../content/site";
-import { HTML_LANG, PAGES } from "../lib/i18n";
-import { useLang } from "../lib/use-lang";
+import { PAGES } from "../lib/i18n";
+import { useHtmlLang, useLang } from "../lib/use-lang";
 
 function NotFoundComponent() {
   const lang = useLang();
@@ -119,9 +119,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const lang = useLang();
+  const htmlLang = useHtmlLang();
   return (
-    <html lang={HTML_LANG[lang]}>
+    <html lang={htmlLang}>
       <head>
         <HeadContent />
       </head>

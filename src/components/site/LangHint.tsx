@@ -5,6 +5,7 @@ import { langHint } from "@/content/site";
 import {
   HTML_LANG,
   PAGES,
+  htmlLangFor,
   dismissLangHint,
   isLangHintDismissed,
   pageAt,
@@ -39,7 +40,7 @@ export function LangHint() {
         <span className="text-muted-foreground">{langHint.question}</span>
         <Link
           to={PAGES[englishPage].es}
-          hrefLang={HTML_LANG.es}
+          hrefLang={htmlLangFor(englishPage, "es")}
           onClick={() => saveLangPreference("es")}
           className="font-medium text-primary hover:text-primary-glow"
         >

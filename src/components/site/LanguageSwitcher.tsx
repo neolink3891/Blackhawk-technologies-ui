@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { siteCopy } from "@/content/site";
-import { HTML_LANG, LANGS, saveLangPreference } from "@/lib/i18n";
+import { LANGS, saveLangPreference } from "@/lib/i18n";
 import { useAlternate } from "@/lib/use-lang";
 
 /** "EN | ES": the current language, and a link to this page in the other one. The choice is remembered (it only
@@ -31,8 +31,8 @@ export function LanguageSwitcher({
           ) : (
             <Link
               to={alt.to}
-              hrefLang={HTML_LANG[code]}
-              lang={HTML_LANG[code]}
+              hrefLang={alt.otherHtmlLang}
+              lang={alt.otherHtmlLang}
               aria-label={t.switchTo}
               onClick={() => {
                 saveLangPreference(code);

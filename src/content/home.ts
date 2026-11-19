@@ -326,11 +326,11 @@ export const homeCopy: Record<Lang, HomeCopy> = {
         {
           icon: Search,
           title: "Evaluar",
-          desc: "Descubre dónde la IA te ahorra tiempo: analizamos cómo trabaja tu equipo y elegimos las tareas que vale la pena automatizar.",
+          desc: "Encontramos dónde la IA te ahorra tiempo: analizamos cómo trabaja tu equipo y elegimos las tareas que vale la pena automatizar.",
         },
         {
           icon: FlaskConical,
-          title: "Probar",
+          title: "Prueba piloto",
           desc: "Lo comprobamos en un solo proceso, con tus datos reales y una forma clara de medir el éxito.",
         },
         {

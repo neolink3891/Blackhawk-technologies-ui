@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-import { HTML_LANG, LANGS, PAGES, type PageKey } from "@/lib/i18n";
+import { htmlLangFor, LANGS, PAGES, type PageKey } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 
 // Every page in both languages, each with its hreflang alternates (en-GB, es-419, x-default → English).
@@ -22,7 +22,7 @@ function sitemapXml() {
     const alternates = [
       ...LANGS.map(
         (l) =>
-          `    <xhtml:link rel="alternate" hreflang="${HTML_LANG[l]}" href="${SITE_URL}${PAGES[key][l]}"/>`,
+          `    <xhtml:link rel="alternate" hreflang="${htmlLangFor(key, l)}" href="${SITE_URL}${PAGES[key][l]}"/>`,
       ),
       `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${PAGES[key].en}"/>`,
     ].join("\n");

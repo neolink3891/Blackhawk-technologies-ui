@@ -1,6 +1,7 @@
 // Copy for the Sekro product page (/sekro, /es/sekro). Every claim was checked (Nov 2026) against the iOS app,
 // the Android app and sekro-api; keep it in step with them. UI wording follows the apps' string catalogs
-// (en-GB / es-ES). Spanish: "tú", es-ES spelling ("vídeo"), as on the other Sekro pages.
+// (en-GB / es-ES). Spanish: neutral Latin American (es-419, "tú": "video", "celular"); UI labels quoted from the
+// app ("Toca para revelar") stay as the app shows them. The Sekro legal pages keep their es-ES wording.
 
 import type { Lang } from "@/components/site/LegalPage";
 
@@ -168,11 +169,11 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
   es: {
     metaTitle: "Sekro — Oculto a simple vista | BlackHawk Technologies",
     metaDescription:
-      "Oculta fotos, vídeos, notas de voz y texto dentro de imágenes normales. Solo quien tú elijas puede abrirlos. Cifrado de extremo a extremo, para iPhone y Android.",
+      "Oculta fotos, videos, notas de voz y texto dentro de imágenes comunes. Solo quien tú elijas puede abrirlos. Cifrado de extremo a extremo, para iPhone y Android.",
     eyebrow: "Una app de BlackHawk Technologies",
     tagline: "Oculto a simple vista.",
     summary:
-      "Oculta fotos, vídeos, notas de voz y texto dentro de imágenes normales. Solo quien tú elijas puede abrirlos.",
+      "Oculta fotos, videos, notas de voz y texto dentro de imágenes comunes. Solo quien tú elijas puede abrirlos.",
     badges: {
       appStoreTop: "Descárgalo en el",
       googlePlayTop: "Disponible en",
@@ -186,11 +187,11 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
     howSteps: [
       {
         title: "Elige qué ocultar y quién puede abrirlo",
-        body: "Escoge una foto, un vídeo, un audio o un texto, una imagen de portada y los contactos a los que va dirigido.",
+        body: "Escoge una foto, un video, un audio o un texto, una imagen de portada y los contactos a los que va dirigido.",
       },
       {
-        title: "Sekro lo cifra en tu teléfono",
-        body: "Se cifra de extremo a extremo en tu dispositivo y se oculta dentro de la imagen de portada, que sigue pareciendo una imagen normal.",
+        title: "Sekro lo cifra en tu celular",
+        body: "Se cifra de extremo a extremo en tu dispositivo y se oculta dentro de la imagen de portada, que sigue pareciendo una imagen común.",
       },
       {
         title: "Comparte la imagen donde quieras",
@@ -200,7 +201,7 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
     hideTitle: "Qué puedes ocultar",
     hideItems: [
       { title: "Fotos", body: "Cualquier foto que elijas." },
-      { title: "Vídeos", body: "De hasta 7 minutos." },
+      { title: "Videos", body: "De hasta 7 minutos." },
       {
         title: "Notas de voz y audio",
         body: "Graba una nota de voz o elige un archivo de audio, de hasta 10 minutos.",
@@ -208,7 +209,7 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       { title: "Texto", body: "De hasta 5.000 caracteres." },
       {
         title: "Una nota oculta",
-        body: "Opcional, de hasta 5.000 caracteres, con una foto, un vídeo o un audio. Se revela junto con ellos.",
+        body: "Opcional, de hasta 5.000 caracteres, con una foto, un video o un audio. Se revela junto con ellos.",
       },
     ],
     featuresTitle: "Privado por diseño",
@@ -216,17 +217,17 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       {
         key: "e2e",
         title: "Cifrado de extremo a extremo",
-        body: "Lo que ocultas, y tus mensajes del chat, se cifran en tu teléfono antes de salir de él. Nuestros servidores no pueden descifrarlos.",
+        body: "Lo que ocultas, y tus mensajes del chat, se cifran en tu celular antes de salir de él. Nuestros servidores no pueden descifrarlos.",
       },
       {
         key: "recipients",
         title: "Solo para tus destinatarios, y firmado",
-        body: "Cada Sekro solo se abre para las personas para las que lo creaste, y para ti. Va firmado, así que saben que es tuyo y que nadie lo ha modificado. Cualquier otra persona ve «Este Sekro no es para ti.»",
+        body: "Cada Sekro solo se abre para las personas para las que lo creaste, y para ti. Va firmado, así que saben que es tuyo y que nadie lo ha modificado. Cualquier otra persona ve “Este Sekro no es para ti.”",
       },
       {
         key: "keys",
         title: "Tus claves van con tu cuenta",
-        body: "Tus claves de cifrado se guardan en tu cuenta, cifradas con una frase de contraseña de Sekro que nunca sale de tu dispositivo, para que no pierdas el acceso al cambiar de teléfono.",
+        body: "Tus claves de cifrado se guardan en tu cuenta, cifradas con una frase de contraseña de Sekro que nunca sale de tu dispositivo, para que no pierdas el acceso al cambiar de celular.",
       },
       {
         key: "contacts",
@@ -236,17 +237,17 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       {
         key: "capture",
         title: "Protección contra capturas y grabaciones",
-        body: "Mientras algo está revelado, las capturas y grabaciones de pantalla no lo recogen. Si Sekro detecta una, el contenido se vuelve a bloquear y se avisa a quien lo envió.",
+        body: "Mientras algo está revelado, las capturas y grabaciones de pantalla no lo captan. Si Sekro detecta una, el contenido se vuelve a bloquear y se avisa a quien lo envió.",
       },
       {
         key: "watermark",
         title: "Marca de agua opcional",
-        body: "Activa «Mostrar marca de agua al verlo» y quien lo reciba verá su @usuario y la hora sobre lo que revela. No aparece en tus propias copias.",
+        body: "Activa “Mostrar marca de agua al verlo” y quien lo reciba verá su @usuario y la hora sobre lo que revela. No aparece en tus propias copias.",
       },
       {
         key: "deleteEverywhere",
         title: "Eliminar en todas partes",
-        body: "Retira un vídeo o una nota de voz que hayas creado: se elimina de todos los chats a los que lo enviaste y de nuestros servidores, y deja de funcionar en todas partes.",
+        body: "Retira un video o una nota de voz que hayas creado: se elimina de todos los chats a los que lo enviaste y de nuestros servidores, y deja de funcionar en todas partes.",
       },
     ],
     screenshotsTitle: "Por dentro",
@@ -259,7 +260,7 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       {
         file: "3-chat",
         caption: "Envíalo en un chat: parece una imagen cualquiera",
-        alt: "Un chat de Sekro con una imagen de un girasol marcada como contenido secreto, con «Toca para revelar».",
+        alt: "Un chat de Sekro con una imagen de un girasol marcada como contenido secreto, con “Toca para revelar”.",
       },
       {
         file: "4-reveal-watermark",
@@ -269,7 +270,7 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       {
         file: "6-open-not-for-you",
         caption: "Nadie más puede abrirlo",
-        alt: "La pantalla Abrir de Sekro con una imagen de globos aerostáticos y el mensaje «Este Sekro no es para ti.»",
+        alt: "La pantalla Abrir de Sekro con una imagen de globos aerostáticos y el mensaje “Este Sekro no es para ti.”",
       },
     ],
     ageNote: "Sekro es para personas de 18 años o más.",
