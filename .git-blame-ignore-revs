@@ -3,3 +3,6 @@
 
 # Format the whole repo with prettier (no code changes)
 4e9e0c3a47ae1416938d1ad4e4c1d508a3c9ce7b
+
+# Format SekroProductPage.tsx with prettier (no code changes)
+554c5f07954e45ea21e6b211275ab5c8e111ab8d
