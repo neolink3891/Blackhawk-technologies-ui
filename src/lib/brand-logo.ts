@@ -3,6 +3,7 @@ import type { LinkHTMLAttributes } from "react";
 // BlackHawk logo images (src/assets/blackhawk-logo.png is the master; these WebPs are what the site serves).
 import icon2x from "@/assets/blackhawk-icon@2x.webp";
 import logoLg2x from "@/assets/blackhawk-logo-lg@2x.webp";
+import logoLg3x from "@/assets/blackhawk-logo-lg@3x.webp";
 import logo2x from "@/assets/blackhawk-logo@2x.webp";
 import logo3x from "@/assets/blackhawk-logo@3x.webp";
 
@@ -11,10 +12,10 @@ export const SM_UP = "(min-width: 640px)";
 export const BELOW_SM = "(max-width: 639.98px)";
 
 export const navIcon = { src: icon2x, width: 48, height: 48 };
-/** Full logo in the navbar, 56px high (lg@2x is 339×112). */
+/** Full logo in the navbar, 56px high (lg@2x is 339×112, lg@3x 508×168). */
 export const navLogo = {
   src: logoLg2x,
-  srcSet: `${logoLg2x} 2x, ${logo3x} 3x`,
+  srcSet: `${logoLg2x} 2x, ${logoLg3x} 3x`,
   width: 170,
   height: 56,
 };
