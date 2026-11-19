@@ -44,12 +44,13 @@ export function ContactPage({ lang }: { lang: Lang }) {
       projectType,
       name: get("name"),
       details: [
-        [m.name, get("name")],
+        [m.name, get("name"), true],
         [m.email, get("email")],
-        [m.company, get("company") || m.none],
+        [m.company, get("company") || m.none, true],
         [m.projectType, projectType],
         [m.language, m.languageValue],
-        [m.page, window.location.href],
+        // Without the query string, so the link length stays predictable.
+        [m.page, window.location.origin + window.location.pathname],
       ],
       messageLabel: m.message,
       message,
@@ -133,6 +134,7 @@ export function ContactPage({ lang }: { lang: Lang }) {
                   id="contact-name"
                   name="name"
                   autoComplete="name"
+                  maxLength={100}
                   required
                   className={inputClass}
                   {...validation}
@@ -145,6 +147,7 @@ export function ContactPage({ lang }: { lang: Lang }) {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  maxLength={254}
                   required
                   className={inputClass}
                   {...validation}
@@ -156,6 +159,7 @@ export function ContactPage({ lang }: { lang: Lang }) {
                   id="contact-company"
                   name="company"
                   autoComplete="organization"
+                  maxLength={100}
                   className={inputClass}
                 />
               </div>
