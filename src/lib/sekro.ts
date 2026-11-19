@@ -15,9 +15,9 @@ export const SEKRO_HOME = { en: "/sekro", es: "/es/sekro" } as const;
 export const SEKRO_IMAGES = {
   icon: "/sekro/app-icon.webp",
   ogImage: "/sekro/og-image.jpg",
-  // Apple's official black "Download on the App Store" badges, unmodified (toolbox.marketingtools.apple.com:
-  // en-us, and es-es, whose artwork reads "Consíguelo en el App Store"). Shown at least 40px tall.
-  appStoreBadge: { en: "/sekro/badges/app-store-en.svg", es: "/sekro/badges/app-store-es.svg" },
+  // Apple's official black "Download on the App Store" badges, unmodified (Apple marketing tools: en-us, and es-mx
+  // for Latin American Spanish, whose artwork reads "Descárgalo en el App Store"). Shown at least 40px tall.
+  appStoreBadge: { en: "/sekro/badges/app-store-en.svg", es: "/sekro/badges/app-store-es-mx.svg" },
   // Google's official "Get it on Google Play" badges (play.google.com/intl/en_us/badges: en, and es, whose artwork
   // reads "Disponible en Google Play"), with only the transparent padding trimmed so they match the App Store
   // badge's height. Both 3.36:1 (en 564×168, es 646×192).

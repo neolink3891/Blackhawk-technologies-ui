@@ -13,6 +13,16 @@ export const PROJECT_TYPES = [
 ] as const;
 export type ProjectType = (typeof PROJECT_TYPES)[number];
 
+/** Project type as it appears in the email subject and body (the inbox is read in English). */
+export const PROJECT_TYPE_EMAIL_LABELS: Record<ProjectType, string> = {
+  "custom-software": "Custom software",
+  "mobile-app": "Mobile app",
+  "ai-automation": "AI / Automation",
+  "saas-platform": "SaaS platform",
+  consultation: "Consultation",
+  other: "Other",
+};
+
 export interface ContactCopy {
   meta: { title: string; description: string; ogTitle: string; ogDescription: string };
   eyebrow: string;
@@ -36,6 +46,18 @@ export interface ContactCopy {
     sending: string;
     sent: string;
     errors: { required: string; email: string };
+    /** Why a message wasn't sent; each is followed by the email fallback. */
+    failure: {
+      tooFast: string;
+      invalid: string;
+      rateLimited: string;
+      sendFailed: string;
+      fallback: string;
+    };
+    /** Label of the hidden anti-spam field (only ever announced if a screen reader reaches it). */
+    honeypot: string;
+    /** Under the form: who processes the message. `{formspree}` becomes a link to Formspree's privacy policy. */
+    privacy: string;
   };
 }
 
@@ -80,6 +102,15 @@ export const contactCopy: Record<Lang, ContactCopy> = {
         required: "Please fill in this field.",
         email: "Please enter a valid email address.",
       },
+      failure: {
+        tooFast: "That was quick! Please check your message, then send it again.",
+        invalid: "Some details don't look right. Please check the form and try again.",
+        rateLimited: "You've sent several messages in a short time. Please try again later.",
+        sendFailed: "Sorry, your message couldn't be sent. Please try again in a moment.",
+        fallback: "You can also email us directly at",
+      },
+      honeypot: "Leave this field empty",
+      privacy: "Messages sent with this form are processed by {formspree} to deliver them to us.",
     },
   },
 
@@ -123,6 +154,15 @@ export const contactCopy: Record<Lang, ContactCopy> = {
         required: "Completa este campo.",
         email: "Ingresa un correo electrónico válido.",
       },
+      failure: {
+        tooFast: "¡Qué rápido! Revisa tu mensaje y vuelve a enviarlo.",
+        invalid: "Algunos datos no parecen correctos. Revisa el formulario e intenta de nuevo.",
+        rateLimited: "Enviaste varios mensajes en poco tiempo. Intenta de nuevo más tarde.",
+        sendFailed: "No pudimos enviar tu mensaje. Intenta de nuevo en un momento.",
+        fallback: "También puedes escribirnos directamente a",
+      },
+      honeypot: "Deja este campo vacío",
+      privacy: "{formspree} procesa los mensajes de este formulario para hacérnoslos llegar.",
     },
   },
 };

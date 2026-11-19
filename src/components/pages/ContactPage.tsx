@@ -1,11 +1,22 @@
-import { useState, type FormEvent, type InvalidEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type InvalidEvent } from "react";
 import { Mail, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { type ContactCopy, contactCopy, PROJECT_TYPES } from "@/content/contact";
+import {
+  type ContactCopy,
+  contactCopy,
+  PROJECT_TYPE_EMAIL_LABELS,
+  PROJECT_TYPES,
+  type ProjectType,
+} from "@/content/contact";
+import { FORMSPREE_PRIVACY_URL, submitToFormspree } from "@/lib/formspree";
+import { siteCopy } from "@/content/site";
 import { HTML_LANG, type Lang } from "@/lib/i18n";
 
 type Field = HTMLInputElement | HTMLTextAreaElement;
+
+/** Minimum time between showing the form and sending it (bots fill forms instantly). */
+const MIN_FORM_MS = 3000;
 
 /** Browser validation, with the message in the page's language instead of the browser's. */
 function validationHandlers(errors: ContactCopy["form"]["errors"]) {
@@ -25,19 +36,53 @@ export function ContactPage({ lang }: { lang: Lang }) {
   const t = contactCopy[lang];
   const f = t.form;
   const [submitting, setSubmitting] = useState(false);
+  const [failure, setFailure] = useState<keyof ContactCopy["form"]["failure"] | null>(null);
+  const startedAt = useRef(0);
   const validation = validationHandlers(f.errors);
 
-  // NOTE: the form doesn't send anything yet (no email or API behind it). When it does, the hidden `lang` field
-  // carries the visitor's language (en-GB / es-419) into the message.
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  // When the form was shown: anything sent within a few seconds is almost certainly a bot.
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
+  // Posted straight to Formspree, which emails contactus@bhtapp.com. Success is shown only on a 2xx from Formspree.
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const get = (k: string) => String(fd.get(k) ?? "").trim();
+    setFailure(null);
+    if (Date.now() - startedAt.current < MIN_FORM_MS) {
+      setFailure("tooFast");
+      return;
+    }
+    const name = get("name").replace(/[\r\n]+/g, " ");
+    const email = get("email");
+    const type = PROJECT_TYPE_EMAIL_LABELS[get("projectType") as ProjectType] ?? get("projectType");
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    const res = await submitToFormspree({
+      _subject: `[Website ${lang === "es" ? "ES" : "EN"}] ${type} — ${name}`,
+      _replyto: email,
+      // Honeypot: Formspree discards submissions where this is filled in.
+      _gotcha: get("website"),
+      name,
+      email,
+      company: get("company"),
+      projectType: type,
+      message: get("message"),
+      language: HTML_LANG[lang],
+      page: window.location.href,
+    });
+    setSubmitting(false);
+    if (res.ok) {
       toast.success(f.sent);
-      (e.target as HTMLFormElement).reset();
-    }, 600);
+      form.reset();
+    } else {
+      setFailure(res.reason);
+    }
   }
+
+  const [privacyBefore, privacyAfter] = f.privacy.split("{formspree}");
 
   const label = (text: string, htmlFor: string, required?: boolean) => (
     <label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
@@ -105,9 +150,20 @@ export function ContactPage({ lang }: { lang: Lang }) {
 
           <form
             onSubmit={onSubmit}
-            className="rounded-2xl border border-border/60 bg-gradient-card p-8 shadow-elegant"
+            className="relative rounded-2xl border border-border/60 bg-gradient-card p-8 shadow-elegant"
           >
             <input type="hidden" name="lang" value={HTML_LANG[lang]} />
+            {/* Honeypot: hidden from people, filled in by bots. */}
+            <div aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden">
+              <label htmlFor="contact-website">{f.honeypot}</label>
+              <input
+                id="contact-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 {label(f.name, "contact-name", true)}
@@ -168,6 +224,21 @@ export function ContactPage({ lang }: { lang: Lang }) {
                 {...validation}
               />
             </div>
+            {failure && (
+              <div
+                role="alert"
+                className="mt-6 rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3 text-sm text-foreground"
+              >
+                {f.failure[failure]} {f.failure.fallback}{" "}
+                <a
+                  href="mailto:contactus@bhtapp.com"
+                  className="font-medium text-primary underline"
+                >
+                  contactus@bhtapp.com
+                </a>
+                .
+              </div>
+            )}
             <button
               type="submit"
               disabled={submitting}
@@ -175,6 +246,19 @@ export function ContactPage({ lang }: { lang: Lang }) {
             >
               {submitting ? f.sending : f.submit} <Send className="h-4 w-4" />
             </button>
+            <p className="mt-4 text-xs text-muted-foreground">
+              {privacyBefore}
+              <a
+                href={FORMSPREE_PRIVACY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                Formspree
+                <span className="sr-only"> ({siteCopy[lang].newTab})</span>
+              </a>
+              {privacyAfter}
+            </p>
           </form>
         </div>
       </section>

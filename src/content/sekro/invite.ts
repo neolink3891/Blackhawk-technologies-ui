@@ -60,8 +60,8 @@ export const sekroInvite: Record<Lang, SekroInviteCopy> = {
     openInSekro: "Abrir en Sekro",
     alreadyInstalled: "¿Ya tienes Sekro?",
     redirecting: "Abriendo el App Store…",
-    // Matches the words on Apple's es-ES badge artwork.
-    appStoreButton: "Consíguelo en el App Store",
+    // Matches the words on Apple's es-MX badge artwork.
+    appStoreButton: "Descárgalo en el App Store",
     // Matches the words on Google's Spanish badge artwork.
     googlePlayAlt: "Disponible en Google Play",
     scanTitle: "En tu móvil",

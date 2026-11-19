@@ -178,8 +178,8 @@ export const sekroProduct: Record<Lang, SekroProductCopy> = {
       appStoreTop: "Descárgalo en el",
       googlePlayTop: "Disponible en",
       comingSoon: "Próximamente",
-      // Matches the words on Apple's es-ES badge artwork.
-      appStoreAlt: "Consíguelo en el App Store",
+      // Matches the words on Apple's es-MX badge artwork.
+      appStoreAlt: "Descárgalo en el App Store",
       // Matches the words on Google's Spanish badge artwork.
       googlePlayAlt: "Disponible en Google Play",
     },
