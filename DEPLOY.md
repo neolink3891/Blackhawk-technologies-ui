@@ -21,11 +21,12 @@ Newest first. Task definition revisions are `blackhawk-technologies-ui:<n>`; rol
 previous one:
 `aws ecs update-service --region eu-west-2 --cluster bhtapps-prod --service blackhawk-technologies-ui-service --task-definition blackhawk-technologies-ui:<previous>`.
 
-| Date       | Version | Task definition                               | Notes                                                                                                            |
-| ---------- | ------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| 2026-11-19 | 1.0.7   | `blackhawk-technologies-ui:8` (rollback `:7`) | New favicons + web manifest, WebP logos, Sekro on Google Play (badges, JSON-LD), repo-wide prettier              |
-| 2026-11-14 | 1.0.6   | `blackhawk-technologies-ui:7` (rollback `:6`) | assetlinks.json: Sekro Play app-signing + upload key fingerprints (verified by Google's Digital Asset Links API) |
-| 2026-11-12 | 1.0.5   | `blackhawk-technologies-ui:6` (rollback `:5`) | Sekro invite page + .well-known, HawkTrack card, Adhki Cogno/NeoLogger removal, lockfile fix for npm 10          |
+| Date       | Version | Task definition                               | Notes                                                                                                                      |
+| ---------- | ------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| 2026-11-19 | 1.0.8   | `blackhawk-technologies-ui:9` (rollback `:8`) | Home repositioned (products, custom software & consultancy, AI); /solutions → /products (301); Atlas hidden; manifest.json |
+| 2026-11-19 | 1.0.7   | `blackhawk-technologies-ui:8` (rollback `:7`) | New favicons + web manifest, WebP logos, Sekro on Google Play (badges, JSON-LD), repo-wide prettier                        |
+| 2026-11-14 | 1.0.6   | `blackhawk-technologies-ui:7` (rollback `:6`) | assetlinks.json: Sekro Play app-signing + upload key fingerprints (verified by Google's Digital Asset Links API)           |
+| 2026-11-12 | 1.0.5   | `blackhawk-technologies-ui:6` (rollback `:5`) | Sekro invite page + .well-known, HawkTrack card, Adhki Cogno/NeoLogger removal, lockfile fix for npm 10                    |
 
 ## Local check
 
